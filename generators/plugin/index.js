@@ -1,7 +1,6 @@
 'use strict';
 var Generator = require('yeoman-generator');
 var chalk = require('chalk');
-var yosay = require('yosay');
 
 var banner = require('../../utils/banner.js');
 
