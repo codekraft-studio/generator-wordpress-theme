@@ -1,13 +1,11 @@
 'use strict';
-var Generator = require('yeoman-generator');
-var chalk = require('chalk');
 
+var Generator = require('yeoman-generator');
 var banner = require('../../utils/banner.js');
 
 module.exports = Generator.extend({
 
   prompting: function () {
-
     // Show the banner
     this.log(banner);
 
@@ -19,13 +17,11 @@ module.exports = Generator.extend({
       // To access props later use this.props.someAnswer;
       this.props = props;
     }.bind(this));
-
   },
 
   writing: {
 
     config: function () {
-
       // Copy and build the package file
       this.fs.copyTpl(
         this.templatePath('_package.json'),
@@ -38,11 +34,9 @@ module.exports = Generator.extend({
         this.templatePath('_Gruntfile.js'),
         this.destinationPath('Gruntfile.js')
       );
-
     },
 
-    plugin: function() {
-
+    plugin: function () {
       // Copy all the assets files
       this.fs.copy(
         this.templatePath('plugin/assets/**/*'),
@@ -59,16 +53,17 @@ module.exports = Generator.extend({
       // Copy the main plugin file
       this.fs.copyTpl(
         this.templatePath('plugin/_plugin.php'),
-        this.destinationPath( this.props.projectName + '.php' ),
+        this.destinationPath(this.props.projectName + '.php'),
         this.props
       );
-
     }
 
   },
 
   install: function () {
-    this.installDependencies({bower: false});
+    this.installDependencies({
+      bower: false
+    });
   }
 
 });

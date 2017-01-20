@@ -1,11 +1,11 @@
+'use strict';
+
 var Generator = require('yeoman-generator');
-var chalk = require('chalk');
 var banner = require('../../utils/banner.js');
 
 module.exports = Generator.extend({
 
   prompting: function () {
-
     // Show the banner
     this.log(banner);
 
@@ -16,13 +16,11 @@ module.exports = Generator.extend({
     return this.prompt(prompts).then(function (props) {
       this.props = props;
     }.bind(this));
-
   },
 
   writing: {
 
     config: function () {
-
       // Copy and build the package file
       this.fs.copyTpl(
         this.templatePath('_package.json'),
@@ -49,17 +47,14 @@ module.exports = Generator.extend({
         this.templatePath('_Gruntfile.js'),
         this.destinationPath('Gruntfile.js')
       );
-
     },
 
     theme: function () {
-
       // Copy all the theme files
       this.fs.copy(
         this.templatePath('theme/**/*'),
         this.destinationPath('src/')
       );
-
     }
 
   },

@@ -1,5 +1,4 @@
-module.exports = function(grunt) {
-
+module.exports = function (grunt) {
   grunt.initConfig({
 
     // Get the package file details
@@ -11,7 +10,7 @@ module.exports = function(grunt) {
       '* Description: <%= pkg.description %> \n' +
       '* Last build: <%= grunt.template.today("yyyy-mm-dd") %> \n' +
       '* @author <%= pkg.author %> \n' +
-      '* @license <%= pkg.license %> \n'+
+      '* @license <%= pkg.license %> \n' +
       '*/\n',
 
     // Clean the dist directory files
@@ -37,11 +36,11 @@ module.exports = function(grunt) {
         stripBanners: true,
         banner: '<%= banner %>'
       },
-      user_script: {
+      userScripts: {
         src: ['assets/src/js/user/**/*.js'],
         dest: 'assets/dist/js/user.js'
       },
-      admin_script: {
+      adminScripts: {
         src: ['assets/src/js/admin/**/*.js'],
         dest: 'assets/dist/js/admin.js'
       }
@@ -52,14 +51,14 @@ module.exports = function(grunt) {
       options: {
         banner: '<%= banner %>'
       },
-      user_script: {
+      userScripts: {
         files: {
-          'assets/dist/js/user.min.js': ['<%= concat.user_script.dest %>']
+          'assets/dist/js/user.min.js': ['<%= concat.userScripts.dest %>']
         }
       },
-      admin_script: {
+      adminScripts: {
         files: {
-          'assets/dist/js/admin.min.js': ['<%= concat.admin_script.dest %>']
+          'assets/dist/js/admin.min.js': ['<%= concat.adminScripts.dest %>']
         }
       }
     },
@@ -82,12 +81,12 @@ module.exports = function(grunt) {
       scripts: {
         files: ['assets/src/js/**/*.js'],
         tasks: ['newer:jshint', 'concat', 'uglify'],
-        options: { spawn: false }
+        options: {spawn: false}
       },
       styles: {
         files: ['assets/src/scss/**/*.scss'],
         tasks: ['sass'],
-        options: { spawn: false }
+        options: {spawn: false}
       }
     },
 
@@ -123,5 +122,4 @@ module.exports = function(grunt) {
   // partial build tasks
   grunt.registerTask('build-styles', ['sass']);
   grunt.registerTask('build-scripts', ['jshint', 'concat', 'uglify']);
-
 };

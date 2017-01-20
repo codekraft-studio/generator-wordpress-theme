@@ -1,7 +1,6 @@
 var path = require('path');
 
-module.exports = function(grunt) {
-
+module.exports = function (grunt) {
   grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
@@ -11,7 +10,7 @@ module.exports = function(grunt) {
       '* Description: <%= pkg.description %> \n' +
       '* Last build: <%= grunt.template.today("yyyy-mm-dd") %> \n' +
       '* @author <%= pkg.author %> \n' +
-      '* @license <%= pkg.license %> \n'+
+      '* @license <%= pkg.license %> \n' +
       '*/\n',
 
     // Clean the dist directory files
@@ -28,7 +27,7 @@ module.exports = function(grunt) {
       files: ['src/assets/src/js/**/*.js'],
       options: {
         esversion: 6,
-        globals: { jQuery: true }
+        globals: {jQuery: true}
       }
     },
 
@@ -38,14 +37,14 @@ module.exports = function(grunt) {
         stripBanners: true,
         banner: '<%= banner %>'
       },
-      user_scripts: {
+      userScripts: {
         src: ['src/assets/src/js/user/**/*.js'],
-        dest: 'src/assets/dist/js/user.js',
+        dest: 'src/assets/dist/js/user.js'
       },
-      admin_scripts: {
+      adminScripts: {
         src: ['src/assets/src/js/admin/**/*.js'],
-        dest: 'src/assets/dist/js/admin.js',
-      },
+        dest: 'src/assets/dist/js/admin.js'
+      }
     },
 
     // Uglify every js file
@@ -94,7 +93,7 @@ module.exports = function(grunt) {
       options: {
         map: true,
         processors: [
-          require('autoprefixer')({ browsers: ['last 2 versions'] })
+          require('autoprefixer')({browsers: ['last 2 versions']})
         ]
       },
       dist: {
@@ -122,17 +121,17 @@ module.exports = function(grunt) {
       scripts: {
         files: ['src/assets/src/js/**/*.js'],
         tasks: ['newer:jshint', 'concat', 'babel', 'uglify'],
-        options: { spawn: false }
+        options: {spawn: false}
       },
       styles: {
         files: ['src/assets/src/scss/**/*.scss'],
         tasks: ['sass'],
-        options: { spawn: false }
+        options: {spawn: false}
       },
       images: {
         files: ['src/assets/src/img/**/*.{png,jpg,gif}'],
         tasks: ['newer:imagemin'],
-        options: { spawn: false }
+        options: {spawn: false}
       }
     },
 
@@ -158,7 +157,7 @@ module.exports = function(grunt) {
       },
       target: {
         files: {
-          src: [ 'src/**/*.php' ]
+          src: ['src/**/*.php']
         }
       }
     }
@@ -187,5 +186,4 @@ module.exports = function(grunt) {
 
   // register build task and alias
   grunt.registerTask('build', ['clean:all', 'build-scripts', 'build-styles', 'imagemin', 'makepot']);
-
 };

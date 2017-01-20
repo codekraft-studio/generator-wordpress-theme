@@ -1,11 +1,10 @@
-module.exports = function(base) {
-
+module.exports = function (base) {
   var validateRequired = function (value) {
-    if( value == '' ) {
+    if (value === '') {
       return 'This field is required, please enter a valid value.';
     }
     return true;
-  }
+  };
 
   return [
     {
@@ -14,7 +13,7 @@ module.exports = function(base) {
       message: 'What slug do you want to use for this project?',
       default: base.appname.replace(/\s+/, '-').toLowerCase(),
       validate: function (input) {
-        if( !/^[a-z]+\-[a-z]+$/.test(input) ) {
+        if (!/^[a-z]+-[a-z]+$/.test(input)) {
           return 'You should follow the WordPress plugin name standard.';
         }
         return true;
@@ -24,7 +23,9 @@ module.exports = function(base) {
       name: 'projectTitle',
       message: 'What is the full name for this project?',
       default: function (answers) {
-        return answers.projectName.replace('-', ' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+        return answers.projectName.replace('-', ' ').replace(/\w\S*/g, function (txt) {
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
       },
       validate: validateRequired
     },
@@ -58,5 +59,4 @@ module.exports = function(base) {
       validate: validateRequired
     }
   ];
-
-}
+};

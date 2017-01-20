@@ -1,7 +1,5 @@
-(function ( $ ) {
+(function ($) {
+  'use strict';
 
-	'use strict';
-
-	console.info('Plugin admin script loaded.');
-
-})( jQuery );
+  console.info('Plugin admin script loaded.');
+})(jQuery);
