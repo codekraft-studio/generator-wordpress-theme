@@ -1,0 +1,31 @@
+//
+// Sass-Ready media queries
+// Here there are some presets of useful
+// media queries breakpoints for various devices
+// Usage: @media #{variable-name} { }
+// and it will compile to: @media variable-name { }
+//
+// Gist: https://gist.github.com/codekraft-studio/18d4d1731112fe9f448cd8106a86709d
+//
+
+// Devices
+$desktops-laptops: "only screen and (min-width : 1224px)";
+$large-screens: "only screen and (min-width : 1824px)";
+$laptop: "screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1)";
+$tablet: "only screen and (min-device-width : 768px) and (max-device-width : 1024px)";
+$tablet-landscape: "only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape)";
+$tablet-portrait: "only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait)";
+$phablet: "(max-width : 767px)";
+$smartphones: "only screen and (min-device-width: 320px) and (max-device-width: 736px)";
+$smartphones-landscape: "only screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : landscape)";
+$smartphones-portrait: "only screen and (min-device-width: 320px) and (max-device-width: 736px) and (orientation : portrait)";
+
+// Pixel Rateos
+$ldpi-screens: "screen and (-webkit-device-pixel-ratio: 0.75)";
+$mdpi-screens: "screen and (-webkit-device-pixel-ratio: 1.0)";
+$hdpi-screens: "screen and (-webkit-device-pixel-ratio: 1.5)";
+$xdpi-screens: "screen and (-webkit-device-pixel-ratio: 2.0)";
+
+// Wearables Devices Media
+$apple-watch: "(max-device-width: 42mm) and (min-device-width: 38mm)";
+$moto360-watch: "(max-device-width: 218px) and (max-device-height: 281px)";

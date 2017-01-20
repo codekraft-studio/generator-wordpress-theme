@@ -1,0 +1,42 @@
+.widget {
+    margin-bottom: 60px;
+    color: $text-color;
+    font-size: 14px;
+
+    .widget-title {
+        font-size: $text-size * 1.1;
+        padding: 0 0 ($main-margin*0.33);
+        margin: 0 0 ($main-margin*0.66);
+        border-bottom: 2px solid $light-color;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+    }
+
+    ul {
+        padding: 0;
+
+        li {
+            @extend .ellipsis;
+        }
+    }
+
+    a {
+        color: $primary-color;
+
+        &:hover {
+            text-decoration: underline;
+            color: $link-color;
+        }
+    }
+
+    @media #{$tablet-portrait} {
+      width: 45%;
+      float: left;
+      margin-bottom: 5%;
+      margin-right: 5%;
+
+      &.widget_search {
+        width: 100%;
+      }
+    }
+}

@@ -1,0 +1,37 @@
+.content {
+
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  padding-bottom: $footer-height;
+
+  main {
+    width: 100%;
+    flex: 2;
+  }
+
+  .section-title {
+    font-size: $text-size * 1.1;
+    padding: 0 0 ($main-margin*0.33);
+    margin:  0 0 1em;
+    border-bottom: 2px solid $light-color;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+  }
+
+  .post-edit-link {
+    @extend %button;
+    font-size: 14px;
+    margin: $main-padding;
+    text-align: right;
+  }
+
+  @media #{$smartphones} {
+    flex-direction: column;
+  }
+
+  @media #{$tablet-portrait} {
+    flex-direction: column;
+  }
+
+}

@@ -1,0 +1,27 @@
+body.author {
+
+  .author-details {
+    display: flex;
+    background-color: #eee;
+    padding: 4%;
+    margin-bottom: 1.5em;
+
+    .author-image {
+      img {
+          width: 64px;
+          margin: 0 36px 36px 0;
+          border-radius: 50%;
+      }
+    }
+
+    .author-description {
+      width: 100%;
+    }
+
+    @media #{$smartphones} {
+      display: none;
+    }
+
+  }
+
+}

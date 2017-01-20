@@ -1,0 +1,15 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the footer of the site/application.
+// -----------------------------------------------------------------------------
+
+footer.footer {
+  background: #EEE;
+  padding: ($theme-padding-vertical * 0.5) 0 $theme-padding-vertical;
+  @include font-size($text-size - 2);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: $footer-height;
+  box-sizing: border-box;
+}

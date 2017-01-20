@@ -1,0 +1,69 @@
+body.single {
+
+  .article-image {
+    margin-bottom: $main-margin * 2;
+    flex: 0 0 100%;
+    figure, img {
+      margin: 0 auto;
+    }
+  }
+
+  article {
+    margin-top: 0;
+
+    h1 { color:$secondary-color;}
+
+    .article-header {}
+
+    .article-content {
+      padding-bottom: $theme-padding-vertical;
+    }
+
+    .article-footer {
+
+      padding-bottom:$theme-padding-vertical;
+
+      & > div {
+        margin-bottom: 1em;
+      }
+
+      a { color: $secondary-color;}
+
+      i { margin-right: $main-margin;}
+
+      .article-categories,
+      .article-tags {
+        line-height: 2;
+      }
+
+      .article-author {
+        display: flex;
+        background-color: #eee;
+        padding: 4%;
+        &::before {
+          content: '';
+        }
+
+        .author-image {
+          img {
+            width: 64px;
+            margin: 0 $main-padding 0 0;
+            border-radius: 50%;
+          }
+        }
+
+        .author-details {
+          .author-name {
+            margin-bottom:$main-margin * 0.25;
+            @include font-size(16px);
+            font-family: $font-headline;
+            font-weight: bold;
+
+          }
+
+          .author-description { line-height: 1.5;}
+        }
+      }
+    }
+  }
+}

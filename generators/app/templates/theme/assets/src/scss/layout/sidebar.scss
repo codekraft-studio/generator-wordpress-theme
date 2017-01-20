@@ -1,0 +1,16 @@
+aside.sidebar {
+    width: $sidebar-width;
+    margin-left: $sidebar-margin;
+    flex: 1;
+
+    @media #{$smartphones} {
+      width: auto;
+      margin: 0;
+    }
+
+    @media #{$tablet-portrait} {
+      width: auto;
+      margin: 0;
+    }
+
+}

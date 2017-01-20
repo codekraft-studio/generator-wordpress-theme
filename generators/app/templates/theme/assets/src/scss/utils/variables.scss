@@ -1,0 +1,28 @@
+
+// Color variables
+$primary-color: #444;
+$secondary-color: #007acc;
+$light-color: darken(white, 5%);
+$link-color: $secondary-color;
+
+// Measures
+$theme-width: 1200px;
+$header-height: 120px;
+$footer-height: 100px;
+$sidebar-width: 30%;
+$sidebar-margin: 5%;
+
+// Text variables
+$text-color: #666;
+$text-line-height: 1.75;
+$text-size: 16px;
+$text-margin: 1em;
+$font: 'Merriweather';
+$font-headline: 'Montserrat';
+
+// Distances
+$main-margin: 1em;
+$main-padding: 20px;
+$theme-padding-vertical: 36px;
+$theme-padding-internal: 5%;
+$theme-padding-internal-resp: 20px;

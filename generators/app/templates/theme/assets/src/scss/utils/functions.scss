@@ -1,0 +1,9 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass functions.
+// -----------------------------------------------------------------------------
+
+/// Calculate Width
+/// Usage: width: calculate-width(2); // spans 2 columns, width = 50%
+@function calculate-width ($col-span) {
+    @return 100% / $col-span;
+}

@@ -1,0 +1,69 @@
+article {
+    position: relative;
+    margin: 0 0 50px;
+    max-width: 100%;
+
+    .article-header {
+        margin-bottom: 1em;
+
+        .article-title {
+          margin: 0;
+          @include font-size(28px);
+        }
+
+        .article-date {
+            text-transform: uppercase;
+            @include font-size(16px);
+            color: lighten($primary-color, 10);
+            margin: 0 0 0.2em 0;
+            a { color: lighten($primary-color, 10); }
+        }
+    }
+
+    .article-content {
+        width: 100%;
+        display: inline-block;
+        text-align: justify;
+        h1 {
+            @include font-size(28px);
+        }
+    }
+
+    .article-modify {
+        text-align: right;
+    }
+
+    .article-footer {
+        width: 100%;
+        @include font-size($text-size - 2);
+
+        .article-details {
+          .article-details-block {
+            display: flex;
+            margin-bottom: $main-margin;
+            @media #{$smartphones-portrait} {
+              flex-direction: column;
+              margin-bottom: 0;
+            }
+            & > div {
+              width: 100%;
+              text-transform: uppercase;
+              font-weight: bold;
+              @media #{$smartphones-portrait} {
+                margin-bottom: $main-margin;
+              }
+            }
+          }
+        }
+
+        .article-metas {
+          border-top: thin solid #d0d0d0;
+          border-bottom: thin solid #d0d0d0;
+          padding: 4%;
+        }
+
+        .author-details {
+            width: 100%;
+        }
+    }
+}

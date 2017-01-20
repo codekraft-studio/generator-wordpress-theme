@@ -1,0 +1,18 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+/// Font size mixin:
+/// Used to calculate the rem size for a given pixel value
+///
+/// Usage: @include font-size(14px)
+///
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
