@@ -8,9 +8,6 @@
     "email": "info@codekraft.it",
     "url": "https://codekraft.it"
   },
-  "files": [
-    "generators"
-  ],
   "main": "generators/index.js",
   "keywords": [
     "wordpress",
