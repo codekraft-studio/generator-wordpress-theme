@@ -1,6 +1,6 @@
 var Generator = require('yeoman-generator');
 var chalk = require('chalk');
-var banner = require('../../utils/banner');
+var banner = require('../../utils/banner.js');
 
 module.exports = Generator.extend({
 
@@ -10,7 +10,7 @@ module.exports = Generator.extend({
     this.log(banner);
 
     // Get the questions
-    var prompts = require('../../utils/prompts')(this);
+    var prompts = require('../../utils/prompts.js')(this);
 
     // Run it
     return this.prompt(prompts).then(function (props) {
