@@ -1,5 +1,6 @@
-# generator-wordpress-starter [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> A generator for wordpress start kits.
+# generator-wordpress-starter
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+> A simple generator for quick WordPress projects creation..
 
 ## Installation
 
