@@ -11,7 +11,7 @@ npm install -g yo
 npm install -g generator-wordpress-starter
 ```
 
-Then generate your new project:
+Create a new folder named as your project name, enter it, then generate your new project:
 
 ```bash
 yo wordpress-starter
