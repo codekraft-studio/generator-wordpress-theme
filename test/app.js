@@ -6,14 +6,16 @@ var helpers = require('yeoman-test');
 describe('generator-wordpress-starter:app', function () {
   before(function () {
     return helpers.run(path.join(__dirname, '../generators/app'))
-      .withPrompts({someAnswer: true})
+      .withPrompts({projectName: 'my-plugin'})
       .toPromise();
   });
 
-  it('creates files', function () {
+  it('creates files from template', function () {
     assert.file([
       'package.json',
-      'Gruntfile.js'
+      'Gruntfile.js',
+      'src/assets/src/scss/base/banner.scss',
+      'src/functions.php'
     ]);
   });
 });
