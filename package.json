@@ -38,7 +38,9 @@
     "extends": "xo-space",
     "rules": {
       "camelcase": 1,
-      "no-unused-vars": 1
+      "no-unused-vars": 1,
+      "linebreak-style": 0,
+      "one-var": 1
     },
     "env": {
       "mocha": true,
