@@ -50,11 +50,11 @@ module.exports = Generator.extend({
 
   configuring: function () {
     switch (this.props.projectManager) {
-      case 'grunt':
-        gruntConfig(this);
-        break;
       case 'gulp':
         gulpConfig(this);
+        break;
+      default:
+        gruntConfig(this);
         break;
     }
   },
