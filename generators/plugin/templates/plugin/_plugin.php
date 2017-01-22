@@ -21,12 +21,12 @@
 defined( 'ABSPATH' ) or die( 'Not Authorized!' );
 
 // Plugin Defines
-define( "<%= projectName %>_FILE", __FILE__ );
-define( "<%= projectName %>_DIR", dirname(__FILE__) );
-define( "<%= projectName %>_INCLUDE_DIR", dirname(__FILE__) . 'include' );
-define( "<%= projectName %>_DIR_BASENAME", plugin_basename( __FILE__ ) );
-define( "<%= projectName %>_DIR_PATH", plugin_dir_path( __FILE__ ) );
-define( "<%= projectName %>_DIR_URL", plugins_url( null, __FILE__ ) );
+define( "<%= definePrefix %>_FILE", __FILE__ );
+define( "<%= definePrefix %>_DIR", dirname(__FILE__) );
+define( "<%= definePrefix %>_INCLUDE_DIR", dirname(__FILE__) . 'include' );
+define( "<%= definePrefix %>_DIR_BASENAME", plugin_basename( __FILE__ ) );
+define( "<%= definePrefix %>_DIR_PATH", plugin_dir_path( __FILE__ ) );
+define( "<%= definePrefix %>_DIR_URL", plugins_url( null, __FILE__ ) );
 
 // Require the main class file
 require_once( dirname(__FILE__) . '/include/class-main.php' );

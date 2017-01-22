@@ -3,18 +3,18 @@
 // Block direct access to file
 defined( 'ABSPATH' ) or die( 'Not Authorized!' );
 
-class WordPress_Plugin_Starter {
+class <%= className %> {
 
   private $settings;
 
   public function __construct() {
 
     // Plugin uninstall hook
-    register_uninstall_hook( WPS_FILE, array(__CLASS__, 'plugin_uninstall') );
+    register_uninstall_hook( <%= definePrefix %>_FILE, array(__CLASS__, 'plugin_uninstall') );
 
     // Plugin activation/deactivation hooks
-    register_activation_hook( WPS_FILE, array($this, 'plugin_activate') );
-    register_deactivation_hook( WPS_FILE, array($this, 'plugin_deactivate') );
+    register_activation_hook( <%= definePrefix %>_FILE, array($this, 'plugin_activate') );
+    register_deactivation_hook( <%= definePrefix %>_FILE, array($this, 'plugin_deactivate') );
 
     // Plugin Actions
     add_action( 'plugins_loaded', array($this, 'plugin_init') );
@@ -54,7 +54,7 @@ class WordPress_Plugin_Starter {
   * @method plugin_init
   */
   function plugin_init() {
-    load_plugin_textDomain( '<%= projectName %>', false, dirname(WPS_DIR_BASENAME) . '/languages' );
+    load_plugin_textDomain( '<%= projectName %>', false, dirname(<%= definePrefix %>_DIR_BASENAME) . '/languages' );
   }
 
   /**
@@ -62,7 +62,17 @@ class WordPress_Plugin_Starter {
    * @method plugin_add_settings_pages
    */
   function plugin_add_settings_pages() {
-    add_menu_page( __('WordPress Plugin Starter', '<%= projectName %>'), __('Plugin Starter', '<%= projectName %>'), 'administrator', '<%= projectName %>-settings', array($this, 'plugin_settings_page'), 'none', null );
+
+    add_menu_page(
+      __('<%= projectTitle %>', '<%= projectName %>'),
+      __('<%= projectTitle %>', '<%= projectName %>'),
+      'administrator', // Menu page capabilities
+      '<%= projectName %>-settings', // Page ID
+      array($this, 'plugin_settings_page'), // Callback
+      'none', // No icon
+      null
+    );
+
   }
 
   /**
@@ -71,7 +81,7 @@ class WordPress_Plugin_Starter {
   */
   function plugin_register_settings() {
 
-    register_setting( '<%= projectName %>-settings-group', 'main_options', array($this, 'plugin_sanitize_settings') );
+    register_setting( '<%= projectName %>-settings-group', '<%= projectName %>_main_options', array($this, 'plugin_sanitize_settings') );
 
     add_settings_section( 'main', __('Main Settings', '<%= projectName %>'), array( $this, 'main_section_callback' ), '<%= projectName %>-settings' );
 
@@ -93,7 +103,7 @@ class WordPress_Plugin_Starter {
    */
   function first_option_callback() {
     return printf(
-      '<input type="text" id="first_option" name="main_options[first_option]" value="%s" />',
+      '<input type="text" id="first_option" name="<%= projectName %>_main_options[first_option]" value="%s" />',
       isset( $this->settings['first_option'] ) ? esc_attr( $this->settings['first_option']) : ''
     );
   }
@@ -112,8 +122,8 @@ class WordPress_Plugin_Starter {
   * @method plugin_enqueue_scripts
   */
   function plugin_enqueue_admin_scripts() {
-    wp_register_style( '<%= projectName %>_admin_style', WPS_DIR_URL . '/assets/dist/css/admin.css', array(), null );
-    wp_register_script( '<%= projectName %>_admin_script', WPS_DIR_URL . '/assets/dist/js/admin.min.js', array(), null, true );
+    wp_register_style( '<%= projectName %>_admin_style', <%= definePrefix %>_DIR_URL . '/assets/dist/css/admin.css', array(), null );
+    wp_register_script( '<%= projectName %>_admin_script', <%= definePrefix %>_DIR_URL . '/assets/dist/js/admin.min.js', array(), null, true );
     wp_enqueue_script('jquery');
     wp_enqueue_style('<%= projectName %>_admin_style');
     wp_enqueue_script('<%= projectName %>_admin_script');
@@ -124,8 +134,8 @@ class WordPress_Plugin_Starter {
   * @method plugin_enqueue_scripts
   */
   function plugin_enqueue_scripts() {
-    wp_register_style( '<%= projectName %>_user_style', WPS_DIR_URL . '/assets/dist/css/user.css', array(), null );
-    wp_register_script( '<%= projectName %>_user_script', WPS_DIR_URL . '/assets/dist/js/user.min.js', array(), null, true );
+    wp_register_style( '<%= projectName %>_user_style', <%= definePrefix %>_DIR_URL . '/assets/dist/css/user.css', array(), null );
+    wp_register_script( '<%= projectName %>_user_script', <%= definePrefix %>_DIR_URL . '/assets/dist/js/user.min.js', array(), null, true );
     wp_enqueue_script('jquery');
     wp_enqueue_style('<%= projectName %>_user_style');
     wp_enqueue_script('<%= projectName %>_user_script');
@@ -143,7 +153,7 @@ class WordPress_Plugin_Starter {
 
       <div class="card">
 
-        <h1><?php _e( 'WordPress Plugin Starter', '<%= projectName %>' ); ?></h1>
+        <h1><?php _e( '<%= projectTitle %>', '<%= projectName %>' ); ?></h1>
 
         <p><?php _e( 'Start from here to build you awesome plugin, using this basic setup.', '<%= projectName %>' ); ?></p>
 
@@ -151,7 +161,7 @@ class WordPress_Plugin_Starter {
 
       <div class="card">
 
-        <?php $this->settings = get_option( 'main_options' ); ?>
+        <?php $this->settings = get_option( '<%= projectName %>_main_options' ); ?>
 
         <form method="post" action="options.php">
 
@@ -172,4 +182,4 @@ class WordPress_Plugin_Starter {
 
 }
 
-new WordPress_Plugin_Starter;
+new <%= className %>;

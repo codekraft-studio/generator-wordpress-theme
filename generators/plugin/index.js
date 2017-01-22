@@ -1,69 +1,45 @@
 'use strict';
 
-var Generator = require('yeoman-generator');
-var banner = require('../../utils/banner.js');
+var WPGenerator = require('../../utils/generator.js');
 
-module.exports = Generator.extend({
+var pascalCase = function (g0,g1,g2) {
+  return g1.toUpperCase() + g2.toLowerCase();
+};
 
-  prompting: function () {
-    // Show the banner
-    this.log(banner);
+module.exports = WPGenerator.extend({
 
-    // Get the questions
-    var prompts = require('../../utils/prompts.js')(this);
+  prompting: WPGenerator.prototype.prompting,
 
-    // Run it
-    return this.prompt(prompts).then(function (props) {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
-    }.bind(this));
+  configuring: WPGenerator.prototype.configuring,
+
+  writing: function() {
+    // Set the class name for the plugin
+    this.props.className = this.props.projectName.replace(/(\w)(\w*)/g, pascalCase).replace('-', '_');
+    this.props.definePrefix = this.props.className.toUpperCase();
+
+    // Copy all the plugin assets
+    this.fs.copy(
+      this.templatePath('plugin/assets/**/*'),
+      this.destinationPath('assets')
+    );
+
+    // Copy the main class file
+    this.fs.copyTpl(
+      this.templatePath('plugin/include/class-main.php'),
+      this.destinationPath('include/class-main.php'),
+      this.props
+    );
+
+    // Copy the main plugin file
+    this.fs.copyTpl(
+      this.templatePath('plugin/_plugin.php'),
+      this.destinationPath(this.props.projectName + '.php'),
+      this.props
+    );
   },
 
-  writing: {
+  install: WPGenerator.prototype.install,
 
-    config: function () {
-      // Copy and build the package file
-      this.fs.copyTpl(
-        this.templatePath('_package.json'),
-        this.destinationPath('package.json'),
-        this.props
-      );
-
-      // Copy the gruntfile
-      this.fs.copy(
-        this.templatePath('_Gruntfile.js'),
-        this.destinationPath('Gruntfile.js')
-      );
-    },
-
-    plugin: function () {
-      // Copy all the assets files
-      this.fs.copy(
-        this.templatePath('plugin/assets/**/*'),
-        this.destinationPath('assets')
-      );
-
-      // Copy the main class file
-      this.fs.copyTpl(
-        this.templatePath('plugin/include/class-main.php'),
-        this.destinationPath('include/class-main.php'),
-        this.props
-      );
-
-      // Copy the main plugin file
-      this.fs.copyTpl(
-        this.templatePath('plugin/_plugin.php'),
-        this.destinationPath(this.props.projectName + '.php'),
-        this.props
-      );
-    }
-
-  },
-
-  install: function () {
-    this.installDependencies({
-      bower: false
-    });
-  }
+  end: WPGenerator.prototype.end
 
 });

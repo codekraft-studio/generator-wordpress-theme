@@ -1,66 +1,37 @@
 'use strict';
 
-var Generator = require('yeoman-generator');
-var banner = require('../../utils/banner.js');
+var WPGenerator = require('../../utils/generator.js');
 
-module.exports = Generator.extend({
+module.exports = WPGenerator.extend({
 
-  prompting: function () {
-    // Show the banner
-    this.log(banner);
+  prompting: WPGenerator.prototype.prompting,
 
-    // Get the questions
-    var prompts = require('../../utils/prompts.js')(this);
+  configuring: WPGenerator.prototype.configuring,
 
-    // Run it
-    return this.prompt(prompts).then(function (props) {
-      this.props = props;
-    }.bind(this));
+  writing: function() {
+    // Copy all the theme files
+    this.fs.copy(
+      this.templatePath('theme/**/*'),
+      this.destinationPath('src/')
+    );
+
+    // Copy the theme function file
+    this.fs.copyTpl(
+      this.templatePath('_functions.php'),
+      this.destinationPath('src/functions.php'),
+      this.props
+    );
+
+    // Copy and compile the banner file
+    this.fs.copyTpl(
+      this.templatePath('_banner.scss'),
+      this.destinationPath('src/assets/src/scss/base/banner.scss'),
+      this.props
+    );
   },
 
-  writing: {
+  install: WPGenerator.prototype.install,
 
-    config: function () {
-      // Copy and build the package file
-      this.fs.copyTpl(
-        this.templatePath('_package.json'),
-        this.destinationPath('package.json'),
-        this.props
-      );
-
-      // Copy the theme function file
-      this.fs.copyTpl(
-        this.templatePath('_functions.php'),
-        this.destinationPath('src/functions.php'),
-        this.props
-      );
-
-      // Copy and compile the banner file
-      this.fs.copyTpl(
-        this.templatePath('_banner.scss'),
-        this.destinationPath('src/assets/src/scss/base/banner.scss'),
-        this.props
-      );
-
-      // Copy the gruntfile
-      this.fs.copy(
-        this.templatePath('_Gruntfile.js'),
-        this.destinationPath('Gruntfile.js')
-      );
-    },
-
-    theme: function () {
-      // Copy all the theme files
-      this.fs.copy(
-        this.templatePath('theme/**/*'),
-        this.destinationPath('src/')
-      );
-    }
-
-  },
-
-  install: function () {
-    this.installDependencies({bower: false});
-  }
+  end: WPGenerator.prototype.end
 
 });
