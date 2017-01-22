@@ -2,8 +2,7 @@ var banner = require('./banner.js');
 // var mkdirp = require('mkdirp');
 var Generator = require('yeoman-generator');
 
-var gruntConfig = function(generator) {
-
+var gruntConfig = function (generator) {
   generator.fs.copyTpl(
     generator.templatePath('grunt/_package.json'),
     generator.destinationPath('package.json'),
@@ -14,11 +13,9 @@ var gruntConfig = function(generator) {
     generator.templatePath('grunt/_Gruntfile.js'),
     generator.destinationPath('Gruntfile.js')
   );
-
 };
 
-var gulpConfig = function(generator) {
-
+var gulpConfig = function (generator) {
   generator.fs.copyTpl(
     generator.templatePath('gulp/_package.json'),
     generator.destinationPath('package.json'),
@@ -29,14 +26,13 @@ var gulpConfig = function(generator) {
     generator.templatePath('gulp/_gulpfile.js'),
     generator.destinationPath('gulpfile.js')
   );
-
 };
 
 module.exports = Generator.extend({
 
-  constructor: function (args, opts) {
+  constructor: function () {
     Generator.apply(this, arguments);
-    this.argument('appname', { type: String, required: false, description: 'The project folder name.' });
+    this.argument('appname', {type: String, required: false, description: 'The project folder name.'});
   },
 
   prompting: function () {
@@ -52,8 +48,7 @@ module.exports = Generator.extend({
     }.bind(this));
   },
 
-  configuring: function() {
-
+  configuring: function () {
     switch (this.props.projectManager) {
       case 'grunt':
         gruntConfig(this);
@@ -62,7 +57,6 @@ module.exports = Generator.extend({
         gulpConfig(this);
         break;
     }
-
   },
 
   install: function () {
@@ -71,7 +65,7 @@ module.exports = Generator.extend({
     });
   },
 
-  end: function() {
+  end: function () {
     this.log('\nYour project is ready, everything was installed successfully. Ciao!');
   }
 

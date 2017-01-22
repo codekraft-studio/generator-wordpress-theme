@@ -2,7 +2,7 @@
 
 var WPGenerator = require('../../utils/generator.js');
 
-var pascalCase = function (g0,g1,g2) {
+var pascalCase = function (g0, g1, g2) {
   return g1.toUpperCase() + g2.toLowerCase();
 };
 
@@ -12,7 +12,7 @@ module.exports = WPGenerator.extend({
 
   configuring: WPGenerator.prototype.configuring,
 
-  writing: function() {
+  writing: function () {
     // Set the class name for the plugin
     this.props.className = this.props.projectName.replace(/(\w)(\w*)/g, pascalCase).replace('-', '_');
     this.props.definePrefix = this.props.className.toUpperCase();

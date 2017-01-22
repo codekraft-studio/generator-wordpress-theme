@@ -43,7 +43,7 @@ module.exports = function (base) {
       message: 'Do you want to use grunt or gulp as your build system?',
       default: 'grunt',
       validate: function (input) {
-        if( ['grunt', 'gulp'].indexOf(input) === -1 ) {
+        if (['grunt', 'gulp'].indexOf(input) === -1) {
           return 'You must use grunt or gulp.';
         }
         return true;

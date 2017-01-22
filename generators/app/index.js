@@ -8,7 +8,7 @@ module.exports = WPGenerator.extend({
 
   configuring: WPGenerator.prototype.configuring,
 
-  writing: function() {
+  writing: function () {
     // Copy all the theme files
     this.fs.copy(
       this.templatePath('theme/**/*'),
