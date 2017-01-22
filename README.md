@@ -17,6 +17,13 @@ Create a new folder named as your project name, enter it, then generate your new
 yo wordpress-starter
 ```
 
+The default action is to generate a new theme, but you can also generate plugins like so:
+```bash
+yo wordpress-starter:plugin
+```
+
+You can choose between grunt or gulp as your project manager.
+
 ## Getting To Know Yeoman
 
  * Yeoman has a heart of gold.
