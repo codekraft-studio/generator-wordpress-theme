@@ -35,8 +35,19 @@ module.exports = function (base) {
       message: 'What is the project description?',
       default: function (answers) {
         return 'This is the ' + answers.projectTitle + ' description.';
-      },
-      validate: validateRequired
+      }
+    },
+    {
+      type: 'text',
+      name: 'projectManager',
+      message: 'Do you want to use grunt or gulp as your build system?',
+      default: 'grunt',
+      validate: function (input) {
+        if( ['grunt', 'gulp'].indexOf(input) === -1 ) {
+          return 'You must use grunt or gulp.';
+        }
+        return true;
+      }
     },
     {
       type: 'text',
