@@ -24,6 +24,12 @@ yo wordpress-starter:plugin
 
 You can choose between grunt or gulp as your project manager.
 
+For more informations about the usage and the options type:
+```bash
+yo wordpress-starter --help
+yo wordpress-starter:plugin --help
+```
+
 ## Getting To Know Yeoman
 
  * Yeoman has a heart of gold.
