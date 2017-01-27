@@ -11,9 +11,9 @@ module.exports = function (base) {
       type: 'text',
       name: 'projectName',
       message: 'What slug do you want to use for this project?',
-      default: base.appname.replace(/\s+/, '-').toLowerCase(),
+      default: base.appname.replace(/\s/g, '-').toLowerCase(),
       validate: function (input) {
-        if (!/^[a-z]+-[a-z]+$/.test(input)) {
+        if (!/^(?:[a-z]+-[a-z]+)+$/g.test(input)) {
           return 'You should follow the WordPress plugin name standard.';
         }
         return true;
@@ -23,7 +23,7 @@ module.exports = function (base) {
       name: 'projectTitle',
       message: 'What is the full name for this project?',
       default: function (answers) {
-        return answers.projectName.replace('-', ' ').replace(/\w\S*/g, function (txt) {
+        return answers.projectName.replace(/-/g, ' ').replace(/\w\S*/g, function (txt) {
           return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
       },
