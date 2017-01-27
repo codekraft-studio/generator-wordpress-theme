@@ -14,7 +14,7 @@ module.exports = WPGenerator.extend({
 
   writing: function () {
     // Set the class name for the plugin
-    this.props.className = this.props.projectName.replace(/(\w)(\w*)/g, pascalCase).replace('-', '_');
+    this.props.className = this.props.projectName.replace(/(\w)(\w*)/g, pascalCase).replace(/-/g, '_');
     this.props.definePrefix = this.props.className.toUpperCase();
 
     // Copy all the plugin assets
