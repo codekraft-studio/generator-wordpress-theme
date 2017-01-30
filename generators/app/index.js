@@ -17,8 +17,8 @@ module.exports = WPGenerator.extend({
 
     // Copy the theme function file
     this.fs.copyTpl(
-      this.templatePath('_functions.php'),
-      this.destinationPath('src/functions.php'),
+      this.templatePath('theme/functions/**/*.php'),
+      this.destinationPath('src/functions/'),
       this.props
     );
 

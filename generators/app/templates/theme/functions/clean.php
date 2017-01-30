@@ -18,7 +18,7 @@ remove_filter( 'the_excerpt', 'wpautop' ); // Remove <p> tags from Excerpt altog
 // Custom View Article link to Post
 function theme_custom_post_more($more) {
   global $post;
-  return '... <a class="article-more" href="' . get_permalink($post->ID) . '">' . __('View Article', '<%= projectName %>') . '</a>';
+  return '... <a class="article-more" href="' . get_permalink($post->ID) . '">' . __('Read More', '<%= projectName %>') . '</a>';
 }
 
 // Optionally Filter the except length.
