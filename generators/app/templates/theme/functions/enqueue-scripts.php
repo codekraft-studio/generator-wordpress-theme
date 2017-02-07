@@ -10,13 +10,13 @@ function theme_additional_styles() {
 function theme_scripts() {
 
 	if( SCRIPT_DEBUG ) {
-		wp_register_script( 'user-script', get_template_directory_uri() . '/assets/dist/js/user.js', array('jquery'), null, true );
+		wp_register_script( '<%= projectName %>-user-script', get_template_directory_uri() . '/assets/dist/js/<%= projectName %>-user.js', array('jquery'), null, true );
 	} else {
-		wp_register_script( 'user-script', get_template_directory_uri() . '/assets/dist/js/user.min.js', array('jquery'), null, true );
+		wp_register_script( '<%= projectName %>-user-script', get_template_directory_uri() . '/assets/dist/js/<%= projectName %>-user.min.js', array('jquery'), null, true );
 	}
 
 	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'user-script' );
+	wp_enqueue_script( '<%= projectName %>-user-script' );
 
 }
 

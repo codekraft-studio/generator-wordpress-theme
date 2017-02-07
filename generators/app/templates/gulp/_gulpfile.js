@@ -16,22 +16,22 @@ var help = require('gulp-help')(gulp, {
 
 gulp.task('uglify', 'Concat and uglify all the javascript files into one file.', function () {
   var userScript = gulp.src('./src/assets/src/js/user/**/*.js')
-    .pipe(concat('user.js'))
+    .pipe(concat(pkg.name + '-user.js'))
     .pipe(babel({presets: ['es2015']}))
-    .pipe(gulp.dest('./src/assets/dist/js/user/'))
+    .pipe(gulp.dest('./src/assets/dist/js/'))
     .pipe(uglify())
     .on('error', notify.onError('Error: <%= error.message %>'))
     .pipe(rename({extname: '.min.js'}))
-    .pipe(gulp.dest('./src/assets/dist/js/user/'));
+    .pipe(gulp.dest('./src/assets/dist/js/'));
 
   var adminScript = gulp.src('./src/assets/src/js/admin/**/*.js')
-    .pipe(concat('admin.js'))
+    .pipe(concat(pkg.name + '-admin.js'))
     .pipe(babel({presets: ['es2015']}))
-    .pipe(gulp.dest('./src/assets/dist/js/admin/'))
+    .pipe(gulp.dest('./src/assets/dist/js/'))
     .pipe(uglify())
     .on('error', notify.onError('Error: <%= error.message %>'))
     .pipe(rename({extname: '.min.js'}))
-    .pipe(gulp.dest('./src/assets/dist/js/admin/'));
+    .pipe(gulp.dest('./src/assets/dist/js/'));
 
   return merge(userScript, adminScript);
 });

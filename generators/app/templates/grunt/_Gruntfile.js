@@ -39,11 +39,11 @@ module.exports = function (grunt) {
       },
       userScripts: {
         src: ['src/assets/src/js/user/**/*.js'],
-        dest: 'src/assets/dist/js/user.js'
+        dest: 'src/assets/dist/js/<%= pkg.name %>-user.js'
       },
       adminScripts: {
         src: ['src/assets/src/js/admin/**/*.js'],
-        dest: 'src/assets/dist/js/admin.js'
+        dest: 'src/assets/dist/js/<%= pkg.name %>-admin.js'
       }
     },
 
@@ -54,8 +54,8 @@ module.exports = function (grunt) {
       },
       target: {
         files: {
-          'src/assets/dist/js/admin.min.js': ['src/assets/dist/js/admin.js'],
-          'src/assets/dist/js/user.min.js': ['src/assets/dist/js/user.js']
+          'src/assets/dist/js/<%= pkg.name %>-admin.min.js': ['<%= concat.adminScripts.dest %>'],
+          'src/assets/dist/js/<%= pkg.name %>-user.min.js': ['<%= concat.userScripts.dest %>']
         }
       }
     },
@@ -68,8 +68,8 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          'src/assets/dist/js/user.js': 'src/assets/dist/js/user.js',
-          'src/assets/dist/js/admin.js': 'src/assets/dist/js/admin.js'
+          '<%= concat.userScripts.dest %>': '<%= concat.userScripts.dest %>',
+          '<%= concat.adminScripts.dest %>': '<%= concat.adminScripts.dest %>'
         }
       }
     },
