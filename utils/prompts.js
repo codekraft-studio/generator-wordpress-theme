@@ -13,7 +13,7 @@ module.exports = function (base) {
       message: 'What slug do you want to use for this project?',
       default: base.appname.replace(/\s/g, '-').toLowerCase(),
       validate: function (input) {
-        if (!/^(?:[a-z]+-[a-z]+)+$/g.test(input)) {
+        if (!/^(?:[a-z]+-?[a-z]+)+$/g.test(input)) {
           return 'You should follow the WordPress plugin name standard.';
         }
         return true;
