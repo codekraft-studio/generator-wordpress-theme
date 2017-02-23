@@ -3,6 +3,7 @@ var pkg = JSON.parse(fs.readFileSync('./package.json'));
 var gulp = require('gulp');
 var watch = require('gulp-watch');
 var concat = require('gulp-concat');
+var imagemin = require('gulp-imagemin');
 var babel = require('gulp-babel');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
@@ -14,6 +15,8 @@ var help = require('gulp-help')(gulp, {
   description: 'Show this help message.'
 });
 
+// Ufligy all the theme files and optionally vendor files
+// the theme files only will be concat and babeled first
 gulp.task('uglify', 'Concat and uglify all the javascript files into one file.', function () {
   var userScript = gulp.src('./src/assets/src/js/user/**/*.js')
     .pipe(concat(pkg.name + '-user.js'))
@@ -33,7 +36,13 @@ gulp.task('uglify', 'Concat and uglify all the javascript files into one file.',
     .pipe(rename({extname: '.min.js'}))
     .pipe(gulp.dest('./src/assets/dist/js/'));
 
-  return merge(userScript, adminScript);
+  var vendorScripts = gulp.src('./src/assets/src/js/vendor/**/*.js')
+    .pipe(uglify())
+    .on('error', notify.onError('Error: <%= error.message %>'))
+    .pipe(rename({extname: '.min.js'}))
+    .pipe(gulp.dest('./src/assets/dist/js/'));
+
+  return merge(userScript, adminScript, vendorScripts);
 });
 
 gulp.task('sass', 'Compile and minify all the sass files into one file.', function () {
@@ -58,6 +67,7 @@ gulp.task('sass', 'Compile and minify all the sass files into one file.', functi
   return merge(mainStyle, adminStyle, editorStyle);
 });
 
+// Do the potfile for the translations
 gulp.task('makepot', 'Generates pot files for your WordPress project.', function () {
   gulp.src('src/**/*.php')
     .pipe(wpPot({
@@ -75,8 +85,19 @@ gulp.task('watch', 'Watch for file changes and execute various tasks.', function
   watch('./src/assets/src/scss/**/*.scss', function () {
     gulp.start('sass');
   });
+
+  watch('./src/assets/src/img/*', function () {
+    gulp.start('imagemin');
+  });
 });
 
-gulp.task('build', 'Build all the project for the distribution.', ['uglify', 'sass', 'makepot']);
+// Minify and compress all the theme images
+gulp.task('imagemin', 'Minify and prepare image files for the distribution.', function () {
+  gulp.src('./src/assets/src/img/*')
+    .pipe(imagemin())
+    .pipe(gulp.dest('./src/assets/dist/img'));
+});
+
+gulp.task('build', 'Build all the project for the distribution.', ['uglify', 'sass', 'imagemin', 'makepot']);
 
 gulp.task('default', ['watch']);
