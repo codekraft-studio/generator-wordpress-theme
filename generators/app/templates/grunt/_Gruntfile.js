@@ -27,11 +27,13 @@ module.exports = function (grunt) {
       files: ['src/assets/src/js/**/*.js'],
       options: {
         esversion: 6,
-        globals: {jQuery: true}
+        globals: {
+          jQuery: true
+        }
       }
     },
 
-    // Concat all the javascript files
+    // Concat all the theme javascript files
     concat: {
       options: {
         stripBanners: true,
@@ -47,16 +49,30 @@ module.exports = function (grunt) {
       }
     },
 
-    // Uglify every js file
+    // Uglify every theme js file and vendor files
     uglify: {
-      options: {
-        banner: '<%= banner %>'
-      },
-      target: {
+      themeScripts: {
+        options: {
+          banner: '<%= banner %>'
+        },
         files: {
           'src/assets/dist/js/<%= pkg.name %>-admin.min.js': ['<%= concat.adminScripts.dest %>'],
           'src/assets/dist/js/<%= pkg.name %>-user.min.js': ['<%= concat.userScripts.dest %>']
         }
+      },
+      vendorScripts: {
+        options: {
+          sourceMap: false
+        },
+        files: [{
+          expand: true,
+          cwd: 'src/assets/src/js/vendor',
+          src: '**/*.js',
+          dest: 'src/assets/dist/js',
+          rename: function (dst, src) {
+            return dst + '/' + src.replace('.js', '.min.js');
+          }
+        }]
       }
     },
 
@@ -93,7 +109,9 @@ module.exports = function (grunt) {
       options: {
         map: true,
         processors: [
-          require('autoprefixer')({browsers: ['last 2 versions']})
+          require('autoprefixer')({
+            browsers: ['last 2 versions']
+          })
         ]
       },
       dist: {
@@ -120,18 +138,24 @@ module.exports = function (grunt) {
     watch: {
       scripts: {
         files: ['src/assets/src/js/**/*.js'],
-        tasks: ['newer:jshint', 'concat', 'babel', 'uglify'],
-        options: {spawn: false}
+        tasks: ['newer:jshint', 'concat', 'babel', 'newer:uglify'],
+        options: {
+          spawn: false
+        }
       },
       styles: {
         files: ['src/assets/src/scss/**/*.scss'],
         tasks: ['sass'],
-        options: {spawn: false}
+        options: {
+          spawn: false
+        }
       },
       images: {
         files: ['src/assets/src/img/**/*.{png,jpg,gif}'],
         tasks: ['newer:imagemin'],
-        options: {spawn: false}
+        options: {
+          spawn: false
+        }
       }
     },
 
