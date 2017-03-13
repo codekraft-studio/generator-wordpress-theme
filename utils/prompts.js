@@ -54,7 +54,12 @@ module.exports = function (base) {
       name: 'projectVersion',
       message: 'The version to initialize this project.',
       default: '0.0.1',
-      validate: validateRequired
+      validate: function (input) {
+        if (!/[0-9]{1}\.([0-9]{1})\.([0-9]{1})/.test(input)) {
+          return 'You should enter a valid version.';
+        }
+        return true;
+      }
     },
     {
       type: 'text',
