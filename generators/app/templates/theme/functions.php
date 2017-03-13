@@ -16,6 +16,7 @@ require_once( get_template_directory() . '/functions/clean.php' );
 require_once( get_template_directory() . '/functions/admin.php' );
 require_once( get_template_directory() . '/functions/theme-support.php' );
 require_once( get_template_directory() . '/functions/menu.php' );
+require_once( get_template_directory() . '/functions/seo.php' );
 require_once( get_template_directory() . '/functions/filters.php' );
 require_once( get_template_directory() . '/functions/sidebar.php' );
 require_once( get_template_directory() . '/functions/shortcode.php' );
