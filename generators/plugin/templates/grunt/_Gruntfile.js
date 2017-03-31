@@ -38,27 +38,30 @@ module.exports = function (grunt) {
       },
       userScripts: {
         src: ['assets/src/js/user/**/*.js'],
-        dest: 'assets/dist/js/user.js'
+        dest: 'assets/dist/js/user/user.js'
       },
       adminScripts: {
         src: ['assets/src/js/admin/**/*.js'],
-        dest: 'assets/dist/js/admin.js'
+        dest: 'assets/dist/js/admin/admin.js'
       }
     },
 
     // Minify all the scripts
     uglify: {
-      options: {
-        banner: '<%= banner %>'
-      },
       userScripts: {
+        options: {
+          banner: '<%= banner %>'
+        },
         files: {
-          'assets/dist/js/user.min.js': ['<%= concat.userScripts.dest %>']
+          'assets/dist/js/user/user.min.js': ['<%= concat.userScripts.dest %>']
         }
       },
       adminScripts: {
+        options: {
+          banner: '<%= banner %>'
+        },
         files: {
-          'assets/dist/js/admin.min.js': ['<%= concat.adminScripts.dest %>']
+          'assets/dist/js/admin/admin.min.js': ['<%= concat.adminScripts.dest %>']
         }
       },
       vendorScripts: {
@@ -69,7 +72,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: 'assets/src/js/vendor',
           src: '**/*.js',
-          dest: 'assets/dist/js',
+          dest: 'assets/dist/js/vendor',
           rename: function (dst, src) {
             return dst + '/' + src.replace('.js', '.min.js');
           }
@@ -94,7 +97,7 @@ module.exports = function (grunt) {
     watch: {
       scripts: {
         files: ['assets/src/js/**/*.js'],
-        tasks: ['newer:jshint', 'concat', 'uglify'],
+        tasks: ['newer:jshint', 'concat', 'newer:uglify'],
         options: {spawn: false}
       },
       styles: {
@@ -117,7 +120,7 @@ module.exports = function (grunt) {
 
   });
 
-  // development tasks
+  // Development tasks
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -125,15 +128,16 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-newer');
+  grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-wp-i18n');
 
-  // register watch task
+  // Register watch task
   grunt.registerTask('default', ['watch']);
 
-  // register build task
+  // Register build task
   grunt.registerTask('build', ['clean:all', 'build-scripts', 'build-styles', 'makepot']);
 
-  // partial build tasks
+  // Partial build tasks
   grunt.registerTask('build-styles', ['sass']);
   grunt.registerTask('build-scripts', ['jshint', 'concat', 'uglify']);
 };
