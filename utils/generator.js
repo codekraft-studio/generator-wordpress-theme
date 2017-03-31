@@ -1,5 +1,5 @@
 var banner = require('./banner.js');
-// var mkdirp = require('mkdirp');
+
 var Generator = require('yeoman-generator');
 
 var gruntConfig = function (generator) {
