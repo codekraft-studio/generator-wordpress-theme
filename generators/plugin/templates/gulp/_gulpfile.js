@@ -18,20 +18,20 @@ gulp.task('uglify', 'Concat and uglify all the javascript files into one file.',
   var userScript = gulp.src('./assets/src/js/user/**/*.js')
     .pipe(concat('user.js'))
     .pipe(babel({presets: ['es2015']}))
-    .pipe(gulp.dest('./assets/dist/js/user/'))
+    .pipe(gulp.dest('./assets/dist/js/user'))
     .pipe(uglify())
     .on('error', notify.onError('Error: <%= error.message %>'))
     .pipe(rename({extname: '.min.js'}))
-    .pipe(gulp.dest('./assets/dist/js/user/'));
+    .pipe(gulp.dest('./assets/dist/js/user'));
 
   var adminScript = gulp.src('./assets/src/js/admin/**/*.js')
     .pipe(concat('admin.js'))
     .pipe(babel({presets: ['es2015']}))
-    .pipe(gulp.dest('./assets/dist/js/admin/'))
+    .pipe(gulp.dest('./assets/dist/js/admin'))
     .pipe(uglify())
     .on('error', notify.onError('Error: <%= error.message %>'))
     .pipe(rename({extname: '.min.js'}))
-    .pipe(gulp.dest('./assets/dist/js/admin/'));
+    .pipe(gulp.dest('./assets/dist/js/admin'));
 
   var vendorScripts = gulp.src('./assets/src/js/vendor/**/*.js')
     .pipe(uglify())
@@ -48,12 +48,12 @@ gulp.task('sass', 'Compile and minify all the sass files into one file.', functi
   var mainStyle = gulp.src('./assets/src/scss/user.scss')
     .pipe(sass(options))
     .on('error', notify.onError('Error: <%= error.message %>'))
-    .pipe(gulp.dest('./assets/dist/css/'));
+    .pipe(gulp.dest('./assets/dist/css/user'));
 
   var adminStyle = gulp.src('./assets/src/scss/admin.scss')
     .pipe(sass(options))
     .on('error', notify.onError('Error: <%= error.message %>'))
-    .pipe(gulp.dest('./assets/dist/css/'));
+    .pipe(gulp.dest('./assets/dist/css/admin'));
 
   return merge(mainStyle, adminStyle);
 });
