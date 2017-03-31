@@ -1,58 +1,59 @@
 {
   "name": "generator-wordpress-starter",
-  "version": "0.0.8",
-  "description": "A simple generator for quick WordPress projects creation.",
+  "version": "0.0.9",
+  "description": "A simple yeoman generator for Wordpress projects.",
   "homepage": "",
   "author": {
     "name": "codekraft-studio",
     "email": "info@codekraft.it",
     "url": "https://codekraft.it"
   },
+  "files": [
+    "generators"
+  ],
   "main": "generators/index.js",
   "keywords": [
     "wordpress",
-    "starter kit",
-    "generator",
+    "starter",
+    "wp-theme",
+    "wp-plugin",
     "yeoman-generator"
   ],
-  "dependencies": {
-    "chalk": "^1.1.3",
-    "lodash": "^4.17.4",
-    "yeoman-generator": "^1.1.1"
-  },
   "devDependencies": {
     "yeoman-test": "^1.6.0",
     "yeoman-assert": "^3.0.0",
+    "coveralls": "^2.12.0",
+    "nsp": "^2.6.3",
     "eslint": "^3.18.0",
     "eslint-config-xo-space": "^0.16.0",
-    "gulp": "^3.9.0",
-    "gulp-eslint": "^3.0.1",
-    "gulp-exclude-gitignore": "^1.0.0",
-    "gulp-line-ending-corrector": "^1.0.1",
-    "gulp-istanbul": "^1.0.0",
-    "gulp-mocha": "^4.2.0",
-    "gulp-plumber": "^1.0.0",
-    "gulp-nsp": "^2.1.0",
-    "gulp-coveralls": "^0.1.0"
+    "jest": "^19.0.2",
+    "jest-cli": "^19.0.1"
+  },
+  "dependencies": {
+    "yeoman-generator": "^1.0.0",
+    "chalk": "^1.1.3"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "scripts": {
+    "prepublish": "nsp check",
+    "pretest": "eslint . --ignore-path .gitignore --fix",
+    "test": "jest --coverage"
   },
   "eslintConfig": {
     "extends": "xo-space",
-    "rules": {
-      "camelcase": 1,
-      "no-unused-vars": 1,
-      "linebreak-style": 0,
-      "one-var": 1
-    },
     "env": {
-      "mocha": true,
-      "browser": true,
-      "jquery": true
+      "jest": true,
+      "node": true
+    },
+    "rules": {
+      "no-unused-vars": 1,
+      "no-undef": 1,
+      "no-compare-neg-zero": 0,
+      "template-tag-spacing": 0
     }
   },
   "repository": "codekraft-studio/generator-wordpress-starter",
-  "scripts": {
-    "prepublish": "gulp prepublish",
-    "test": "gulp"
-  },
-  "license": "MIT"
+  "license": "Apache-2.0"
 }

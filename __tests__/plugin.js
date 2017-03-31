@@ -9,7 +9,7 @@ describe('generator-wordpress-starter:plugin', function () {
       projectName: 'my-plugin'
     };
 
-    before(function () {
+    beforeEach(function () {
       return helpers.run(path.join(__dirname, '../generators/plugin'))
         .withPrompts(prompts)
         .toPromise();
@@ -31,7 +31,7 @@ describe('generator-wordpress-starter:plugin', function () {
   });
 
   describe('with grunt project manager mode', function () {
-    before(function () {
+    beforeEach(function () {
       return helpers.run(path.join(__dirname, '../generators/plugin'))
         .withPrompts({projectManager: 'grunt'})
         .toPromise();
@@ -52,7 +52,7 @@ describe('generator-wordpress-starter:plugin', function () {
   });
 
   describe('with gulp project manager mode', function () {
-    before(function () {
+    beforeEach(function () {
       return helpers.run(path.join(__dirname, '../generators/plugin'))
         .withPrompts({projectManager: 'gulp'})
         .toPromise();

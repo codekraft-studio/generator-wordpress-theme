@@ -1,6 +1,5 @@
-# generator-wordpress-starter
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> A simple generator for quick WordPress projects creation..
+# generator-wordpress-starter [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+> A simple yeoman generator for Wordpress projects.
 
 ## Installation
 
@@ -11,23 +10,15 @@ npm install -g yo
 npm install -g generator-wordpress-starter
 ```
 
-Create a new folder named as your project name, enter it, then generate your new project:
+Create a new folder named as your project name, enter it, then generate your new theme project:
 
 ```bash
 yo wordpress-starter
 ```
 
-The default action is to generate a new theme, but you can also generate plugins like so:
+You can also generate plugins, by typing:
 ```bash
 yo wordpress-starter:plugin
-```
-
-You can choose between grunt or gulp as your project manager.
-
-For more informations about the usage and the options type:
-```bash
-yo wordpress-starter --help
-yo wordpress-starter:plugin --help
 ```
 
 ## Getting To Know Yeoman
@@ -39,7 +30,7 @@ yo wordpress-starter:plugin --help
 
 ## License
 
-MIT © [codekraft-studio](https://codekraft.it)
+Apache-2.0 © [codekraft-studio]()
 
 
 [npm-image]: https://badge.fury.io/js/generator-wordpress-starter.svg
