@@ -122,8 +122,8 @@ class <%= className %> {
   * @method plugin_enqueue_scripts
   */
   function plugin_enqueue_admin_scripts() {
-    wp_register_style( '<%= projectName %>_admin_style', <%= definePrefix %>_DIR_URL . '/assets/dist/css/admin.css', array(), null );
-    wp_register_script( '<%= projectName %>_admin_script', <%= definePrefix %>_DIR_URL . '/assets/dist/js/admin.min.js', array(), null, true );
+    wp_register_style( '<%= projectName %>_admin_style', <%= definePrefix %>_DIR_URL . '/assets/dist/css/admin/admin.css', array(), null );
+    wp_register_script( '<%= projectName %>_admin_script', <%= definePrefix %>_DIR_URL . '/assets/dist/js/admin/admin.min.js', array(), null, true );
     wp_enqueue_script('jquery');
     wp_enqueue_style('<%= projectName %>_admin_style');
     wp_enqueue_script('<%= projectName %>_admin_script');
@@ -134,8 +134,8 @@ class <%= className %> {
   * @method plugin_enqueue_scripts
   */
   function plugin_enqueue_scripts() {
-    wp_register_style( '<%= projectName %>_user_style', <%= definePrefix %>_DIR_URL . '/assets/dist/css/user.css', array(), null );
-    wp_register_script( '<%= projectName %>_user_script', <%= definePrefix %>_DIR_URL . '/assets/dist/js/user.min.js', array(), null, true );
+    wp_register_style( '<%= projectName %>_user_style', <%= definePrefix %>_DIR_URL . '/assets/dist/css/user/user.css', array(), null );
+    wp_register_script( '<%= projectName %>_user_script', <%= definePrefix %>_DIR_URL . '/assets/dist/js/user/user.min.js', array(), null, true );
     wp_enqueue_script('jquery');
     wp_enqueue_style('<%= projectName %>_user_style');
     wp_enqueue_script('<%= projectName %>_user_script');
