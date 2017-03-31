@@ -188,7 +188,7 @@ module.exports = function (grunt) {
 
   });
 
-  // development tasks
+  // Development tasks
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
@@ -201,13 +201,13 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-wp-i18n');
 
-  // register default task watch
+  // Register default task watch
   grunt.registerTask('default', ['watch']);
 
   // Register partial build tasks
   grunt.registerTask('build-styles', ['sass', 'postcss']);
   grunt.registerTask('build-scripts', ['jshint', 'concat', 'babel', 'uglify']);
 
-  // register build task and alias
+  // Register build task and alias
   grunt.registerTask('build', ['clean:all', 'build-scripts', 'build-styles', 'imagemin', 'makepot']);
 };
