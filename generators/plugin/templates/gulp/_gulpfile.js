@@ -48,14 +48,19 @@ gulp.task('sass', 'Compile and minify all the sass files into one file.', functi
   var mainStyle = gulp.src('./assets/src/scss/user.scss')
     .pipe(sass(options))
     .on('error', notify.onError('Error: <%= error.message %>'))
-    .pipe(gulp.dest('./assets/dist/css/user'));
+    .pipe(gulp.dest('./assets/dist/css'));
+
+  var editorStyle = gulp.src('./assets/src/scss/editor-style.scss')
+    .pipe(sass(options))
+    .on('error', notify.onError('Error: <%= error.message %>'))
+    .pipe(gulp.dest('./assets/dist/css'));
 
   var adminStyle = gulp.src('./assets/src/scss/admin.scss')
     .pipe(sass(options))
     .on('error', notify.onError('Error: <%= error.message %>'))
-    .pipe(gulp.dest('./assets/dist/css/admin'));
+    .pipe(gulp.dest('./assets/dist/css'));
 
-  return merge(mainStyle, adminStyle);
+  return merge(mainStyle, editorStyle, adminStyle);
 });
 
 gulp.task('makepot', 'Generates pot files for your WordPress project.', function () {

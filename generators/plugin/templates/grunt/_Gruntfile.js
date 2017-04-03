@@ -88,6 +88,7 @@ module.exports = function (grunt) {
         },
         files: {
           'assets/dist/css/user.css': 'assets/src/scss/user.scss',
+          'assets/dist/css/editor-style.css': 'assets/src/scss/editor-style.scss',
           'assets/dist/css/admin.css': 'assets/src/scss/admin.scss'
         }
       }

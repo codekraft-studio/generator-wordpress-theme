@@ -18,9 +18,12 @@ class <%= className %> {
 
     // Plugin Actions
     add_action( 'plugins_loaded', array($this, 'plugin_init') );
+
+    // User
     add_action( 'wp_enqueue_scripts', array($this, 'plugin_enqueue_scripts') );
 
     // Admin
+    add_filter( 'mce_css', array($this, 'plugin_add_editor_style') );
     add_action( 'admin_enqueue_scripts', array($this, 'plugin_enqueue_admin_scripts') );
     add_action( 'admin_init', array($this, 'plugin_register_settings') );
     add_action( 'admin_menu', array($this, 'plugin_add_settings_pages') );
@@ -122,7 +125,7 @@ class <%= className %> {
   * @method plugin_enqueue_scripts
   */
   function plugin_enqueue_admin_scripts() {
-    wp_register_style( '<%= projectName %>_admin_style', <%= definePrefix %>_DIR_URL . '/assets/dist/css/admin/admin.css', array(), null );
+    wp_register_style( '<%= projectName %>_admin_style', <%= definePrefix %>_DIR_URL . '/assets/dist/css/admin.css', array(), null );
     wp_register_script( '<%= projectName %>_admin_script', <%= definePrefix %>_DIR_URL . '/assets/dist/js/admin/admin.min.js', array(), null, true );
     wp_enqueue_script('jquery');
     wp_enqueue_style('<%= projectName %>_admin_style');
@@ -134,11 +137,23 @@ class <%= className %> {
   * @method plugin_enqueue_scripts
   */
   function plugin_enqueue_scripts() {
-    wp_register_style( '<%= projectName %>_user_style', <%= definePrefix %>_DIR_URL . '/assets/dist/css/user/user.css', array(), null );
+    wp_register_style( '<%= projectName %>_user_style', <%= definePrefix %>_DIR_URL . '/assets/dist/css/user.css', array(), null );
     wp_register_script( '<%= projectName %>_user_script', <%= definePrefix %>_DIR_URL . '/assets/dist/js/user/user.min.js', array(), null, true );
     wp_enqueue_script('jquery');
     wp_enqueue_style('<%= projectName %>_user_style');
     wp_enqueue_script('<%= projectName %>_user_script');
+  }
+
+  /**
+   * Add the plugin style to tinymce editor
+   * @method plugin_add_editor_style
+   */
+  function plugin_add_editor_style($styles) {
+      if ( !empty( $styles ) ) {
+      $styles .= ',';
+    }
+    $styles .= <%= definePrefix %>_DIR_URL . '/assets/dist/css/editor-style.css';
+    return $styles;
   }
 
   /**
