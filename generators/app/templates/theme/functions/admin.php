@@ -12,9 +12,9 @@ function theme_admin_styles() {
 function theme_admin_scripts() {
 
 	if( SCRIPT_DEBUG ) {
-		wp_register_script( 'admin-script', get_template_directory_uri() . '/assets/dist/js/admin.js', array('jquery'), null, true );
+		wp_register_script( 'admin-script', get_template_directory_uri() . '/assets/dist/js/<%= projectName %>-admin.js', array('jquery'), null, true );
 	} else {
-		wp_register_script( 'admin-script', get_template_directory_uri() . '/assets/dist/js/admin.min.js', array('jquery'), null, true );
+		wp_register_script( 'admin-script', get_template_directory_uri() . '/assets/dist/js/<%= projectName %>-admin.min.js', array('jquery'), null, true );
 	}
 
 	wp_enqueue_script( 'jquery' );
