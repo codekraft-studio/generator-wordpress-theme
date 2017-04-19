@@ -4,6 +4,7 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-test');
 
 describe('generator-wordpress-starter:plugin', function () {
+  // This test describe the default beheviour
   describe('with default options', function () {
     var prompts = {
       projectName: 'my-plugin'
@@ -13,6 +14,10 @@ describe('generator-wordpress-starter:plugin', function () {
       return helpers.run(path.join(__dirname, '../generators/plugin'))
         .withPrompts(prompts)
         .toPromise();
+    });
+
+    it('creates and move in a folder named like the projectName', () => {
+      assert.equal(path.basename(process.cwd()), 'my-plugin');
     });
 
     it('should create the plugin project files', () => {
@@ -30,6 +35,7 @@ describe('generator-wordpress-starter:plugin', function () {
     });
   });
 
+  // This test describe the grunt project mode
   describe('with grunt project manager mode', function () {
     beforeEach(function () {
       return helpers.run(path.join(__dirname, '../generators/plugin'))
@@ -51,6 +57,7 @@ describe('generator-wordpress-starter:plugin', function () {
     });
   });
 
+  // This test describe the gulp project mode
   describe('with gulp project manager mode', function () {
     beforeEach(function () {
       return helpers.run(path.join(__dirname, '../generators/plugin'))
