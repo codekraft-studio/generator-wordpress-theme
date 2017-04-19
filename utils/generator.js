@@ -1,38 +1,13 @@
 var banner = require('./banner.js');
-
+var chalk = require('chalk');
+var path = require('path');
+var mkdirp = require('mkdirp');
 var Generator = require('yeoman-generator');
-
-var gruntConfig = function (generator) {
-  generator.fs.copyTpl(
-    generator.templatePath('grunt/_package.json'),
-    generator.destinationPath('package.json'),
-    generator.props
-  );
-
-  generator.fs.copy(
-    generator.templatePath('grunt/_Gruntfile.js'),
-    generator.destinationPath('Gruntfile.js')
-  );
-};
-
-var gulpConfig = function (generator) {
-  generator.fs.copyTpl(
-    generator.templatePath('gulp/_package.json'),
-    generator.destinationPath('package.json'),
-    generator.props
-  );
-
-  generator.fs.copy(
-    generator.templatePath('gulp/_gulpfile.js'),
-    generator.destinationPath('gulpfile.js')
-  );
-};
 
 module.exports = Generator.extend({
 
   constructor: function () {
     Generator.apply(this, arguments);
-    this.argument('appname', {type: String, required: false, description: 'The project folder name.'});
   },
 
   prompting: function () {
@@ -49,12 +24,37 @@ module.exports = Generator.extend({
   },
 
   configuring: function () {
+    // Create the project folder if not matching current working directory
+    if (path.basename(this.destinationPath()) !== this.props.projectName) {
+      this.log(chalk.yellow('\n! Missing project folder named ' + this.props.projectName + ' created.\n'));
+      mkdirp(this.props.projectName);
+      this.destinationRoot(this.destinationPath(this.props.projectName));
+    }
+
     switch (this.props.projectManager) {
       case 'gulp':
-        gulpConfig(this);
+        this.fs.copyTpl(
+          this.templatePath('gulp/_package.json'),
+          this.destinationPath('package.json'),
+          this.props
+        );
+
+        this.fs.copy(
+          this.templatePath('gulp/_gulpfile.js'),
+          this.destinationPath('gulpfile.js')
+        );
         break;
       default:
-        gruntConfig(this);
+        this.fs.copyTpl(
+          this.templatePath('grunt/_package.json'),
+          this.destinationPath('./package.json'),
+          this.props
+        );
+
+        this.fs.copy(
+          this.templatePath('grunt/_Gruntfile.js'),
+          this.destinationPath('./Gruntfile.js')
+        );
         break;
     }
   },
