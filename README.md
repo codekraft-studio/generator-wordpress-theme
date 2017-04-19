@@ -10,11 +10,13 @@ npm install -g yo
 npm install -g generator-wordpress-starter
 ```
 
-Create a new folder named as your project name, enter it, then generate your new theme project:
+To generate a new project just type:
 
 ```bash
 yo wordpress-starter
 ```
+
+It will be made a bit of questions then you will have your project ready to go.
 
 You can also generate plugins, by typing:
 ```bash
