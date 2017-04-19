@@ -1,6 +1,6 @@
 {
   "name": "generator-wordpress-starter",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A simple yeoman generator for Wordpress projects.",
   "homepage": "",
   "author": {
