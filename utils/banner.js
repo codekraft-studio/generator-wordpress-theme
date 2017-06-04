@@ -1,3 +1,5 @@
+'use strict';
+
 let chalk = require('chalk');
 
 module.exports = chalk.bold.blue([

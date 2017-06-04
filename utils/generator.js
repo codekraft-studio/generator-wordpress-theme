@@ -23,13 +23,13 @@ module.exports = Generator.extend({
 
   // Inizialize the generator by checking the options
   initializing: function () {
-    this.log(chalk.cyan('\n[i]: The generator has started the build process...'));
+    this.log(chalk.cyan('\n[i] The generator has started the build process...'));
     let done = this.async();
 
     // If custom template is specified
     if (this.options.template && this.options.template !== '') {
       this.log(
-        chalk.cyan('[i] A custom template named', chalk.bold.green(this.options.template), 'will be used as specified.')
+        chalk.cyan('[i] A custom template named', chalk.bold.blue(this.options.template), 'will be used for generate the project.')
       );
 
       // The home directory
@@ -41,7 +41,7 @@ module.exports = Generator.extend({
       // Show the custom template folder path
       this.log(
         chalk.cyan('[i] Trying to locate and use the template in the folder:'),
-        chalk.bgCyan(templateDirectory)
+        chalk.underline.bold(templateDirectory)
       );
 
       // Check if the template folder exists and is not empty
@@ -67,19 +67,23 @@ module.exports = Generator.extend({
           }
 
           // Inform the use that the default template will be used
-          this.log(chalk.cyan('\n[i]: The generator will use the default template.'));
+          this.log(chalk.cyan('\n[i] The generator will use the default template.'));
+
+          // Erase the template property
+          this.options.template = false;
+
           // Continue
           done();
         }.bind(this));
       } else {
         // Set the new source root directory
         this.sourceRoot(templateDirectory);
-        this.log(chalk.cyan('[i]: The new template source root has been set.'));
+        this.log(chalk.cyan('[i] The template was found and the source root has been updated.'));
         // Continue
         done();
       }
     } else {
-      this.log(chalk.cyan('[i]: The default template will be used to generate the project.'));
+      this.log(chalk.cyan('[i] The default template will be used to generate the project.'));
       // Continue
       done();
     }
@@ -113,7 +117,7 @@ module.exports = Generator.extend({
 
     switch (this.props.projectManager) {
       case 'gulp':
-        this.log(chalk.cyan('\n[i]: Building the project with', chalk.bold('gulp.')));
+        this.log(chalk.cyan('\n[i] Building the project with', chalk.bold('gulp.')));
         this.fs.copyTpl(
           this.templatePath('gulp/_package.json'),
           this.destinationPath('package.json'),
@@ -125,8 +129,8 @@ module.exports = Generator.extend({
           this.destinationPath('gulpfile.js')
         );
         break;
-      default:
-        this.log(chalk.cyan('\n[i]: Building the project with', chalk.bold('grunt.')));
+      case 'grunt':
+        this.log(chalk.cyan('\n[i] Building the project with', chalk.bold('grunt.')));
         this.fs.copyTpl(
           this.templatePath('grunt/_package.json'),
           this.destinationPath('./package.json'),
@@ -138,13 +142,16 @@ module.exports = Generator.extend({
           this.destinationPath('./Gruntfile.js')
         );
         break;
+      default:
+        this.log(chalk.cyan('\n[i] Building the project without a build system.'));
+        break;
     }
   },
 
   install: function () {
     // Check if it will be installed
     if (!this.options.skipInstall) {
-      this.log(chalk.cyan('\n[i]: Starting to install the project dependencies.\n'));
+      this.log(chalk.cyan('\n[i] Starting to install the project dependencies.\n'));
       this.installDependencies({
         bower: false
       });

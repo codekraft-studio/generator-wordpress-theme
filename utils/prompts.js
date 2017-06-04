@@ -1,3 +1,5 @@
+'use strict';
+
 let _ = require('lodash');
 
 module.exports = function (base) {
@@ -40,11 +42,13 @@ module.exports = function (base) {
     {
       type: 'text',
       name: 'projectManager',
-      message: 'Do you want to use grunt or gulp as your build system?',
-      default: 'grunt',
+      message: 'Do you want to use grunt or gulp as your build system? (Leave blank if you dont want to use anything)',
+      default: function (answers) {
+        return base.options.template ? '' : 'grunt';
+      },
       validate: function (input) {
-        if (['grunt', 'gulp'].indexOf(input) === -1) {
-          return 'You must use grunt or gulp.';
+        if (['', 'grunt', 'gulp'].indexOf(input) === -1) {
+          return 'You must use grunt, gulp or leave it blank.';
         }
         return true;
       }
