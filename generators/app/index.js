@@ -1,24 +1,23 @@
 'use strict';
 
+var chalk = require('chalk');
 var WPGenerator = require('../../utils/generator.js');
 
 module.exports = WPGenerator.extend({
+
+  initializing: WPGenerator.prototype.initializing,
 
   prompting: WPGenerator.prototype.prompting,
 
   configuring: WPGenerator.prototype.configuring,
 
   writing: function () {
-    // Copy all the theme files
-    this.fs.copy(
-      this.templatePath('theme/**/*'),
-      this.destinationPath('src/')
-    );
+    this.log(chalk.cyan('[i] Starting to copy the template files into folder.\n'));
 
-    // Copy the theme function file
+    // Copy and compile all the theme files
     this.fs.copyTpl(
-      this.templatePath('theme/functions/**/*.php'),
-      this.destinationPath('src/functions/'),
+      this.templatePath('theme/**/*'),
+      this.destinationPath('src/'),
       this.props
     );
 
