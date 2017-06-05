@@ -43,7 +43,7 @@ module.exports = function (base) {
       type: 'text',
       name: 'projectManager',
       message: 'Do you want to use grunt or gulp as your build system? (Leave blank if you dont want to use anything)',
-      default: function (answers) {
+      default: function () {
         return base.options.template ? '' : 'grunt';
       },
       validate: function (input) {

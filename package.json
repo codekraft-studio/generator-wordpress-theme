@@ -45,13 +45,16 @@
     "extends": "xo-space",
     "env": {
       "jest": true,
-      "node": true
+      "node": true,
+      "browser": true,
+      "jquery": true
     },
     "rules": {
       "no-unused-vars": 1,
       "no-undef": 1,
       "no-compare-neg-zero": 0,
-      "template-tag-spacing": 0
+      "template-tag-spacing": 0,
+      "no-warning-comments": 0
     }
   },
   "repository": "codekraft-studio/generator-wordpress-starter",

@@ -5,7 +5,6 @@ var chalk = require('chalk');
 var path = require('path');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
-var path = require('path');
 var Generator = require('yeoman-generator');
 
 module.exports = Generator.extend({

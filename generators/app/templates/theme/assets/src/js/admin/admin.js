@@ -1,3 +1,4 @@
-jQuery(document).ready(() => {
-  console.info('Admin script ready');
-});
+(function ($, window, document) {
+  'use strict';
+  console.log('Admin script ready');
+})(window.jQuery, window, document);

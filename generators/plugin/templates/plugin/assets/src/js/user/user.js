@@ -1,5 +1,4 @@
-(function ($) {
+(function ($, window, document) {
   'use strict';
-
-  console.info('Plugin user script loaded.');
-})(jQuery);
+  console.log('Plugin user script ready');
+})(window.jQuery, window, document);
