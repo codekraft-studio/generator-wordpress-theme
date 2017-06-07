@@ -117,27 +117,28 @@ module.exports = Generator.extend({
     switch (this.props.projectManager) {
       case 'gulp':
         this.log(chalk.cyan('\n[i] Building the project with', chalk.bold('gulp.')));
+
         this.fs.copyTpl(
-          this.templatePath('gulp/_package.json'),
+          this.templatePath('gulp/package.json'),
           this.destinationPath('package.json'),
           this.props
         );
 
         this.fs.copy(
-          this.templatePath('gulp/_gulpfile.js'),
+          this.templatePath('gulp/gulpfile.js'),
           this.destinationPath('gulpfile.js')
         );
         break;
       case 'grunt':
         this.log(chalk.cyan('\n[i] Building the project with', chalk.bold('grunt.')));
         this.fs.copyTpl(
-          this.templatePath('grunt/_package.json'),
+          this.templatePath('grunt/package.json'),
           this.destinationPath('./package.json'),
           this.props
         );
 
         this.fs.copy(
-          this.templatePath('grunt/_Gruntfile.js'),
+          this.templatePath('grunt/Gruntfile.js'),
           this.destinationPath('./Gruntfile.js')
         );
         break;
