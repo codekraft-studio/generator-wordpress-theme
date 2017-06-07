@@ -14,19 +14,18 @@ module.exports = WPGenerator.extend({
   writing: function () {
     this.log(chalk.cyan('[i] Starting to copy the template files into folder.\n'));
 
-    // TODO: The glob pattern needs to be refined with all the scripting possibilities
     // Copy and compile all the theme source files
+    // related with the web development
     this.fs.copyTpl(
-      this.templatePath('theme/**/*.{js,php,css,scss}'),
+      this.templatePath('theme/**/*.{md,txt,js,coffee,ts,html,manifest,php,asp,css,scss,sass}'),
       this.destinationPath('src/'),
       this.props
     );
 
-    // TODO: Find a glob that is the opposite of this: *.{js,php,css,scss}
-    // trying to do something more comprehensive
     // Copy all other assets file that probably don't need interpolation
+    // related with the web commonly used assets formats
     this.fs.copy(
-      this.templatePath('theme/**/*.{png,gif,jpg}'),
+      this.templatePath('theme/**/*.{ico,gif,png,jpg,jpeg,svg,webp,woff,woff2,otf,ttf}'),
       this.destinationPath('src/')
     );
   },
