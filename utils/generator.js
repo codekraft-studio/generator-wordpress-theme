@@ -60,17 +60,20 @@ module.exports = Generator.extend({
         ]).then(function (props) {
           // Exit if user wants it
           if (!props.continue) {
-            this.log('\nThe generator is quitting, thank you for using it!');
-            process.exit(1);
+            // Alter default exception function so the following error isn't showd
+            process.on('uncaughtException', function () {
+              this.log(chalk.cyan('\n[i] The generator is quitting, thank you for using it!\n'));
+              this.greetings();
+            }.bind(this));
+            // Exit with error
+            done(true);
             return;
           }
 
           // Inform the use that the default template will be used
           this.log(chalk.cyan('\n[i] The generator will use the default template.'));
-
           // Erase the template property
           this.options.template = false;
-
           // Continue
           done();
         }.bind(this));
@@ -160,9 +163,13 @@ module.exports = Generator.extend({
 
   end: function () {
     this.log('\nYour project is', chalk.bold.yellow('ready'), 'to go.', 'We hope you liked to use our generator.\n');
+    this.greetings();
+  },
+
+  greetings: function () {
     this.log(
-      chalk.bold(
-        'Made with ❤ by',
+      chalk.bold.cyan(
+        '! Made with ❤ by',
         chalk.bold.green('CODEK') + chalk.bold.white('RAFT-ST') + chalk.bold.red('UDIO') + '.\n'
       )
     );
