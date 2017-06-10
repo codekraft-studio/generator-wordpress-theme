@@ -17,7 +17,7 @@ module.exports = function (base) {
       message: 'What slug do you want to use for this project?',
       default: _.kebabCase(base.appname),
       validate: function (input) {
-        if (!/^(?:[a-z]+-?[a-z]+)+$/g.test(input)) {
+        if (!/^(?:[a-z0-9]+-?[a-z0-9]+)+$/g.test(input)) {
           return 'You should follow the WordPress plugin name standard.';
         }
         return true;
