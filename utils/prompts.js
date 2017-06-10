@@ -59,7 +59,7 @@ module.exports = function (base) {
       message: 'The version to initialize this project.',
       default: '0.0.1',
       validate: function (input) {
-        if (!/[0-9]{1}\.([0-9]{1})\.([0-9]{1})/.test(input)) {
+        if (!/^\bv?(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)$/.test(input)) {
           return 'You should enter a valid version.';
         }
         return true;
