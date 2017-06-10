@@ -1,3 +1,5 @@
+'use strict';
+
 let _ = require('lodash');
 
 module.exports = function (base) {
@@ -15,7 +17,7 @@ module.exports = function (base) {
       message: 'What slug do you want to use for this project?',
       default: _.kebabCase(base.appname),
       validate: function (input) {
-        if (!/^(?:[a-z]+-?[a-z]+)+$/g.test(input)) {
+        if (!/^(?:[a-z0-9]+-?[a-z0-9]+)+$/g.test(input)) {
           return 'You should follow the WordPress plugin name standard.';
         }
         return true;
@@ -40,11 +42,13 @@ module.exports = function (base) {
     {
       type: 'text',
       name: 'projectManager',
-      message: 'Do you want to use grunt or gulp as your build system?',
-      default: 'grunt',
+      message: 'Do you want to use grunt or gulp as your build system? (Leave blank if you dont want to use anything)',
+      default: function () {
+        return base.options.template ? '' : 'grunt';
+      },
       validate: function (input) {
-        if (['grunt', 'gulp'].indexOf(input) === -1) {
-          return 'You must use grunt or gulp.';
+        if (['', 'grunt', 'gulp'].indexOf(input) === -1) {
+          return 'You must use grunt, gulp or leave it blank.';
         }
         return true;
       }
@@ -55,7 +59,7 @@ module.exports = function (base) {
       message: 'The version to initialize this project.',
       default: '0.0.1',
       validate: function (input) {
-        if (!/[0-9]{1}\.([0-9]{1})\.([0-9]{1})/.test(input)) {
+        if (!/^\bv?(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)$/.test(input)) {
           return 'You should enter a valid version.';
         }
         return true;

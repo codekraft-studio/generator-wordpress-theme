@@ -1,3 +1,3 @@
-(function ($) {
+(function ($, window, document) {
   'use strict';
-})(jQuery);
+})(window.jQuery, window, document);

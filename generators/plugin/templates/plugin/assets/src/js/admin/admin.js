@@ -1,5 +1,4 @@
-(function ($) {
+(function ($, window, document) {
   'use strict';
-
-  console.info('Plugin admin script loaded.');
-})(jQuery);
+  console.log('Plugin admin script ready');
+})(window.jQuery, window, document);

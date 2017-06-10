@@ -1,3 +1,4 @@
-jQuery(document).ready(() => {
-  console.info('User script ready');
-});
+(function ($, window, document) {
+  'use strict';
+  console.log('User script ready');
+})(window.jQuery, window, document);
