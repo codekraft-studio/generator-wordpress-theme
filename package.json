@@ -9,7 +9,8 @@
     "url": "https://codekraft.it"
   },
   "files": [
-    "generators"
+    "generators",
+    "utils"
   ],
   "main": "generators/app/index.js",
   "keywords": [
