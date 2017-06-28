@@ -11,7 +11,7 @@ npm install -g yo
 npm install -g generator-wordpress-starter
 ```
 
-To generate a new project just type:
+To generate a new project just type the string below, the generator will create the folder for you if not exists:
 
 ```bash
 yo wordpress-starter
@@ -27,15 +27,24 @@ yo wordpress-starter:plugin
 ---
 
 ## Generate a custom theme
+
 The project allow you to generate custom WordPress themes from templates located in 	`~/.wordpress-starter/` folder.
-You **should create** the folder if doesn't exist and place your themes inside like in this example:
+
++ Create a `.wordpress-starter` directory and place it inside your home folder.
++ Place your themes inside that folder and follow some simple rules.
++ When your template is ready you can use it with `--template TemplateName`
+
+
+
+You **must create** the folder if doesn't exist and place your themes inside like in this example:
+
 ```bash
 tree ~/.wordpress-starter/
 ├───Simple
 └───Advanced
 ```
 
-Every theme folder must follow simple rules in order to been generated correctly:
+Every theme folder __must follow__ simple rules in order to been generated correctly.
 ```bash
 tree ~/.wordpress-starter/Simple
 └───theme
@@ -52,11 +61,24 @@ tree ~/.wordpress-starter/Simple
 ```
 You can take a look at the [example](https://github.com/codekraft-studio/generator-wordpress-starter/tree/master/generators/app/templates) which is the default theme generated if you don't specify a custom one.
 
+As you can see in the default template, you can access the prompt variables inside the template during render process.
+
+This are all the variables available right now:
+
+* __projectName__: The project name as slug
+* __projectTitle__: The full project title as it appears on WordPress repositories
+* __projectDescription__: A short project description
+* __projectManager__: The build system used for the project (grunt, gulp)
+* __projectVersion__: The version when the project has started
+* __projectAuthor__: The project author name
+
+Simply use it like this: `<%= projectName %>` inside your files to have it rendered with the value.
+
 Inside the __theme__ folder you will always put all the themes related files (scripts, templates, assets, ...) while in the gulp/grunt folder you should put only the files that are related with your project build system configuration.
 
 In the grunt/gulp folder, you __must place only two files__: `package.json` and `gulpfile.js` or `Gruntfile.js`, any other file __will be ignored__.
 
-The `package.json` file will be rendered with [EJS interpolation](http://www.embeddedjs.com/), while the other file will be simply copied.
+The `package.json` file will be rendered with [EJS interpolation](http://www.embeddedjs.com/), while the other file will be simply copied since it uses itself ESJ during it's job.
 
 ---
 
