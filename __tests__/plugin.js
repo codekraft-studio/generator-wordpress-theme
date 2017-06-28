@@ -7,6 +7,7 @@ describe('generator-wordpress-starter:plugin', function () {
   // This test describe the default beheviour
   describe('with default options', function () {
     var prompts = {
+      projectTitle: 'My Plugin',
       projectName: 'my-plugin'
     };
 
@@ -24,9 +25,12 @@ describe('generator-wordpress-starter:plugin', function () {
       assert.file([
         prompts.projectName + '.php',
         'package.json',
-        'include/class-main.php'
+        'include/class-main.php',
+        'readme.txt'
       ]);
     });
+
+    it('has the project title set on readme.txt file', () => assert.fileContent('readme.txt', '=== ' + prompts.projectTitle + ' ==='));
 
     it('has the project name set on package.json', () => assert.fileContent('package.json', '"name": "' + prompts.projectName + '"'));
 
@@ -65,9 +69,7 @@ describe('generator-wordpress-starter:plugin', function () {
         .toPromise();
     });
 
-    it('should have a valid Gulpfile', function () {
-      assert.file('gulpfile.js');
-    });
+    it('should have a valid Gulpfile', () => assert.file('gulpfile.js'));
 
     it('should have gulp as dependency', () => assert.fileContent('package.json', '"gulp"'));
 
