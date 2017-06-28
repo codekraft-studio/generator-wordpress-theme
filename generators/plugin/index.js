@@ -36,6 +36,13 @@ module.exports = WPGenerator.extend({
       this.destinationPath(this.props.projectName + '.php'),
       this.props
     );
+
+    // Copy and compile all the files in plugin root directory
+    this.fs.copyTpl(
+      this.templatePath('plugin/[^_]*'),
+      this.destinationPath(),
+      this.props
+    );
   },
 
   install: WPGenerator.prototype.install,
