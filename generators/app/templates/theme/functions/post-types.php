@@ -37,7 +37,7 @@ function theme_custom_post_types() {
         'filter_items_list'     => __( 'Filter items list', '<%= projectName %>' ),
       ),
       'supports'              => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'custom-fields', ),
-      'taxonomies'            => array( 'category', 'post_tag' ),
+      'taxonomies'            => array( 'category', 'product_tag' ),
       'hierarchical'          => false,
       'public'                => true,
       'show_ui'               => true,

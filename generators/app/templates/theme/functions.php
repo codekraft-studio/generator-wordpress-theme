@@ -21,6 +21,7 @@ require_once( get_template_directory() . '/functions/filters.php' );
 require_once( get_template_directory() . '/functions/sidebar.php' );
 require_once( get_template_directory() . '/functions/shortcode.php' );
 require_once( get_template_directory() . '/functions/post-types.php' );
+require_once( get_template_directory() . '/functions/taxonomies.php' );
 require_once( get_template_directory() . '/functions/enqueue-scripts.php' );
 
 /*------------------------------------*\
