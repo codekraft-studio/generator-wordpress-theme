@@ -10,6 +10,8 @@ var sass = require('gulp-sass');
 var notify = require('gulp-notify');
 var wpPot = require('gulp-wp-pot');
 var merge = require('merge-stream');
+var del = require('del');
+var runSequence = require('run-sequence');
 var help = require('gulp-help')(gulp, {
   description: 'Show this help message.'
 });
@@ -82,6 +84,34 @@ gulp.task('watch', 'Watch for file changes and execute various tasks.', function
   });
 });
 
-gulp.task('build', 'Build all the project for the distribution.', ['uglify', 'sass', 'makepot']);
+gulp.task('clean', 'Clean the distribution folder from previous build.', function () {
+  return del('dist/*');
+});
+
+gulp.task('copy', 'Copy all the files into distribution folder.', function () {
+  return merge(
+
+    // Copy root files
+    gulp.src('./*.{txt,png,php}').pipe(gulp.dest('./dist')),
+
+    // Copy plugin files
+    gulp.src('include/**/*.*').pipe(gulp.dest('./dist/include')),
+    gulp.src('views/**/*.*').pipe(gulp.dest('./dist/views')),
+    gulp.src('languages/**/*.*').pipe(gulp.dest('./dist/languages')),
+
+    // Copy optmized assets
+    gulp.src('assets/dist/**/*.*').pipe(gulp.dest('./dist/assets/dist'))
+
+  );
+});
+
+gulp.task('build', 'Build all the project for the distribution.', function (callback) {
+  return runSequence(
+    'clean',
+    ['uglify', 'sass', 'makepot'],
+    'copy',
+    callback
+  );
+});
 
 gulp.task('default', ['watch']);
