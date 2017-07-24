@@ -57,7 +57,7 @@ describe('generator-wordpress-starter:plugin', function () {
     it('should have the build task', () => assert.fileContent('Gruntfile.js', 'build:'));
 
     it('should have the development basic tasks', () => {
-      ['clean', 'jshint', 'uglify', 'sass', 'makepot'].map(task => assert.fileContent('Gruntfile.js', task + ': '));
+      ['clean', 'jshint', 'uglify', 'sass', 'makepot', 'copy'].map(task => assert.fileContent('Gruntfile.js', task + ': '));
     });
   });
 
@@ -75,6 +75,7 @@ describe('generator-wordpress-starter:plugin', function () {
 
     it('should have all the gulp dev-dependencies', () => {
       [
+        'babel-preset-es2015',
         'gulp',
         'gulp-babel',
         'gulp-concat',
@@ -86,7 +87,8 @@ describe('generator-wordpress-starter:plugin', function () {
         'gulp-watch',
         'gulp-wp-pot',
         'merge-stream',
-        'babel-preset-es2015'
+        'del',
+        'run-sequence'
       ].map(
         val => assert.fileContent('package.json', '"' + val + '"')
       );

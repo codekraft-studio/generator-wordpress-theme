@@ -15,9 +15,23 @@ module.exports = function (grunt) {
 
     // Clean the dist directory files
     clean: {
-      all: ['assets/dist/*', 'languages/<%= pkg.name %>.pot'],
+      all: ['dist/*', 'assets/dist/*', 'languages/<%= pkg.name %>.pot'],
+      dist: ['dist/*'],
       styles: ['assets/dist/css/*'],
       scripts: ['assets/dist/js/*']
+    },
+
+    // Copy all the optimized files into distribution folder
+    copy: {
+      dist: {
+        files: [
+          {expand: true, src: ['./*.{txt,png,php}'], dest: './dist'},
+          {expand: true, src: ['./include/**/*'], dest: './dist'},
+          {expand: true, src: ['./views/**/*'], dest: './dist'},
+          {expand: true, src: ['./languages/**/*'], dest: './dist'},
+          {expand: true, src: ['./assets/dist/**/*'], dest: './dist'}
+        ]
+      }
     },
 
     // Hint all the script files
@@ -123,6 +137,7 @@ module.exports = function (grunt) {
 
   // Development tasks
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -136,7 +151,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', ['watch']);
 
   // Register build task
-  grunt.registerTask('build', ['clean:all', 'build-scripts', 'build-styles', 'makepot']);
+  grunt.registerTask('build', ['clean:all', 'build-scripts', 'build-styles', 'makepot', 'copy:dist']);
 
   // Partial build tasks
   grunt.registerTask('build-styles', ['sass']);
