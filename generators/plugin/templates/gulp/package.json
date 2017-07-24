@@ -12,18 +12,20 @@
   "license": "<%= projectLicense %>",
   "devDependencies": {
     "babel-preset-es2015": "^6.22.0",
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
     "gulp-help": "^1.6.1",
+    "gulp-jshint": "^2.0.4",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-uglify": "^2.0.0",
     "gulp-watch": "^4.3.11",
     "gulp-wp-pot": "^2.0.3",
+    "jshint": "^2.9.5",
     "merge-stream": "^1.0.1",
-    "del": "^3.0.0",
     "run-sequence": "^2.0.0"
   }
 }

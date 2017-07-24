@@ -6,6 +6,7 @@ var concat = require('gulp-concat');
 var babel = require('gulp-babel');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var notify = require('gulp-notify');
 var wpPot = require('gulp-wp-pot');
@@ -18,6 +19,7 @@ var help = require('gulp-help')(gulp, {
 
 gulp.task('uglify', 'Concat and uglify all the javascript files into one file.', function () {
   var userScript = gulp.src('./assets/src/js/user/**/*.js')
+    .pipe(jshint())
     .pipe(concat('user.js'))
     .pipe(babel({presets: ['es2015']}))
     .pipe(gulp.dest('./assets/dist/js/user'))
@@ -27,6 +29,7 @@ gulp.task('uglify', 'Concat and uglify all the javascript files into one file.',
     .pipe(gulp.dest('./assets/dist/js/user'));
 
   var adminScript = gulp.src('./assets/src/js/admin/**/*.js')
+    .pipe(jshint())
     .pipe(concat('admin.js'))
     .pipe(babel({presets: ['es2015']}))
     .pipe(gulp.dest('./assets/dist/js/admin'))
