@@ -163,16 +163,6 @@ module.exports = Generator.extend({
 
   end: function () {
     this.log('\nYour project is', chalk.bold.yellow('ready'), 'to go.', 'We hope you liked to use our generator.\n');
-    this.greetings();
-  },
-
-  greetings: function () {
-    this.log(
-      chalk.bold.cyan(
-        '! Made with ❤ by',
-        chalk.bold.green('CODEK') + chalk.bold.white('RAFT-ST') + chalk.bold.red('UDIO') + '.\n'
-      )
-    );
   }
 
 });
