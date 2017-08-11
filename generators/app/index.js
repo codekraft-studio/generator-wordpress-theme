@@ -22,12 +22,14 @@ module.exports = WPGenerator.extend({
       this.props
     );
 
-    // Copy all other assets file that probably don't need interpolation
-    // related with the web commonly used assets formats
-    this.fs.copy(
-      this.templatePath('theme/**/*.{ico,gif,png,jpg,jpeg,svg,webp,woff,woff2,otf,ttf}'),
-      this.destinationPath('src/')
-    );
+    try {
+      // Copy all other assets file that probably don't need interpolation
+      // related with the web commonly used assets formats
+      this.fs.copy(
+        this.templatePath('theme/**/*.{ico,gif,png,jpg,jpeg,svg,webp,woff,woff2,otf,ttf}'),
+        this.destinationPath('src/')
+      );
+    } catch (e) { }
   },
 
   install: WPGenerator.prototype.install,
