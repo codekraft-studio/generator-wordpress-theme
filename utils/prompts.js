@@ -2,14 +2,18 @@
 
 let _ = require('lodash');
 
-module.exports = function (base) {
-  var validateRequired = function (value) {
-    if (value === '') {
-      return 'This field is required, please enter a valid value.';
-    }
-    return true;
-  };
+var validateRequired = function (value) {
+  if (value === '') {
+    return 'This field is required, please enter a valid value.';
+  }
+  return true;
+};
 
+// Function that validate for required input
+module.exports.validateRequired = validateRequired;
+
+// The prompts array
+module.exports.prompt = function (base) {
   return [
     {
       type: 'text',

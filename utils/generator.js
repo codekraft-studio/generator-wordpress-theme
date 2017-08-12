@@ -63,7 +63,6 @@ module.exports = Generator.extend({
             // Alter default exception function so the following error isn't showd
             process.on('uncaughtException', function () {
               this.log(chalk.cyan('\n[i] The generator is quitting, thank you for using it!\n'));
-              this.greetings();
             }.bind(this));
             // Exit with error
             done(true);
@@ -96,7 +95,7 @@ module.exports = Generator.extend({
     this.log(banner);
 
     // Get the questions
-    var prompts = require('./prompts.js')(this);
+    var prompts = require('./prompts.js').prompt(this);
 
     // Run it
     return this.prompt(prompts).then(function (props) {
@@ -152,7 +151,6 @@ module.exports = Generator.extend({
   },
 
   install: function () {
-    // Check if it will be installed
     if (!this.options.skipInstall) {
       this.log(chalk.cyan('\n[i] Starting to install the project dependencies.\n'));
       this.installDependencies({
