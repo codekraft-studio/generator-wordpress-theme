@@ -3,7 +3,7 @@ var WPGenerator = require('../utils/generator.js');
 var assert = require('yeoman-assert');
 
 describe('generator-wordpress-starter:utils:generator', () => {
-  describe('check for methods:', () => {
+  describe('has default methods', () => {
     it('has a initializing method to check command line options', () => {
       assert.implement(WPGenerator, 'initializing');
     });
