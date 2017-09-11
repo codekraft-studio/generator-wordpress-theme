@@ -112,13 +112,15 @@ module.exports = function (grunt) {
     watch: {
       scripts: {
         files: ['assets/src/js/**/*.js'],
-        tasks: ['newer:jshint', 'concat', 'newer:uglify'],
-        options: {spawn: false}
+        tasks: ['newer:jshint', 'concat', 'newer:uglify']
       },
       styles: {
         files: ['assets/src/scss/**/*.scss'],
-        tasks: ['sass'],
-        options: {spawn: false}
+        tasks: ['sass']
+      },
+      images: {
+        files: ['assets/src/img/**/*.{png,jpg,gif,svg}'],
+        tasks: ['sass']
       }
     },
 
@@ -131,6 +133,32 @@ module.exports = function (grunt) {
           domainPath: '/languages'
         }
       }
+    },
+
+    // Optimize and copy all images to dist folder
+    imagemin: {
+      dist: {
+        options: {},
+        files: [{
+          expand: true,
+          cwd: 'assets/src/img',
+          src: ['**/*.{png,jpg,gif}'],
+          dest: 'assets/dist/img'
+        }]
+      }
+    },
+
+    // Optimize and copy all svgs to dist folder
+    svgmin: {
+      dist: {
+        options: {},
+        files: [{
+          expand: true,
+          cwd: 'assets/src/img',
+          src: ['**/*.svg'],
+          dest: 'assets/dist/img'
+        }]
+      }
     }
 
   });
@@ -141,19 +169,22 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-newer');
+  grunt.loadNpmTasks('grunt-sass');
+  grunt.loadNpmTasks('grunt-svgmin');
   grunt.loadNpmTasks('grunt-postcss');
+  grunt.loadNpmTasks('grunt-newer');
   grunt.loadNpmTasks('grunt-wp-i18n');
 
   // Register watch task
   grunt.registerTask('default', ['watch']);
 
   // Register build task
-  grunt.registerTask('build', ['clean:all', 'build-scripts', 'build-styles', 'makepot', 'copy:dist']);
+  grunt.registerTask('build', ['clean:all', 'build-scripts', 'build-styles', 'build-images', 'makepot', 'copy:dist']);
 
   // Partial build tasks
+  grunt.registerTask('build-images', ['newer:imagemin', 'newer:svgmin']);
   grunt.registerTask('build-styles', ['sass']);
   grunt.registerTask('build-scripts', ['jshint', 'concat', 'uglify']);
 };
