@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var watch = require('gulp-watch');
 var concat = require('gulp-concat');
 var imagemin = require('gulp-imagemin');
+var svgmin = require('gulp-svgmin');
 var babel = require('gulp-babel');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
@@ -92,12 +93,19 @@ gulp.task('watch', 'Watch for file changes and execute various tasks.', function
 });
 
 // Minify and compress all the theme images
-gulp.task('imagemin', 'Minify and prepare image files for the distribution.', function () {
-  gulp.src('./src/assets/src/img/*')
+gulp.task('images', 'Minify and prepare image files for the distribution.', function () {
+  // Optimize all the images
+  var img = gulp.src('./src/assets/src/img/**/*.{png,jpg,gif}')
     .pipe(imagemin())
     .pipe(gulp.dest('./src/assets/dist/img'));
+  // Optmize all the svgs
+  var svg = gulp.src('./src/assets/src/img/**/*.svg')
+    .pipe(svgmin())
+    .pipe(gulp.dest('./src/assets/dist/img'));
+  // Merge the streams
+  return merge(img, svg);
 });
 
-gulp.task('build', 'Build all the project for the distribution.', ['uglify', 'sass', 'imagemin', 'makepot']);
+gulp.task('build', 'Build all the project for the distribution.', ['uglify', 'sass', 'images', 'makepot']);
 
 gulp.task('default', ['watch']);

@@ -134,6 +134,19 @@ module.exports = function (grunt) {
       }
     },
 
+    // Optmize all the svg files
+    svgmin: {
+      dist: {
+        options: {},
+        files: [{
+          expand: true,
+          cwd: 'src/assets/src/img',
+          src: ['**/*.svg'],
+          dest: 'src/assets/dist/img'
+        }]
+      }
+    },
+
     // Watch js and css files and rebuild
     watch: {
       scripts: {
