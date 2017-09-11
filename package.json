@@ -39,7 +39,7 @@
   },
   "scripts": {
     "prepublish": "nsp check",
-    "pretest": "eslint . --ignore-path .gitignore --fix",
+    "pretest": "eslint . --fix",
     "test": "jest --coverage"
   },
   "eslintConfig": {
