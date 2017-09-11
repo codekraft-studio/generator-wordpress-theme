@@ -12,6 +12,8 @@ var notify = require('gulp-notify');
 var wpPot = require('gulp-wp-pot');
 var merge = require('merge-stream');
 var del = require('del');
+var svgmin = require('gulp-svgmin');
+var imagemin = require('gulp-imagemin');
 var runSequence = require('run-sequence');
 var help = require('gulp-help')(gulp, {
   description: 'Show this help message.'
@@ -77,6 +79,16 @@ gulp.task('makepot', 'Generates pot files for your WordPress project.', function
     .pipe(gulp.dest('./languages/' + pkg.name + '.pot'));
 });
 
+gulp.task('images', 'Optimize and copy all the images and svgs in the project.', function () {
+  var svg = gulp.src('./assets/src/img/**/*.svg')
+    .pipe(svgmin())
+    .pipe(gulp.dest('./assets/dist/img'));
+  var img = gulp.src('./assets/src/img/**/*.{png,jpg,gif}')
+		.pipe(imagemin())
+		.pipe(gulp.dest('./assets/dist/img'));
+  return merge(svg, img);
+});
+
 gulp.task('watch', 'Watch for file changes and execute various tasks.', function () {
   watch('./assets/src/js/**/*.js', function () {
     gulp.start('uglify');
@@ -111,7 +123,7 @@ gulp.task('copy', 'Copy all the files into distribution folder.', function () {
 gulp.task('build', 'Build all the project for the distribution.', function (callback) {
   return runSequence(
     'clean',
-    ['uglify', 'sass', 'makepot'],
+    ['uglify', 'sass', 'images', 'makepot'],
     'copy',
     callback
   );
