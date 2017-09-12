@@ -19,6 +19,10 @@ var help = require('gulp-help')(gulp, {
   description: 'Show this help message.'
 });
 
+gulp.task('clean', 'Clean the distribution folder from previous build.', function () {
+  return del(['assets/dist/*', 'dist/*']);
+});
+
 gulp.task('uglify', 'Concat and uglify all the javascript files into one file.', function () {
   var userScript = gulp.src('./assets/src/js/user/**/*.js')
     .pipe(jshint())
@@ -97,10 +101,6 @@ gulp.task('watch', 'Watch for file changes and execute various tasks.', function
   watch('./assets/src/scss/**/*.scss', function () {
     gulp.start('sass');
   });
-});
-
-gulp.task('clean', 'Clean the distribution folder from previous build.', function () {
-  return del('dist/*');
 });
 
 gulp.task('copy', 'Copy all the files into distribution folder.', function () {
