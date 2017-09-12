@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 <%= projectDescription %>
 
 == Description ==
-
+<%= projectDescription %>
 
 == Installation ==
 
@@ -22,8 +22,8 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 1. Go to "after activation" below.
 
 = Manually =
-1. Upload the press-tube folder to the /wp-content/plugins/ directory
-1. Activate the Press Tube plugin through the Plugins menu in WordPress
+1. Upload the <%= projectName %> folder to the /wp-content/plugins/ directory
+1. Activate the <%= projectTitle %> plugin through the Plugins menu in WordPress
 1. Go to "after activation" below.
 
 = After activation =
@@ -36,9 +36,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 An answer to that question.
 
-= What about foo bar? =
-
-Answer to foo bar dilemma.
 
 == Screenshots ==
 
@@ -48,3 +45,5 @@ Answer to foo bar dilemma.
 
 
 == Upgrade Notice ==
+
+You should upgrade to last version.
