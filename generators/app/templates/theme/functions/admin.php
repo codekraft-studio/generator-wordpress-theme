@@ -11,14 +11,14 @@ function theme_admin_styles() {
 // Load admin scripts
 function theme_admin_scripts() {
 
-	if( SCRIPT_DEBUG ) {
-		wp_register_script( 'admin-script', get_template_directory_uri() . '/assets/dist/js/<%= projectName %>-admin.js', array('jquery'), null, true );
-	} else {
-		wp_register_script( 'admin-script', get_template_directory_uri() . '/assets/dist/js/<%= projectName %>-admin.min.js', array('jquery'), null, true );
-	}
+  $min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 
-	wp_enqueue_script( 'jquery' );
-  wp_enqueue_script( 'admin-script' );
+  // Main script path
+  $path = get_template_directory_uri() . "/assets/dist/js/<%= projectName %>-admin{$min}.js";
+
+  // Register and Enqueue
+  wp_register_script( '<%= projectName %>-admin', $path, array('jquery'), null, true );
+  wp_enqueue_script( '<%= projectName %>-admin' );
 
 }
 
@@ -33,8 +33,8 @@ function theme_remove_admin_bar() {
   return false;
 }
 
+add_filter( 'show_admin_bar', 'theme_remove_admin_bar' ); // Remove Admin bar
 add_action( 'admin_enqueue_scripts', 'theme_admin_styles' ); // Add Theme admin styles
 add_action( 'admin_enqueue_scripts', 'theme_admin_scripts' ); // Add Theme admin scripts
 add_action( 'admin_enqueue_scripts', 'theme_admin_conditional_styles' ); // Add Theme Conditionals admin scripts
 add_action( 'admin_enqueue_scripts', 'theme_admin_conditional_scripts' ); // Add Theme Conditionals admin scripts
-add_filter( 'show_admin_bar', 'theme_remove_admin_bar' ); // Remove Admin bar
