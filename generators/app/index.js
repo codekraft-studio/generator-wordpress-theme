@@ -18,6 +18,19 @@ const measureText = function(font, text) {
 
 module.exports = class extends WPGenerator {
 
+  // Init generator with custom options
+  constructor(args, opts) {
+    super(args, opts);
+
+    // Option to skip the dinamic custom screenshot creation
+    // mainly for internal use since the tests fail with multiple jimp instances
+    this.option('skipScreenshot', {
+      description: 'Skip the dinamic screenshot creation.',
+      type: Boolean,
+      hide: true
+    });
+  }
+
   initializing() {
     super.initializing();
   }
@@ -54,8 +67,13 @@ module.exports = class extends WPGenerator {
   // Create the theme screenshot image
   createScreenshot() {
 
+    // Optionally skip this section
+    if(this.options.skipScreenshot) {
+      return;
+    }
+
     var self = this;
-    var done = this.async();
+    var callback = self.async();
 
     // The screenshot measures
     var measures = {
@@ -71,15 +89,18 @@ module.exports = class extends WPGenerator {
     Jimp.loadFont(Jimp.FONT_SANS_32_WHITE, function(err, font) {
 
       if( err ) {
-        done(null);
+        callback();
         return;
       }
+
+      self.log(chalk.cyan(`[i] Creating a [${measures.width}x${measures.height}] png file.`));
 
       // Create a new image from nothing
       var image = new Jimp(measures.width, measures.height, bgColor, function(err, image) {
 
         if( err ) {
-          done(null);
+          self.log(chalk.red('[e] The png file creation failed, skipping this step.'));
+          callback();
           return;
         }
 
@@ -97,12 +118,16 @@ module.exports = class extends WPGenerator {
         // Build the output file path
         let outputFile = self.destinationPath('src/screenshot.png');
 
+        self.log(chalk.cyan(`[i] Printing the project name: ${text} on image.`));
+
         // Print the text on the screenshot
         image.print(font, position.width, position.height, text);
 
+        self.log(chalk.cyan(`[i] Saving image to: 'src/screenshot.png'.`));
+
         // Write the image to disk
-        image.write(outputFile, (err) => {
-          done(null);
+        image.write(outputFile, function(err) {
+          callback();
         });
 
       });
