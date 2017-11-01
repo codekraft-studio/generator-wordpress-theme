@@ -8,5 +8,6 @@ module.exports = chalk.bold.cyan([
   ' |  |  |  |  _  |    |__ --||   _|  _  |   _||   _|  -__|   _| ',
   ' |________|   __|    |_____||____|___._|__|  |____|_____|__|   ',
   '          |__|                                                 ',
-  '                                     by codekraft-studio        '
+  '                                     by codekraft-studio       ',
+  '                                                               '
 ].join('\n'));
