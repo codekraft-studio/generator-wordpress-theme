@@ -1,10 +1,14 @@
-# generator-wordpress-starter 
+![banner](banner.jpg)
+
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url] [![Slack Chat](https://img.shields.io/badge/wordpress_slack-@codekraft--studio-blue.svg?style=flat)](https://wordpress.slack.com)
+
+# generator-wordpress-starter
+
 > A simple yeoman generator for Wordpress projects.
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-wordpress-starter using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and __generator-wordpress-starter__ using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
@@ -33,8 +37,6 @@ The project allow you to generate custom WordPress themes from templates located
 + Create a `.wordpress-starter` directory and place it inside your home folder.
 + Place your themes inside that folder and follow some simple rules.
 + When your template is ready you can use it with `--template TemplateName`
-
-
 
 You **must create** the folder if doesn't exist and place your themes inside like in this example:
 
