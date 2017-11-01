@@ -2,11 +2,11 @@
 
 const chalk = require('chalk');
 const WPGenerator = require('../../utils/generator.js');
-var Jimp = require('jimp');
+const Jimp = require('jimp');
 
-var measureText = function(font, text) {
-  var x = 0;
-  for (var i = 0; i < text.length; i++) {
+const measureText = function(font, text) {
+  let x = 0;
+  for (let i = 0; i < text.length; i++) {
     if (font.chars[text[i]]) {
       x += font.chars[text[i]].xoffset + (font.kernings[text[i]] && font.kernings[text[i]][text[i + 1]]
         ? font.kernings[text[i]][text[i + 1]]
@@ -52,7 +52,7 @@ module.exports = class extends WPGenerator {
   }
 
   // Create the theme screenshot image
-  createScreenshot: function() {
+  createScreenshot() {
 
     var self = this;
     var done = this.async();
@@ -109,7 +109,7 @@ module.exports = class extends WPGenerator {
 
     });
 
-  },
+  }
 
   install() {
     super.install();
