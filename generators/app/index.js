@@ -1,17 +1,23 @@
 'use strict';
 
-var chalk = require('chalk');
-var WPGenerator = require('../../utils/generator.js');
+const chalk = require('chalk');
+const WPGenerator = require('../../utils/generator.js');
 
-module.exports = WPGenerator.extend({
+module.exports = class extends WPGenerator {
 
-  initializing: WPGenerator.prototype.initializing,
+  initializing() {
+    super.initializing();
+  }
 
-  prompting: WPGenerator.prototype.prompting,
+  prompting() {
+    return super.prompting();
+  }
 
-  configuring: WPGenerator.prototype.configuring,
+  configuring() {
+    super.configuring();
+  }
 
-  writing: function () {
+  writing() {
     this.log(chalk.cyan('[i] Starting to copy the template files into folder.\n'));
 
     // Copy and compile all the theme source files
@@ -30,10 +36,14 @@ module.exports = WPGenerator.extend({
         this.destinationPath('src/')
       );
     } catch (e) { }
-  },
+  }
 
-  install: WPGenerator.prototype.install,
+  install() {
+    super.install();
+  }
 
-  end: WPGenerator.prototype.end
+  end() {
+    super.end();
+  }
 
-});
+};

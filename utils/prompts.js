@@ -1,8 +1,8 @@
 'use strict';
 
-let _ = require('lodash');
+const _ = require('lodash');
 
-var validateRequired = function (value) {
+const validateRequired = function (value) {
   if (value === '') {
     return 'This field is required, please enter a valid value.';
   }

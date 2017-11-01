@@ -61,24 +61,6 @@ describe('generator-wordpress-starter:app', () => {
     });
   });
 
-  // Testing the custom template option
-  describe('generator custom existing template:', () => {
-    beforeEach(done => {
-      this.runContext
-        .withPrompts({continue: false})
-        .withOptions({template: 'Test'})
-        .on('error', done)
-        .on('end', done);
-    });
-
-    it('wont create any file if template not exists', () => {
-      assert.noFile([
-        'src/functions.php',
-        'src/index.php'
-      ]);
-    });
-  });
-
   // Test without a project manager
   describe('without project manager', () => {
     beforeEach(() => {

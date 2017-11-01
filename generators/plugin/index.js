@@ -1,18 +1,22 @@
 'use strict';
 
-var WPGenerator = require('../../utils/generator.js');
+const WPGenerator = require('../../utils/generator.js');
 
-var pascalCase = function (g0, g1, g2) {
+const pascalCase = function (g0, g1, g2) {
   return g1.toUpperCase() + g2.toLowerCase();
 };
 
-module.exports = WPGenerator.extend({
+module.exports = class extends WPGenerator {
 
-  prompting: WPGenerator.prototype.prompting,
+  prompting() {
+    return super.prompting();
+  }
 
-  configuring: WPGenerator.prototype.configuring,
+  configuring() {
+    super.configuring();
+  }
 
-  writing: function () {
+  writing() {
     // Set the class name for the plugin
     this.props.className = this.props.projectName.replace(/(\w)(\w*)/g, pascalCase).replace(/-/g, '_');
     this.props.definePrefix = this.props.className.toUpperCase();
@@ -43,10 +47,14 @@ module.exports = WPGenerator.extend({
       this.destinationPath(),
       this.props
     );
-  },
+  }
 
-  install: WPGenerator.prototype.install,
+  install() {
+    super.install();
+  }
 
-  end: WPGenerator.prototype.end
+  end() {
+    super.end();
+  }
 
-});
+};
