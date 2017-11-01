@@ -2,6 +2,19 @@
 
 const chalk = require('chalk');
 const WPGenerator = require('../../utils/generator.js');
+var Jimp = require('jimp');
+
+var measureText = function(font, text) {
+  var x = 0;
+  for (var i = 0; i < text.length; i++) {
+    if (font.chars[text[i]]) {
+      x += font.chars[text[i]].xoffset + (font.kernings[text[i]] && font.kernings[text[i]][text[i + 1]]
+        ? font.kernings[text[i]][text[i + 1]]
+        : 0) + (font.chars[text[i]].xadvance || 0);
+    }
+  }
+  return x;
+};
 
 module.exports = class extends WPGenerator {
 
@@ -37,6 +50,66 @@ module.exports = class extends WPGenerator {
       );
     } catch (e) { }
   }
+
+  // Create the theme screenshot image
+  createScreenshot: function() {
+
+    var self = this;
+    var done = this.async();
+
+    // The screenshot measures
+    var measures = {
+      width: 1200,
+      height: 900
+    };
+
+    // TODO: Derive the screenshot backgorund color from the projectName in range of colors
+    // Get the screenshot background color
+    var bgColor = 0x4286f4;
+
+    // Load the font to write text
+    Jimp.loadFont(Jimp.FONT_SANS_32_WHITE, function(err, font) {
+
+      if( err ) {
+        done(null);
+        return;
+      }
+
+      // Create a new image from nothing
+      var image = new Jimp(measures.width, measures.height, bgColor, function(err, image) {
+
+        if( err ) {
+          done(null);
+          return;
+        }
+
+        let text = self.props.projectName.toUpperCase();
+
+        // Get the text total width
+        let totalWidth = measureText(font, text);
+
+        // Get the item position
+        let position = {
+          width: Math.floor((measures.width / 2) - (totalWidth / 2)),
+          height: Math.floor(measures.height / 2 - 16)
+        };
+
+        // Build the output file path
+        let outputFile = self.destinationPath('src/screenshot.png');
+
+        // Print the text on the screenshot
+        image.print(font, position.width, position.height, text);
+
+        // Write the image to disk
+        image.write(outputFile, (err) => {
+          done(null);
+        });
+
+      });
+
+    });
+
+  },
 
   install() {
     super.install();
