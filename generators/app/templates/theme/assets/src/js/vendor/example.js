@@ -1,3 +1,3 @@
 (function () {
-  console.log('Example script.');
+  console.log('Example script');
 })();

@@ -31,9 +31,10 @@
     "yeoman-test": "^1.7.0"
   },
   "dependencies": {
-    "yeoman-generator": "^2.0.1",
     "chalk": "^2.3.0",
-    "jimp": "^0.2.28"
+    "jimp": "^0.2.28",
+    "lodash": "^4.17.4",
+    "yeoman-generator": "^2.0.1"
   },
   "jest": {
     "testEnvironment": "node"

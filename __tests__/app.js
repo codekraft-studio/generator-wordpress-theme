@@ -7,6 +7,9 @@ var helpers = require('yeoman-test');
 describe('generator-wordpress-starter:app', () => {
   jest.setTimeout(5000);
 
+  // Override process HOME env variable to point to this folder
+  process.env.HOME = __dirname;
+
   // Testing the default template option
   describe('generator default case:', () => {
     beforeAll(() => {
@@ -58,8 +61,8 @@ describe('generator-wordpress-starter:app', () => {
         .on('end', done);
     });
 
-    it('reset the template option to proceed', () => {
-      assert.equal(context.generator.options.template, false);
+    it('ensure the projectTemplate property is set to empty', () => {
+      assert.equal(context.generator.props.projectTemplate, '');
     });
 
     it('render the files from the default template', () => {
@@ -73,8 +76,6 @@ describe('generator-wordpress-starter:app', () => {
   // Describe the generation with custom existing template
   describe('generator existing template', () => {
     beforeAll(() => {
-      // Override process HOME env variable to point to this folder
-      process.env.HOME = __dirname;
       return helpers.run(path.join(__dirname, '../generators/app'))
         .withPrompts({projectName: 'my-theme'})
         .withOptions({

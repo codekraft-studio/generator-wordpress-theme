@@ -25,26 +25,25 @@ module.exports = class extends WPGenerator {
     // Option to skip the dinamic custom screenshot creation
     // mainly for internal use since the tests fail with multiple jimp instances
     this.option('skipScreenshot', {
-      description: 'Skip the dinamic screenshot creation.',
+      description: 'Skip the dinamic screenshot creation',
       type: Boolean,
       hide: true
     });
   }
 
-  initializing() {
-    super.initializing();
-  }
-
+  // Ask questions
   prompting() {
     return super.prompting();
   }
 
+  // Setup project
   configuring() {
     super.configuring();
   }
 
+  // Write files
   writing() {
-    this.log(chalk.cyan('[i] Starting to copy the template files into folder.\n'));
+    this.log('Starting to copy the template files into destination\n');
 
     // Copy and compile all the theme source files
     // related with the web development
@@ -54,14 +53,14 @@ module.exports = class extends WPGenerator {
       this.props
     );
 
+    // Copy all other assets file that probably don't need interpolation
+    // related with the web commonly used assets formats
     try {
-      // Copy all other assets file that probably don't need interpolation
-      // related with the web commonly used assets formats
       this.fs.copy(
         this.templatePath('theme/**/*.{ico,gif,png,jpg,jpeg,svg,webp,woff,woff2,otf,ttf}'),
         this.destinationPath('src/')
       );
-    } catch (e) { }
+    } catch (e) {}
   }
 
   // Create the theme screenshot image
@@ -93,13 +92,13 @@ module.exports = class extends WPGenerator {
         return;
       }
 
-      self.log(chalk.cyan(`[i] Creating a [${measures.width}x${measures.height}] png file.`));
+      self.log('Creating a', chalk.cyan(`[${measures.width}x${measures.height}]`), 'png file for theme screenshot');
 
       // Create a new image from nothing
       var image = new Jimp(measures.width, measures.height, bgColor, function(err, image) {
 
         if( err ) {
-          self.log(chalk.red('[e] The png file creation failed, skipping this step.'));
+          self.log('The png file creation', chalk.red('failed'), 'skipping this step');
           callback();
           return;
         }
@@ -118,12 +117,12 @@ module.exports = class extends WPGenerator {
         // Build the output file path
         let outputFile = self.destinationPath('src/screenshot.png');
 
-        self.log(chalk.cyan(`[i] Printing the project name: ${text} on image.`));
+        self.log('Printing the project name', chalk.cyan(text), 'on image');
 
         // Print the text on the screenshot
         image.print(font, position.width, position.height, text);
 
-        self.log(chalk.cyan(`[i] Saving image to: 'src/screenshot.png'.`));
+        self.log('Saving image to:', chalk.cyan('"src/screenshot.png"'));
 
         // Write the image to disk
         image.write(outputFile, function(err) {
@@ -136,10 +135,12 @@ module.exports = class extends WPGenerator {
 
   }
 
+  // Optionally run the installer
   install() {
     super.install();
   }
 
+  // Say goodbye
   end() {
     super.end();
   }
