@@ -35,6 +35,10 @@ describe('generator-wordpress-starter:app', () => {
       ]);
     });
 
+    it('init a empty git repository', () => {
+      assert.file('.git/HEAD');
+    });
+
     it('should have set theme name in banner', () => {
       assert.fileContent('src/assets/src/scss/base/banner.scss', 'Theme Name: My Theme');
     });

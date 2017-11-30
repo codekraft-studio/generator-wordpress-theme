@@ -97,6 +97,9 @@ module.exports = class WPGenerator extends Generator {
     this.setupDestination();
     this.setupTemplate();
     this.setupProjectManager();
+
+    // Init an empty repository
+    this.spawnCommandSync('git', ['init', '--quiet']);
   }
 
   install() {
