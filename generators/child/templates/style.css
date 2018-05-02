@@ -1,0 +1,10 @@
+/*
+ Theme Name:   <%= projectTitle %>
+ Description:  <%= projectDescription %>
+ Author:       <%= projectAuthor %>
+ Template:     <%= parentTemplate %>
+ Version:      <%= projectVersion %>
+ License:      <%= projectLicense %>
+ Tags:         <%= parentTemplate %>, child-theme
+ Text Domain:  <%= parentTemplate %>-child
+*/
