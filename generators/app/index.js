@@ -147,5 +147,4 @@ module.exports = class extends WPGenerator {
   end() {
     super.end();
   }
-
 };

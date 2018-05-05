@@ -22,6 +22,7 @@ module.exports = class extends WPGenerator {
     return super.prompting('defaultPrompt');
   }
 
+  // Setup project
   configuring() {
     this.setupDestination();
     this.setupTemplate();

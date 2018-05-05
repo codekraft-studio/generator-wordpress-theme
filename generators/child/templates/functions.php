@@ -1,6 +1,6 @@
 <?php
 
-function <%= parentTemplate %>_child_enqueue_styles() {
+function <%= functionPrefix %>_child_enqueue_styles() {
   $parent_style = '<%= parentTemplate %>';
 
   wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
@@ -11,4 +11,4 @@ function <%= parentTemplate %>_child_enqueue_styles() {
   );
 }
 
-add_action( 'wp_enqueue_scripts', '<%= parentTemplate %>_child_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', '<%= functionPrefix %>_child_enqueue_styles' );

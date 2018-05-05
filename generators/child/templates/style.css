@@ -6,5 +6,5 @@
  Version:      <%= projectVersion %>
  License:      <%= projectLicense %>
  Tags:         <%= parentTemplate %>, child-theme
- Text Domain:  <%= parentTemplate %>-child
+ Text Domain:  <%= projectName %>
 */
