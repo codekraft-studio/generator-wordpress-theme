@@ -41,13 +41,19 @@ const validateVersion = val => {
   return true;
 };
 
-// Export default settings
-module.exports.defaultProjectManager = defaultProjectManager;
-module.exports.projectManagers = projectManagers;
+const validateSlug = val => {
+  if (!/^(?:[a-z0-9]+-?[a-z0-9]+)+$/g.test(val)) {
+    return 'You should follow the WordPress plugin name standard';
+  }
+  return true;
+};
 
-// Function that validate for required input
+// Export for internal testing
 module.exports.validateRequired = validateRequired;
+module.exports.validateVersion = validateVersion;
+module.exports.validateSlug = validateSlug;
 
+// Export prompts
 module.exports.defaultPrompt = function (base) {
   // Option to choose default template
   let defaultTemplate = {
@@ -68,12 +74,7 @@ module.exports.defaultPrompt = function (base) {
       name: 'projectName',
       message: 'What slug do you want to use for this project?',
       default: _.kebabCase(base.appname),
-      validate: function (input) {
-        if (!/^(?:[a-z0-9]+-?[a-z0-9]+)+$/g.test(input)) {
-          return 'You should follow the WordPress plugin name standard';
-        }
-        return true;
-      }
+      validate: validateSlug
     }, {
       name: 'projectTitle',
       message: 'What is the full name for this project?',
@@ -138,14 +139,21 @@ module.exports.defaultPrompt = function (base) {
     }
   ];
 };
-
 module.exports.childPrompt = base => ([
   {
     type: 'text',
     name: 'parentTemplate',
     message: 'What is the parent template slug?',
     default: 'wordpress-starter'
-  }, {
+  },
+  {
+    type: 'text',
+    name: 'projectName',
+    message: 'What slug do you want to use for this project?',
+    default: answers => _.kebabCase(`${answers.parentTemplate}-child`),
+    validate: validateSlug
+  },
+  {
     name: 'projectTitle',
     message: 'What is the full name for this project?',
     default: answers => {
