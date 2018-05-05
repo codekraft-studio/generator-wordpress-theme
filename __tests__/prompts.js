@@ -2,7 +2,7 @@
 
 var assert = require('yeoman-assert');
 var validateRequired = require('../utils/prompts.js').validateRequired;
-var prompts = require('../utils/prompts.js').prompt({
+var prompts = require('../utils/prompts.js').defaultPrompt({
   appname: 'test',
   user: {
     git: {
