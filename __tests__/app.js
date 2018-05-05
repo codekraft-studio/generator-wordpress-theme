@@ -1,23 +1,19 @@
 'use strict';
 
-var path = require('path');
-var assert = require('yeoman-assert');
-var helpers = require('yeoman-test');
+const path = require('path');
+const assert = require('yeoman-assert');
+const helpers = require('yeoman-test');
 
 describe('generator-wordpress-starter:app', () => {
-  jest.setTimeout(5000);
-
-  // Override process HOME env variable to point to this folder
+  // Override process HOME env constiable to point to this folder
+  // so we can use the .wordpress-starter folder for mocked templates
   process.env.HOME = __dirname;
 
-  // Testing the default template option
-  describe('generator default case:', () => {
+  describe('generator with default case:', () => {
     beforeAll(() => {
       return helpers.run(path.join(__dirname, '../generators/app'))
         .withPrompts({projectName: 'my-theme'})
         .withOptions({
-          'skip-welcome-message': true,
-          'skip-message': true,
           'skip-screenshot': true
         }).toPromise();
     });
@@ -39,17 +35,16 @@ describe('generator-wordpress-starter:app', () => {
       assert.file('.git/HEAD');
     });
 
-    it('should have set theme name in banner', () => {
+    it('set theme name in banner', () => {
       assert.fileContent('src/assets/src/scss/base/banner.scss', 'Theme Name: My Theme');
     });
 
-    it('should have set text domain in banner', () => {
+    it('set text domain in banner', () => {
       assert.fileContent('src/assets/src/scss/base/banner.scss', 'Text Domain: my-theme');
     });
   });
 
-  // Describe the generation with a non existing custom template input
-  describe('generator non existing template continue', () => {
+  describe('generator with non existing template continue', () => {
     let context = null;
 
     beforeAll(done => {
@@ -69,16 +64,16 @@ describe('generator-wordpress-starter:app', () => {
       assert.equal(context.generator.props.projectTemplate, '');
     });
 
-    it('render the files from the default template', () => {
+    it('render the theme files', () => {
       assert.file([
         'src/functions.php',
-        'src/index.php'
+        'src/index.php',
+        'src/assets/src/scss/base/banner.scss'
       ]);
     });
   });
 
-  // Describe the generation with custom existing template
-  describe('generator existing template', () => {
+  describe('generator with existing template', () => {
     beforeAll(() => {
       return helpers.run(path.join(__dirname, '../generators/app'))
         .withPrompts({projectName: 'my-theme'})
@@ -89,7 +84,7 @@ describe('generator-wordpress-starter:app', () => {
         .toPromise();
     });
 
-    it('render the files from the custom template', () => {
+    it('render the theme files', () => {
       assert.file([
         'src/functions.php',
         'src/index.php',
@@ -98,8 +93,7 @@ describe('generator-wordpress-starter:app', () => {
     });
   });
 
-  // Test without a project manager
-  describe('without project manager', () => {
+  describe('generator without project manager', () => {
     beforeAll(() => {
       return helpers.run(path.join(__dirname, '../generators/app'))
         .withPrompts({projectManager: ''})
@@ -109,6 +103,7 @@ describe('generator-wordpress-starter:app', () => {
         .toPromise();
     });
 
+    // TODO: Style file is missing
     it('copy only the template files', () => {
       assert.file([
         'src/functions.php',

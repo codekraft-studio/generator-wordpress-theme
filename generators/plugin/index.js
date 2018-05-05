@@ -7,13 +7,26 @@ const pascalCase = function (g0, g1, g2) {
 };
 
 module.exports = class extends WPGenerator {
+  constructor(args, opts) {
+    super(args, opts);
 
-  prompting() {
-    return super.prompting();
+    // Add template option for use custom templates
+    this.option('template', {
+      description: 'Generate the project using a custom template',
+      type: String,
+      alias: 't'
+    });
   }
 
+  prompting() {
+    return super.prompting('defaultPrompt');
+  }
+
+  // Setup project
   configuring() {
-    super.configuring();
+    this.setupDestination();
+    this.setupTemplate();
+    this.setupProjectManager();
   }
 
   writing() {
@@ -56,5 +69,4 @@ module.exports = class extends WPGenerator {
   end() {
     super.end();
   }
-
 };

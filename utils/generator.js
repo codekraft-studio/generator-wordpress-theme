@@ -10,26 +10,12 @@ const Generator = require('yeoman-generator');
 module.exports = class WPGenerator extends Generator {
   constructor(args, opts) {
     super(args, opts);
-
-    // Add template option for use custom templates
-    this.option('template', {
-      description: 'Generate the project using a custom template',
-      type: String,
-      alias: 't'
-    });
-
     this.log(banner);
   }
 
-  // Init the generation take options and setup template
-  initializing() {
-    this.log(banner);
-  }
-
-  prompting() {
-    const prompts = require('./prompts.js').prompt(this);
-
-    // Run it
+  // Get the prompt questions by name
+  prompting(name = 'defaultPrompt') {
+    const prompts = require('./prompts.js')[name](this);
     return this.prompt(prompts).then(props => {
       this.props = props;
       this.log('\nStarting to create the project');
@@ -92,17 +78,8 @@ module.exports = class WPGenerator extends Generator {
     }
   }
 
-  // Run various configuration functions
-  configuring() {
-    this.setupDestination();
-    this.setupTemplate();
-    this.setupProjectManager();
-
-    // Init an empty repository
-    this.spawnCommandSync('git', ['init', '--quiet']);
-  }
-
   install() {
+    this.spawnCommandSync('git', ['init', '--quiet']);
     if (!this.options.skipInstall) {
       this.log(chalk.cyan('\n[i] Starting to install the project dependencies\n'));
       this.installDependencies({

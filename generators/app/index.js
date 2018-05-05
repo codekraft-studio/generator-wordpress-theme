@@ -17,8 +17,6 @@ const measureText = function(font, text) {
 };
 
 module.exports = class extends WPGenerator {
-
-  // Init generator with custom options
   constructor(args, opts) {
     super(args, opts);
 
@@ -29,19 +27,26 @@ module.exports = class extends WPGenerator {
       type: Boolean,
       hide: true
     });
+
+    // Add template option for use custom templates
+    this.option('template', {
+      description: 'Generate the project using a custom template',
+      type: String,
+      alias: 't'
+    });
   }
 
-  // Ask questions
   prompting() {
-    return super.prompting();
+    return super.prompting('defaultPrompt');
   }
 
   // Setup project
   configuring() {
-    super.configuring();
+    this.setupDestination();
+    this.setupTemplate();
+    this.setupProjectManager();
   }
 
-  // Write files
   writing() {
     this.log('Starting to copy the template files into destination\n');
 
@@ -135,14 +140,11 @@ module.exports = class extends WPGenerator {
 
   }
 
-  // Optionally run the installer
   install() {
     super.install();
   }
 
-  // Say goodbye
   end() {
     super.end();
   }
-
 };
