@@ -1,8 +1,8 @@
 {
   "name": "generator-wordpress-starter",
   "version": "0.1.8",
-  "description": "A simple yeoman generator for Wordpress projects.",
-  "homepage": "",
+  "description": "A yeoman generator for Wordpress projects with custom templates support.",
+  "homepage": "https://github.com/codekraft-studio/generator-wordpress-starter",
   "author": {
     "name": "codekraft-studio",
     "email": "info@codekraft.it",
@@ -21,20 +21,20 @@
     "yeoman-generator"
   ],
   "devDependencies": {
-    "coveralls": "^3.0.0",
-    "eslint": "^4.10.0",
-    "eslint-config-xo-space": "^0.17.0",
-    "jest": "^21.2.1",
-    "jest-cli": "^21.2.1",
-    "nsp": "^2.8.1",
-    "yeoman-assert": "^3.1.0",
-    "yeoman-test": "^1.7.0"
+    "coveralls": "^3.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-xo-space": "^0.18.0",
+    "jest": "^23.1.0",
+    "jest-cli": "^23.1.0",
+    "nsp": "^3.2.1",
+    "yeoman-assert": "^3.1.1",
+    "yeoman-test": "^1.7.2"
   },
   "dependencies": {
-    "chalk": "^2.3.0",
+    "chalk": "^2.4.1",
     "jimp": "^0.2.28",
-    "lodash": "^4.17.4",
-    "yeoman-generator": "^2.0.1"
+    "lodash": "^4.17.10",
+    "yeoman-generator": "^2.0.5"
   },
   "jest": {
     "testEnvironment": "node"
