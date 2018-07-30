@@ -160,25 +160,29 @@ module.exports.childPrompt = base => ([
       return _.startCase(`${answers.parentTemplate} Child`);
     },
     validate: validateRequired
-  }, {
+  },
+  {
     type: 'text',
     name: 'projectDescription',
     message: 'What is the project description?',
     default: answers => {
       return `This is the ${answers.projectTitle} description.`;
     }
-  }, {
+  },
+  {
     type: 'text',
     name: 'projectVersion',
     message: 'The version to initialize this project',
     default: '0.0.1',
     validate: validateVersion
-  }, {
+  },
+  {
     type: 'text',
     name: 'projectAuthor',
     message: 'The name of the author for this project?',
     default: base.user.git.name() || ''
-  }, {
+  },
+  {
     type: 'text',
     name: 'projectLicense',
     message: 'What license do you want to use?',

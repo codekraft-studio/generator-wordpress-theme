@@ -11,6 +11,9 @@ module.exports = class WPGenerator extends Generator {
   constructor(args, opts) {
     super(args, opts);
     this.log(banner);
+
+    this.name = path.basename(path.dirname(this.resolved));
+    this.sourceRoot(path.join(__dirname, '../generators/templates', this.name));
   }
 
   // Get the prompt questions by name

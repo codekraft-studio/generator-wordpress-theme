@@ -21,26 +21,26 @@
     "yeoman-generator"
   ],
   "devDependencies": {
-    "coveralls": "^3.0.1",
-    "eslint": "^4.19.1",
-    "eslint-config-xo-space": "^0.18.0",
-    "jest": "^23.1.0",
-    "jest-cli": "^23.1.0",
+    "coveralls": "^3.0.2",
+    "eslint": "^5.2.0",
+    "eslint-config-xo-space": "^0.19.0",
+    "jest": "^23.4.2",
+    "jest-cli": "^23.4.2",
     "nsp": "^3.2.1",
     "yeoman-assert": "^3.1.1",
-    "yeoman-test": "^1.7.2"
+    "yeoman-test": "^1.9.0"
   },
   "dependencies": {
     "chalk": "^2.4.1",
     "jimp": "^0.2.28",
     "lodash": "^4.17.10",
-    "yeoman-generator": "^2.0.5"
+    "yeoman-generator": "^3.1.1"
   },
   "jest": {
     "testEnvironment": "node"
   },
   "scripts": {
-    "prepublish": "nsp check",
+    "prepublish": "nsp check --warn-only",
     "pretest": "eslint . --fix",
     "test": "jest --coverage"
   },
