@@ -73,7 +73,7 @@ module.exports.defaultPrompt = function (base) {
       type: 'text',
       name: 'projectName',
       message: 'What slug do you want to use for this project?',
-      default: _.kebabCase(base.appname),
+      default: _.kebabCase(base.options ? base.options.name : base.appname),
       validate: validateSlug
     }, {
       name: 'projectTitle',

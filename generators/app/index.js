@@ -48,7 +48,7 @@ module.exports = class extends WPGenerator {
   }
 
   writing() {
-    this.log('Starting to copy the template files into destination\n');
+    this.log('Starting to copy the template files\n');
 
     // Copy and compile all the theme source files
     // related with the web development
@@ -76,66 +76,51 @@ module.exports = class extends WPGenerator {
       return;
     }
 
-    var self = this;
-    var callback = self.async();
+    const self = this;
+    const callback = self.async();
 
     // The screenshot measures
-    var measures = {
+    const measures = {
       width: 1200,
       height: 900
     };
 
     // TODO: Derive the screenshot backgorund color from the projectName in range of colors
     // Get the screenshot background color
-    var bgColor = 0x4286f4;
+    const bgColor = 0x4286f4;
 
     // Load the font to write text
     Jimp.loadFont(Jimp.FONT_SANS_32_WHITE, function(err, font) {
-
       if( err ) {
         callback();
         return;
       }
 
-      self.log('Creating a', chalk.cyan(`[${measures.width}x${measures.height}]`), 'png file for theme screenshot');
-
       // Create a new image from nothing
-      var image = new Jimp(measures.width, measures.height, bgColor, function(err, image) {
-
+      new Jimp(measures.width, measures.height, bgColor, function(err, image) {
         if( err ) {
           self.log('The png file creation', chalk.red('failed'), 'skipping this step');
           callback();
           return;
         }
 
+        // Prepare text to write on png
         let text = self.props.projectName.toUpperCase();
-
-        // Get the text total width
         let totalWidth = measureText(font, text);
-
-        // Get the item position
         let position = {
           width: Math.floor((measures.width / 2) - (totalWidth / 2)),
           height: Math.floor(measures.height / 2 - 16)
         };
 
-        // Build the output file path
+        // Writo text into file center
         let outputFile = self.destinationPath('src/screenshot.png');
-
-        self.log('Printing the project name', chalk.cyan(text), 'on image');
-
-        // Print the text on the screenshot
         image.print(font, position.width, position.height, text);
-
-        self.log('Saving image to:', chalk.cyan('"src/screenshot.png"'));
 
         // Write the image to disk
         image.write(outputFile, function(err) {
           callback();
         });
-
       });
-
     });
 
   }
