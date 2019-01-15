@@ -3,6 +3,7 @@
   "version": "<%= projectVersion %>",
   "description": "<%= projectDescription %>",
   "main": "",
+  "private": true,
   "scripts": {
     "start": "node node_modules/gulp/bin/gulp",
     "build": "node node_modules/gulp/bin/gulp build",

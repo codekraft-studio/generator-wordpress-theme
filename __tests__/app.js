@@ -10,9 +10,11 @@ describe('generator-wordpress-starter:app', () => {
   process.env.HOME = __dirname;
 
   describe('generator with default case:', () => {
+    const themeName = 'my-theme'
+
     beforeAll(() => {
       return helpers.run(path.join(__dirname, '../generators/app'))
-        .withPrompts({projectName: 'my-theme'})
+        .withPrompts({projectName: themeName})
         .withOptions({
           'skip-screenshot': true
         }).toPromise();
@@ -26,8 +28,8 @@ describe('generator-wordpress-starter:app', () => {
       assert.file([
         'package.json',
         'Gruntfile.js',
-        'src/assets/src/scss/base/banner.scss',
-        'src/functions.php'
+        'src/functions.php',
+        'src/style.css'
       ]);
     });
 
@@ -36,12 +38,14 @@ describe('generator-wordpress-starter:app', () => {
     });
 
     it('set theme name in banner', () => {
-      assert.fileContent('src/assets/src/scss/base/banner.scss', 'Theme Name: My Theme');
+      assert.fileContent('src/style.css', 'Theme Name: My Theme');
     });
 
     it('set text domain in banner', () => {
-      assert.fileContent('src/assets/src/scss/base/banner.scss', 'Text Domain: my-theme');
+      assert.fileContent('src/style.css', 'Text Domain: my-theme');
     });
+
+    it('has the project name set on package.json', () => assert.fileContent('package.json', '"name": "' + themeName + '"'));
   });
 
   describe('generator with non existing template continue', () => {
@@ -64,11 +68,11 @@ describe('generator-wordpress-starter:app', () => {
       assert.equal(context.generator.props.projectTemplate, '');
     });
 
-    it('render the theme files', () => {
+    it('render the mandatory theme files', () => {
       assert.file([
         'src/functions.php',
         'src/index.php',
-        'src/assets/src/scss/base/banner.scss'
+        'src/style.css'
       ]);
     });
   });

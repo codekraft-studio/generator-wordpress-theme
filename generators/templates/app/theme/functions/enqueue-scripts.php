@@ -3,8 +3,7 @@
 // Load theme scripts
 function theme_scripts() {
 
-  $min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-  $path = get_template_directory_uri() . "/assets/dist/js/main{$min}.js";
+  $path = get_template_directory_uri() . "/assets/dist/js/main.js";
 
   // Register and Enqueue
   wp_register_script( '<%= projectName %>-main', $path, array('jquery'), null, true );

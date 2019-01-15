@@ -101,7 +101,7 @@ module.exports = function (grunt) {
           style: 'compressed'
         },
         files: {
-          'assets/dist/css/user.css': 'assets/src/scss/user.scss',
+          'assets/dist/css/main.css': 'assets/src/scss/main.scss',
           'assets/dist/css/editor.css': 'assets/src/scss/editor.scss',
           'assets/dist/css/admin.css': 'assets/src/scss/admin.scss'
         }

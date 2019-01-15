@@ -56,7 +56,7 @@ gulp.task('uglify', 'Concat and uglify all the javascript files into one file.',
 gulp.task('sass', 'Compile and minify all the sass files into one file.', function () {
   var options = {outputStyle: 'compressed'};
 
-  var mainStyle = gulp.src('./assets/src/scss/user.scss')
+  var mainStyle = gulp.src('./assets/src/scss/main.scss')
     .pipe(sass(options))
     .on('error', notify.onError('Error: <%= error.message %>'))
     .pipe(gulp.dest('./assets/dist/css'));
