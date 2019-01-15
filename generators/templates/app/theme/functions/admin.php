@@ -3,7 +3,7 @@
 // Load theme admin styles
 function theme_admin_styles() {
 
-	wp_register_style( 'admin-style', get_template_directory_uri() . '/assets/dist/css/admin-style.css', array(), null );
+	wp_register_style( 'admin-style', get_template_directory_uri() . '/assets/dist/css/admin.css', array(), null );
 	wp_enqueue_style( 'admin-style' );
 
 }
@@ -12,9 +12,7 @@ function theme_admin_styles() {
 function theme_admin_scripts() {
 
   $min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-
-  // Main script path
-  $path = get_template_directory_uri() . "/assets/dist/js/<%= projectName %>-admin{$min}.js";
+  $path = get_template_directory_uri() . "/assets/dist/js/admin{$min}.js";
 
   // Register and Enqueue
   wp_register_script( '<%= projectName %>-admin', $path, array('jquery'), null, true );

@@ -61,7 +61,7 @@ gulp.task('sass', 'Compile and minify all the sass files into one file.', functi
     .on('error', notify.onError('Error: <%= error.message %>'))
     .pipe(gulp.dest('./assets/dist/css'));
 
-  var editorStyle = gulp.src('./assets/src/scss/editor-style.scss')
+  var editorStyle = gulp.src('./assets/src/scss/editor.scss')
     .pipe(sass(options))
     .on('error', notify.onError('Error: <%= error.message %>'))
     .pipe(gulp.dest('./assets/dist/css'));

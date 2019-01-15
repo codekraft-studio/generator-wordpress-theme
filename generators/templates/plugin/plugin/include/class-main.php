@@ -164,7 +164,7 @@ class <%= className %> {
       if ( !empty( $styles ) ) {
       $styles .= ',';
     }
-    $styles .= <%= definePrefix %>_DIR_URL . '/assets/dist/css/editor-style.css';
+    $styles .= <%= definePrefix %>_DIR_URL . '/assets/dist/css/editor.css';
     return $styles;
   }
 

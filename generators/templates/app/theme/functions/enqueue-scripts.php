@@ -4,13 +4,11 @@
 function theme_scripts() {
 
   $min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-
-  // Main script path
-  $path = get_template_directory_uri() . "/assets/dist/js/<%= projectName %>-user{$min}.js";
+  $path = get_template_directory_uri() . "/assets/dist/js/main{$min}.js";
 
   // Register and Enqueue
-  wp_register_script( '<%= projectName %>-user', $path, array('jquery'), null, true );
-	wp_enqueue_script( '<%= projectName %>-user' );
+  wp_register_script( '<%= projectName %>-main', $path, array('jquery'), null, true );
+	wp_enqueue_script( '<%= projectName %>-main' );
 
 }
 

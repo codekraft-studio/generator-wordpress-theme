@@ -22,7 +22,7 @@ function theme_support()  {
 	add_theme_support( 'custom-logo' );
 
 	// Add theme support for custom CSS in the TinyMCE visual editor
-	add_editor_style( 'editor-style.css' );
+	add_editor_style( 'editor.css' );
 
 	// Adding post format support
   add_theme_support( 'post-formats', array(

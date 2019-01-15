@@ -49,18 +49,18 @@ gulp.task('uglify', 'Concat and uglify all the javascript files into one file.',
 gulp.task('sass', 'Compile and minify all the sass files into one file.', function () {
   var options = {outputStyle: 'compressed'};
 
-  var mainStyle = gulp.src('./src/assets/src/scss/user-style.scss')
+  var mainStyle = gulp.src('./src/assets/src/scss/main.scss')
     .pipe(sass(options))
     .on('error', notify.onError('Error: <%= error.message %>'))
-    .pipe(rename('style.css'))
-    .pipe(gulp.dest('./src/'));
+    .pipe(rename('main.css'))
+    .pipe(gulp.dest('./src/assets/dist/css/'));
 
-  var adminStyle = gulp.src('./src/assets/src/scss/admin-style.scss')
+  var adminStyle = gulp.src('./src/assets/src/scss/admin.scss')
     .pipe(sass(options))
     .on('error', notify.onError('Error: <%= error.message %>'))
     .pipe(gulp.dest('./src/assets/dist/css/'));
 
-  var editorStyle = gulp.src('./src/assets/src/scss/editor-style.scss')
+  var editorStyle = gulp.src('./src/assets/src/scss/editor.scss')
     .pipe(sass(options))
     .on('error', notify.onError('Error: <%= error.message %>'))
     .pipe(gulp.dest('./src/assets/dist/css/'));
