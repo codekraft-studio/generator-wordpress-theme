@@ -16,6 +16,9 @@ const projectManagers = [
   }, {
     name: 'Gulp',
     value: 'gulp'
+  }, {
+    name: 'Webpack',
+    value: 'webpack'
   }
 ];
 

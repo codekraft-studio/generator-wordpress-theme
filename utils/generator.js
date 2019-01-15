@@ -43,15 +43,8 @@ module.exports = class WPGenerator extends Generator {
   setupDestination() {
     let projectName = this.props.projectName;
     if (path.basename(this.destinationPath()) !== projectName) {
-      this.log(chalk.yellow(`[!] The project folder for: ${projectName} does not exist.`));
-      // Create recursively the folder
       mkdirp(projectName);
-      // Set the new destination root
       this.destinationRoot(this.destinationPath(projectName));
-      // Inform that the folder will be created
-      this.log(
-        chalk.yellow('\n[!] Missing project folder named ' + projectName + ' created\n')
-      );
     }
   }
 
@@ -78,27 +71,43 @@ module.exports = class WPGenerator extends Generator {
 
   // Setup the project manager configuration files
   setupProjectManager() {
-    switch (this.props.projectManager) {
+    const pm = this.props.projectManager
+    const ignores = []
+
+    switch (pm) {
       case 'grunt':
-        this.log('Building the project with', chalk.cyan('grunt'), 'as project manager');
-        this.fs.copyTpl(this.templatePath('grunt/package.json'), this.destinationPath('./package.json'), this.props);
-        this.fs.copy(this.templatePath('grunt/Gruntfile.js'), this.destinationPath('./Gruntfile.js'));
-        break;
       case 'gulp':
-        this.log('Building the project with', chalk.cyan('gulp'), 'as project manager');
-        this.fs.copyTpl(this.templatePath('gulp/package.json'), this.destinationPath('package.json'), this.props);
-        this.fs.copy(this.templatePath('gulp/gulpfile.js'), this.destinationPath('gulpfile.js'));
+      case 'webpack':
+        this.log('Building the project with', chalk.cyan(pm), 'as project manager');
+        ignores.push('node_modules', 'dist');
+        this.fs.copyTpl(
+          this.templatePath(`${pm}/package.json`),
+          this.destinationPath('./package.json'),
+          this.props
+        );
+        this.fs.copy(
+          [
+            this.templatePath(`${pm}/*`),
+            "!**/package.json"
+          ],
+          this.destinationPath()
+        );
         break;
       default:
         this.log('Building the project without a project manager');
         break;
     }
+
+    this.fs.write(
+      this.destinationPath('.gitignore'),
+      ignores.join('\n')
+    )
   }
 
   install() {
     this.spawnCommandSync('git', ['init', '--quiet']);
     if (!this.options.skipInstall) {
-      this.log(chalk.cyan('\n[i] Starting to install the project dependencies\n'));
+      this.log('\nInstalling the project dependencies');
       this.installDependencies({
         bower: false
       });
