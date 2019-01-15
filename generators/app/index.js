@@ -2,9 +2,7 @@
 
 const Jimp = require('jimp');
 const chalk = require('chalk');
-const updateNotifier = require('update-notifier');
 const WPGenerator = require('../../utils/generator.js');
-const pkg = require('../../package.json');
 
 const measureText = function(font, text) {
   let x = 0;
@@ -17,12 +15,6 @@ const measureText = function(font, text) {
   }
   return x;
 };
-
-// Check for package updates
-updateNotifier({pkg}).notify({
-  defer: false,
-  isGlobal: true
-});
 
 module.exports = class extends WPGenerator {
   constructor(args, opts) {

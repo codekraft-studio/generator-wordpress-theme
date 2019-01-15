@@ -1,11 +1,21 @@
 'use strict';
 
+const pkg = require('../package.json');
 const banner = require('./banner.js');
 const chalk = require('chalk');
 const path = require('path');
 const os = require('os');
 const mkdirp = require('mkdirp');
+const updateNotifier = require('update-notifier');
 const Generator = require('yeoman-generator');
+
+// Check for package updates
+updateNotifier({
+  pkg
+}).notify({
+  defer: false,
+  isGlobal: true
+});
 
 module.exports = class WPGenerator extends Generator {
   constructor(args, opts) {
@@ -14,6 +24,10 @@ module.exports = class WPGenerator extends Generator {
 
     this.name = path.basename(path.dirname(this.resolved));
     this.sourceRoot(path.join(__dirname, '../generators/templates', this.name));
+    this.argument('name', {
+      type: String,
+      required: false
+    });
   }
 
   // Get the prompt questions by name
