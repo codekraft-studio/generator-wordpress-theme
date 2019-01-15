@@ -4,9 +4,9 @@
   "description": "<%= projectDescription %>",
   "main": "",
   "scripts": {
-    "start": "node ./node_modules/grunt/bin/grunt",
-    "build": "node ./node_modules/grunt/bin/grunt build",
-    "postinstall": "node ./node_modules/grunt/bin/grunt build"
+    "start": "grunt",
+    "build": "grunt build",
+    "postinstall": "grunt build"
   },
   "author": "<%= projectAuthor %>",
   "license": "<%= projectLicense %>",

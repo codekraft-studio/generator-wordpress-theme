@@ -1,6 +1,7 @@
-var path = require('path');
+const path = require('path');
+const sass = require('node-sass');
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
   grunt.initConfig({
 
     pkg: grunt.file.readJSON('package.json'),
@@ -41,11 +42,11 @@ module.exports = function (grunt) {
       },
       userScripts: {
         src: ['src/assets/src/js/user/**/*.js'],
-        dest: 'src/assets/dist/js/<%= pkg.name %>-user.js'
+        dest: 'src/assets/dist/js/main.js'
       },
       adminScripts: {
         src: ['src/assets/src/js/admin/**/*.js'],
-        dest: 'src/assets/dist/js/<%= pkg.name %>-admin.js'
+        dest: 'src/assets/dist/js/admin.js'
       }
     },
 
@@ -56,8 +57,8 @@ module.exports = function (grunt) {
           banner: '<%= banner %>'
         },
         files: {
-          'src/assets/dist/js/<%= pkg.name %>-admin.min.js': ['<%= concat.adminScripts.dest %>'],
-          'src/assets/dist/js/<%= pkg.name %>-user.min.js': ['<%= concat.userScripts.dest %>']
+          'src/assets/dist/js/main.min.js': ['<%= concat.userScripts.dest %>'],
+          'src/assets/dist/js/admin.min.js': ['<%= concat.adminScripts.dest %>']
         }
       },
       vendorScripts: {
@@ -69,7 +70,7 @@ module.exports = function (grunt) {
           cwd: 'src/assets/src/js/vendor',
           src: '**/*.js',
           dest: 'src/assets/dist/js',
-          rename: function (dst, src) {
+          rename: function(dst, src) {
             return dst + '/' + src.replace('.js', '.min.js');
           }
         }]
@@ -80,7 +81,7 @@ module.exports = function (grunt) {
     babel: {
       options: {
         sourceMap: true,
-        presets: ['es2015']
+        presets: ['env', 'es2015']
       },
       dist: {
         files: {
@@ -92,14 +93,15 @@ module.exports = function (grunt) {
 
     // Compile sass style
     sass: {
+      options: {
+        implementation: sass,
+        sourceMap: true
+      },
       dist: {
-        options: {
-          style: 'compressed'
-        },
         files: {
-          'src/style.css': 'src/assets/src/scss/user-style.scss',
-          'src/editor-style.css': 'src/assets/src/scss/editor-style.scss',
-          'src/assets/dist/css/admin-style.css': 'src/assets/src/scss/admin-style.scss'
+          'src/assets/dist/css/main.css': 'src/assets/src/scss/main.scss',
+          'src/assets/dist/css/editor.css': 'src/assets/src/scss/editor.scss',
+          'src/assets/dist/css/admin.css': 'src/assets/src/scss/admin.scss'
         }
       }
     },
@@ -206,9 +208,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-newer');
   grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-postcss');
