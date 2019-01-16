@@ -4,29 +4,24 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-describe('generator-wordpress-starter:app', () => {
-  // Override process HOME env constiable to point to this folder
-  // so we can use the .wordpress-starter folder for mocked templates
-  process.env.HOME = __dirname;
-
-  describe('generator with default case:', () => {
+describe('generator-wordpress-theme:app', () => {
+  describe('default execution', () => {
     const themeName = 'my-theme'
 
     beforeAll(() => {
+      jest.setTimeout(10000)
       return helpers.run(path.join(__dirname, '../generators/app'))
         .withPrompts({projectName: themeName})
-        .withOptions({
-          'skip-screenshot': true
-        }).toPromise();
+        .toPromise();
     });
 
     it('create a folder named like the projectName', () => {
-      assert.equal(path.basename(process.cwd()), 'my-theme');
+      assert.equal(path.basename(process.cwd()), themeName);
     });
 
-    it('creates mandatory files from template', () => {
+    it('creates mandatory wordpress files', () => {
       assert.file([
-        'package.json',
+        'src/index.php',
         'src/functions.php',
         'src/style.css'
       ]);
@@ -41,12 +36,44 @@ describe('generator-wordpress-starter:app', () => {
       assert.fileContent('src/style.css', 'Text Domain: my-theme');
     });
 
-    it('set the project on package.json', () => {
-      assert.fileContent('package.json', '"name": "' + themeName + '"')
+    it('create the package.json file', () => {
+      assert.fileContent('package.json', `"name": "${themeName}"`)
+    });
+
+    it('create the theme screenshot file', () => {
+      assert.file('src/screenshot.png');
     });
   });
 
-  describe('generator with non existing template continue', () => {
+  describe('without project manager', () => {
+    beforeAll(() => {
+      return helpers.run(path.join(__dirname, '../generators/app'))
+        .withPrompts({projectManager: ''})
+        .withOptions({
+          'skip-screenshot': true
+        })
+        .toPromise();
+    });
+
+    it('creates mandatory wordpress files', () => {
+      assert.file([
+        'src/index.php',
+        'src/functions.php',
+        'src/style.css'
+      ]);
+    });
+
+    it('does not copy any project manager file', () => {
+      assert.noFile([
+        'package.json',
+        'Gruntfile.js',
+        'gulpfile.js',
+        'webpack.config.js'
+      ]);
+    });
+  });
+
+  describe('non existing template', () => {
     let context = null;
 
     beforeAll(done => {
@@ -71,53 +98,6 @@ describe('generator-wordpress-starter:app', () => {
         'src/functions.php',
         'src/index.php',
         'src/style.css'
-      ]);
-    });
-  });
-
-  describe('generator with existing template', () => {
-    beforeAll(() => {
-      return helpers.run(path.join(__dirname, '../generators/app'))
-        .withPrompts({projectName: 'my-theme'})
-        .withOptions({
-          'skip-screenshot': true,
-          template: 'Example'
-        })
-        .toPromise();
-    });
-
-    it('render the theme files', () => {
-      assert.file([
-        'src/functions.php',
-        'src/index.php',
-        'src/style.css'
-      ]);
-    });
-  });
-
-  describe('generator without project manager', () => {
-    beforeAll(() => {
-      return helpers.run(path.join(__dirname, '../generators/app'))
-        .withPrompts({projectManager: ''})
-        .withOptions({
-          'skip-screenshot': true
-        })
-        .toPromise();
-    });
-
-    // TODO: Style file is missing
-    it('copy only the template files', () => {
-      assert.file([
-        'src/functions.php',
-        'src/index.php'
-      ]);
-    });
-
-    it('does not copy any project manager file', () => {
-      assert.noFile([
-        'src/Gruntfile.js',
-        'src/gulpfile.js',
-        'src/webpack.config.js'
       ]);
     });
   });
