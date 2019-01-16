@@ -19,7 +19,7 @@ module.exports = class extends WPGenerator {
   }
 
   prompting() {
-    return super.prompting('defaultPrompt');
+    return super.prompting('pluginPrompt');
   }
 
   // Setup project

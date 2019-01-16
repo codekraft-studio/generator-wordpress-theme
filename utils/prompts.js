@@ -54,9 +54,8 @@ module.exports.validateRequired = validateRequired;
 module.exports.validateVersion = validateVersion;
 module.exports.validateSlug = validateSlug;
 
-// Basic prompt questions
+// Theme questions
 module.exports.defaultPrompt = function(base) {
-  // Option to choose default template
   let defaultTemplate = {
     name: 'Default',
     value: ''
@@ -137,54 +136,93 @@ module.exports.defaultPrompt = function(base) {
   }];
 };
 
+// Plugin questions
+module.exports.pluginPrompt = base => ([{
+  type: 'text',
+  name: 'projectName',
+  message: 'What slug do you want to use for this project?',
+  default: _.kebabCase(base.options ? base.options.name : base.appname),
+  validate: validateSlug
+}, {
+  name: 'projectTitle',
+  message: 'What is the full name for this project?',
+  default: function(answers) {
+    return _.startCase(_.toLower(answers.projectName));
+  },
+  validate: validateRequired
+}, {
+  type: 'text',
+  name: 'projectDescription',
+  message: 'What is the project description?',
+  default: function(answers) {
+    return 'This is the ' + answers.projectTitle + ' description';
+  }
+}, {
+  type: 'list',
+  name: 'projectManager',
+  message: 'What do you want to use as project manager?',
+  choices: projectManagers,
+  default: 'grunt'
+}, {
+  type: 'text',
+  name: 'projectVersion',
+  message: 'The version to initialize this project',
+  default: '0.0.1',
+  validate: validateVersion
+}, {
+  type: 'text',
+  name: 'projectAuthor',
+  message: 'The name of the author for this project?',
+  default: base.user.git.name() || ''
+}, {
+  type: 'text',
+  name: 'projectLicense',
+  message: 'What license do you want to use?',
+  default: 'ISC',
+  validate: validateRequired
+}]);
+
 // Child theme prompt questions
 module.exports.childPrompt = base => ([{
-    type: 'text',
-    name: 'parentTemplate',
-    message: 'What is the parent template slug?',
-    default: 'wordpress-starter'
+  type: 'text',
+  name: 'parentTemplate',
+  message: 'What is the parent template slug?',
+  default: 'wordpress-starter'
+}, {
+  type: 'text',
+  name: 'projectName',
+  message: 'What slug do you want to use for this project?',
+  default: answers => _.kebabCase(`${answers.parentTemplate}-child`),
+  validate: validateSlug
+}, {
+  name: 'projectTitle',
+  message: 'What is the full name for this project?',
+  default: answers => {
+    return _.startCase(`${answers.parentTemplate} Child`);
   },
-  {
-    type: 'text',
-    name: 'projectName',
-    message: 'What slug do you want to use for this project?',
-    default: answers => _.kebabCase(`${answers.parentTemplate}-child`),
-    validate: validateSlug
-  },
-  {
-    name: 'projectTitle',
-    message: 'What is the full name for this project?',
-    default: answers => {
-      return _.startCase(`${answers.parentTemplate} Child`);
-    },
-    validate: validateRequired
-  },
-  {
-    type: 'text',
-    name: 'projectDescription',
-    message: 'What is the project description?',
-    default: answers => {
-      return `This is the ${answers.projectTitle} description.`;
-    }
-  },
-  {
-    type: 'text',
-    name: 'projectVersion',
-    message: 'The version to initialize this project',
-    default: '0.0.1',
-    validate: validateVersion
-  },
-  {
-    type: 'text',
-    name: 'projectAuthor',
-    message: 'The name of the author for this project?',
-    default: base.user.git.name() || ''
-  },
-  {
-    type: 'text',
-    name: 'projectLicense',
-    message: 'What license do you want to use?',
-    default: 'ISC',
-    validate: validateRequired
+  validate: validateRequired
+}, {
+  type: 'text',
+  name: 'projectDescription',
+  message: 'What is the project description?',
+  default: answers => {
+    return `This is the ${answers.projectTitle} description.`;
   }
-]);
+}, {
+  type: 'text',
+  name: 'projectVersion',
+  message: 'The version to initialize this project',
+  default: '0.0.1',
+  validate: validateVersion
+}, {
+  type: 'text',
+  name: 'projectAuthor',
+  message: 'The name of the author for this project?',
+  default: base.user.git.name() || ''
+}, {
+  type: 'text',
+  name: 'projectLicense',
+  message: 'What license do you want to use?',
+  default: 'ISC',
+  validate: validateRequired
+}]);
