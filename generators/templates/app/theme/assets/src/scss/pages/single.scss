@@ -1,9 +1,10 @@
 body.single {
-
   .article-image {
     margin-bottom: $main-margin * 2;
     flex: 0 0 100%;
-    figure, img {
+
+    figure,
+    img {
       margin: 0 auto;
     }
   }
@@ -11,7 +12,9 @@ body.single {
   article {
     margin-top: 0;
 
-    h1 { color:$secondary-color;}
+    h1 {
+      color: $secondary-color;
+    }
 
     .article-header {}
 
@@ -20,16 +23,19 @@ body.single {
     }
 
     .article-footer {
-
-      padding-bottom:$theme-padding-vertical;
+      padding-bottom: $theme-padding-vertical;
 
       & > div {
         margin-bottom: 1em;
       }
 
-      a { color: $secondary-color;}
+      a {
+        color: $secondary-color;
+      }
 
-      i { margin-right: $main-margin;}
+      i {
+        margin-right: $main-margin;
+      }
 
       .article-categories,
       .article-tags {
@@ -40,6 +46,7 @@ body.single {
         display: flex;
         background-color: #eee;
         padding: 4%;
+
         &::before {
           content: '';
         }
@@ -54,14 +61,15 @@ body.single {
 
         .author-details {
           .author-name {
-            margin-bottom:$main-margin * 0.25;
+            margin-bottom: $main-margin * 0.25;
             @include font-size(16px);
             font-family: $font-headline;
             font-weight: bold;
-
           }
 
-          .author-description { line-height: 1.5;}
+          .author-description {
+            line-height: 1.5;
+          }
         }
       }
     }

@@ -1,5 +1,8 @@
-body.author {
+// -----------------------------------------------------------------------------
+// This file contains styles that are specific to the author page.
+// -----------------------------------------------------------------------------
 
+body.author {
   .author-details {
     display: flex;
     background-color: #eee;
@@ -8,20 +11,17 @@ body.author {
 
     .author-image {
       img {
-          width: 64px;
-          margin: 0 36px 36px 0;
-          border-radius: 50%;
+        width: 64px;
+        margin: 0 36px 36px 0;
+        border-radius: 50%;
       }
     }
 
     .author-description {
       width: 100%;
     }
-
     @media #{$smartphones} {
       display: none;
     }
-
   }
-
 }

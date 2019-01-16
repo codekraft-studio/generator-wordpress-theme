@@ -4,85 +4,86 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: $font-headline, sans-serif;
-	margin:0 0 1em;
-	padding: 0;
-	text-align: left;
+  font-family: $font-headline, sans-serif;
+  margin: 0 0 1em;
+  padding: 0;
+  text-align: left;
 }
 
 h1 {
-	color: $primary-color;
-	@include font-size(32px);
-	@media #{$tablet} {
-
-	}
+  color: $primary-color;
+  @include font-size(32px);
+  @media #{$tablet} {}
 }
 
 h2 {
-	color: $secondary-color;
-	@include font-size(24px);
-	margin-top: $text-margin * 2;
-	@media #{$tablet} {
-	}
+  color: $secondary-color;
+  @include font-size(24px);
+  margin-top: $text-margin * 2;
+  @media #{$tablet} {}
 }
 
 h3 {
-	color: $primary-color;
-	@include font-size(22px);
-	margin-top: $text-margin * 1.8;
+  color: $primary-color;
+  @include font-size(22px);
+  margin-top: $text-margin * 1.8;
 }
 
-h4, h5, h6 {
-	color: $secondary-color;
-	@include font-size(16px);
-	margin-top: $text-margin * 1.6;
+h4,
+h5,
+h6 {
+  color: $secondary-color;
+  @include font-size(16px);
+  margin-top: $text-margin * 1.6;
 }
 
 h1 a,
 h3 a {
-	text-decoration: none;
-	color: $primary-color;
+  text-decoration: none;
+  color: $primary-color;
 }
 
 h2 a,
 h4 a {
-	text-decoration: none;
-	color: $secondary-color;
+  text-decoration: none;
+  color: $secondary-color;
 }
 
 h1 a:hover,
 h2 a:hover,
 h3 a:hover,
 h4 a:hover {
-	color: $link-color;
+  color: $link-color;
 }
 
 p {
-	margin: 0 0 $text-margin;
-	line-height: $text-line-height;
-	
+  margin: 0 0 $text-margin;
+  line-height: $text-line-height;
 }
 
-ul, ol, dl {
-    margin: 0;
-    padding: 0 0 0 $main-margin * 2;
+dl,
+ol,
+ul {
+  margin: 0;
+  padding: 0 0 0 $main-margin * 2;
 
-	li, dt { line-height: $text-line-height * 1.25;}
+  dt,
+  li {
+    line-height: $text-line-height * 1.25;
+  }
 }
-
-
 
 b,
 strong {
-	color: $link-color;
+  color: $link-color;
 }
 
 a {
-	color: $link-color;
-    text-decoration: none;
+  color: $link-color;
+  text-decoration: none;
 
-    &:hover {
-        text-decoration: underline;
-        color: $link-color;
-    }
+  &:hover {
+    text-decoration: underline;
+    color: $link-color;
+  }
 }

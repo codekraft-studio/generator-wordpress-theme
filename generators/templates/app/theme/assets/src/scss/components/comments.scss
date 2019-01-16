@@ -3,101 +3,99 @@
 // -----------------------------------------------------------------------------
 
 div#comments {
-	ol,
-	ul {
-		list-style-type: none;
-	}
+  ol,
+  ul {
+    list-style-type: none;
+  }
 
-	& > ul {
-		padding: 0 0 0 24px;
-	}
+  & > ul {
+    padding: 0 0 0 24px;
+  }
 
-	h2 {
-		margin: $main-margin 0 $main-padding;
-	}
+  h2 {
+    margin: $main-margin 0 $main-padding;
+  }
 
-	h3#reply-title {
-		margin: $main-margin 0 ($main-margin * 0.2);
+  h3#reply-title {
+    margin: $main-margin 0 ($main-margin * 0.2);
 
-		small {
-			font-size: $text-size;
-			font-weight: 400;
-			display: block;
-			color: $primary-color;
-		}
-	}
+    small {
+      font-size: $text-size;
+      font-weight: 400;
+      display: block;
+      color: $primary-color;
+    }
+  }
 
-	.logged-in-as {
-		font-size: $text-size - 3;
-	}
+  .logged-in-as {
+    font-size: $text-size - 3;
+  }
 
-	.comment-body {
-		position: relative;
-		padding: 0 0 1.5em;
-		margin: 0 0 22px;
-		display: block;
-		line-height: 1.4;
-		border-bottom: 1px solid #eee;
-		// Float clearfix
-		&::after {
-			content: "";
-			clear: both;
-			display: table;
-		}
+  .comment-body {
+    position: relative;
+    padding: 0 0 1.5em;
+    margin: 0 0 22px;
+    display: block;
+    line-height: 1.4;
+    border-bottom: 1px solid #eee;
+    // Float clearfix
+    &::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    // The comment date and meta datas
+    .comment-metadata {
+      font-size: $text-size - 3;
+      color: lighten($text-color, 20%);
+      right: 0;
+      top: 0;
+    }
 
-		// The comment date and meta datas
-		.comment-metadata {
-			font-size: $text-size - 3;
-			color: lighten($text-color, 20%);
-			right: 0;
-			top: 0;
-		}
+    .edit-link {
+      margin-left: $text-margin;
+      font-family: $font-headline;
+    }
+    // The comment meta details (author and date	)
+    footer {
+      margin-bottom: 0.5em;
+    }
 
-		.edit-link {
-			margin-left: $text-margin;
-			font-family: $font-headline;
-		}
-		// The comment meta details (author and date	)
-		footer {
-			margin-bottom: 0.5em;
-		}
+    .comment-content {
+      color: lighten($text-color, 10%);
+      display: grid;
+    }
 
-		.comment-content {
-			color: lighten($text-color, 10%);
-			display: grid;
-		}
+    div.reply {
+      float: right;
 
-		div.reply {
-			float: right;
+      .comment-reply-link {
+        @extend %button;
+        font-size: $text-size - 4;
+        padding: 6px 19px;
+      }
+    }
+  }
 
-			.comment-reply-link {
-				@extend %button;
-				font-size: $text-size - 4;
-				padding: 6px 19px;
-			}
-		}
-	}
+  .form-submit input[type="submit"] {
+    @extend %button;
+    margin: 0;
+    padding: 11px 24px;
+    font-size: $text-size - 2;
+    letter-spacing: 0.2rem;
+  }
+  // The author card
+  .comment-author.vcard {
+    b {
+      color: $secondary-color;
+    }
 
-	.form-submit input[type="submit"] {
-		@extend %button;
-		margin: 0;
-		padding: 11px 24px;
-		font-size: $text-size - 2;
-		letter-spacing: 0.2rem;
-	}
-
-	// The author card
-	.comment-author.vcard {
-		b {
-			color: $secondary-color;
-		}
-
-		img {
-			width: 40px;
-			height: 40px;
-			border-radius: 50%;
-			float: left;
-			margin: 0 18px 0 0;
-		}
-	}
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      float: left;
+      margin: 0 18px 0 0;
+    }
+  }
 }

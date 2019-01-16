@@ -3,37 +3,37 @@
 // -----------------------------------------------------------------------------
 
 .nowrap {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 .unselectable {
-    user-select: none;
+  user-select: none;
 }
 
 .ellipsis {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .alignright {
-    float: right;
+  float: right;
 }
 
 .alignleft {
-    float: left;
+  float: left;
 }
 
 .aligncenter {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
+  content: "";
+  clear: both;
+  display: table;
 }
 
 .text-left {

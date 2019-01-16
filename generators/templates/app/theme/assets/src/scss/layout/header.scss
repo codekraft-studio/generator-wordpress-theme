@@ -3,70 +3,72 @@
 // -----------------------------------------------------------------------------
 
 header.header {
-    background: $light-color;
-    position: relative;
-    margin: 0 auto ($theme-padding-vertical * 2);
+  background: $light-color;
+  position: relative;
+  margin: 0 auto ($theme-padding-vertical * 2);
 
-    .main-width {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        padding-top: 20px;
-        padding-bottom: 20px;
+  .main-width {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    @media #{$smartphones-portrait} {
+      display: block;
+    }
+  }
 
-        @media #{$smartphones-portrait} {
-            display: block;
-        }
+  .logo {
+    width: 100%;
+
+    h1,
+    h2 {
+      margin: 0;
     }
 
-    .logo {
-        width: 100%;
-
-        h1,h2 { margin:0;}
-
-        a {
-            text-decoration: none !important;
-            display: flex;
-            align-items: center;
-            width: 100%;
-        }
+    a {
+      text-decoration: none !important;
+      display: flex;
+      align-items: center;
+      width: 100%;
     }
+  }
 
-    .site-head {
-        display: flex;
-        flex-direction: row;
+  .site-head {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .site-image {
+    margin: 0 ($theme-padding-vertical / 2) 0 0;
+
+    img {
+      margin: 0;
+      display: block;
+      width: auto;
+      height: 64px;
+      max-width: inherit;
+      border-radius: 50%;
     }
+  }
 
-    .site-image {
-        margin: 0 ($theme-padding-vertical / 2) 0 0;
-
-        img {
-            margin: 0;
-            display: block;
-            width: auto;
-            height: 64px;
-            max-width: inherit;
-            border-radius:50%;
-        }
+  .site-info {
+    display: inline-block;
+    width: 100%;
+    // The WordPress site title text
+    .site-title {
+      @include font-size(22px);
+      @media #{$smartphones} {
+        @include font-size(20px);
+      }
     }
-
-    .site-info {
-        display: inline-block;
-        width: 100%;
-
-        // The WordPress site title text
-        .site-title {
-            @include font-size(22px);
-            @media #{$smartphones} { @include font-size(20px); }
-        }
-
-        // The wordPress motto text
-        .site-description {
-            @include font-size(18px);
-            margin: 0;
-            @media #{$smartphones} { /* display: none; */}
-        }
-
+    // The wordPress motto text
+    .site-description {
+      @include font-size(18px);
+      margin: 0;
+      @media #{$smartphones} {
+        /* display: none; */
+      }
     }
-
+  }
 }
