@@ -1,18 +1,23 @@
 {
-  "name": "generator-wordpress-starter",
+  "name": "@wptools/generator-theme",
   "version": "0.1.9",
-  "description": "A yeoman generator for Wordpress projects with custom templates support.",
-  "homepage": "https://github.com/codekraft-studio/generator-wordpress-starter",
+  "description": "Yeoman generator for WordPress themes, childs and custom templates",
+  "homepage": "https://github.com/codekraft-studio/generator-wordpress-theme",
   "author": {
     "name": "codekraft-studio",
     "email": "info@codekraft.it",
-    "url": "https://codekraft.it"
+    "url": "https://github.com/codekraft-studio"
   },
   "files": [
     "generators",
     "utils"
   ],
   "main": "generators/app/index.js",
+  "scripts": {
+    "pretest": "npm run lint",
+    "test": "jest --coverage",
+    "lint": "eslint . --fix"
+  },
   "keywords": [
     "wordpress",
     "starter",
@@ -20,6 +25,15 @@
     "wp-plugin",
     "yeoman-generator"
   ],
+  "repository": "codekraft-studio/generator-wordpress-theme",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "jimp": "^0.6.0",
+    "lodash": "^4.17.11",
+    "update-notifier": "^2.5.0",
+    "yeoman-generator": "^3.2.0"
+  },
   "devDependencies": {
     "coveralls": "^3.0.2",
     "eslint": "^5.12.0",
@@ -28,39 +42,21 @@
     "yeoman-assert": "^3.1.1",
     "yeoman-test": "^1.9.1"
   },
-  "dependencies": {
-    "chalk": "^2.4.2",
-    "jimp": "^0.6.0",
-    "lodash": "^4.17.11",
-    "update-notifier": "^2.5.0",
-    "yeoman-generator": "^3.2.0"
-  },
   "jest": {
     "testEnvironment": "node"
-  },
-  "scripts": {
-    "pretest": "eslint . --fix",
-    "test": "jest --coverage"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
     "env": {
       "jest": true,
       "node": true,
-      "browser": true,
-      "jquery": true
+      "browser": true
     },
     "parserOptions": {
       "ecmaVersion": 6
-    },
-    "rules": {
-      "no-unused-vars": 1,
-      "no-undef": 1,
-      "no-compare-neg-zero": 0,
-      "template-tag-spacing": 0,
-      "no-warning-comments": 0
     }
   },
-  "repository": "codekraft-studio/generator-wordpress-starter",
-  "license": "Apache-2.0"
+  "publishConfig": {
+    "access": "public"
+  }
 }
