@@ -22,19 +22,11 @@ module.exports = class WPGenerator extends Generator {
     super(args, opts);
     this.log(banner);
 
-    this.name = path.basename(path.dirname(this.resolved));
-    this.sourceRoot(path.join(__dirname, '../generators/templates', this.name));
+    this.genName = path.basename(path.dirname(this.resolved));
+    this.sourceRoot(path.join(__dirname, '../generators/templates', this.genName));
     this.argument('name', {
       type: String,
       required: false
-    });
-  }
-
-  // Get the prompt questions by name
-  prompting(name = 'defaultPrompt') {
-    const prompts = require('./prompts.js')[name](this);
-    return this.prompt(prompts).then(props => {
-      this.props = props;
     });
   }
 

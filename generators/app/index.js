@@ -1,22 +1,33 @@
 'use strict';
 
+const _ = require('lodash');
 const Jimp = require('jimp');
 const chalk = require('chalk');
-const WPGenerator = require('../../utils/generator.js');
+const {
+  validateSlug,
+  validateRequired,
+  validateVersion
+} = require('../../utils/validators');
+const getTemplates = require('../../utils/get-templates');
+const measureText = require('../../utils/measure-text');
+const BaseGenerator = require('../../utils/generator');
 
-const measureText = function(font, text) {
-  let x = 0;
-  for (let i = 0; i < text.length; i++) {
-    if (font.chars[text[i]]) {
-      x += font.chars[text[i]].xoffset + (font.kernings[text[i]] && font.kernings[text[i]][text[i + 1]]
-        ? font.kernings[text[i]][text[i + 1]]
-        : 0) + (font.chars[text[i]].xadvance || 0);
-    }
-  }
-  return x;
-};
+const defaultProjectManager = 'webpack';
+const projectManagers = [{
+  name: 'Nothing',
+  value: ''
+}, {
+  name: 'Grunt',
+  value: 'grunt'
+}, {
+  name: 'Gulp',
+  value: 'gulp'
+}, {
+  name: 'Webpack',
+  value: 'webpack'
+}];
 
-module.exports = class extends WPGenerator {
+module.exports = class extends BaseGenerator {
   constructor(args, opts) {
     super(args, opts);
 
@@ -37,7 +48,80 @@ module.exports = class extends WPGenerator {
   }
 
   prompting() {
-    return super.prompting('defaultPrompt');
+    const templates = [{
+      name: 'Default',
+      value: ''
+    }];
+    const customTemplates = getTemplates();
+    const templateChoices = customTemplates ? templates.concat(customTemplates) : templates;
+
+    this.props = {};
+    return this.prompt([{
+      type: 'text',
+      name: 'projectName',
+      message: 'What slug do you want to use for this project?',
+      default: () => _.kebabCase(this.options ? this.options.name : this.appname),
+      validate: validateSlug
+    }, {
+      name: 'projectTitle',
+      message: 'What is the full name for this project?',
+      default: ({
+        projectName
+      }) => _.startCase(_.toLower(projectName)),
+      validate: validateRequired
+    }, {
+      type: 'text',
+      name: 'projectDescription',
+      message: 'What is the project description?',
+      default: ({
+        projectTitle
+      }) => `This is the ${projectTitle} description`
+    }, {
+      type: 'list',
+      name: 'projectTemplate',
+      message: 'Which template do you want to use?',
+      default: () => {
+        let template = this.options.template;
+        if (!template) {
+          return '';
+        }
+        let index = templateChoices.indexOf(template);
+        return (index > -1) ?
+          template :
+          '';
+      },
+      choices: templateChoices,
+      // Show this prompt only if any custom template exists
+      // otherwise it will be useless and probably cause bugs
+      when: function() {
+        return customTemplates && customTemplates.length;
+      }
+    }, {
+      type: 'list',
+      name: 'projectManager',
+      message: 'What do you want to use as project manager?',
+      choices: projectManagers,
+      default: defaultProjectManager
+    }, {
+      type: 'text',
+      name: 'projectVersion',
+      message: 'The version to initialize this project',
+      default: '0.0.1',
+      validate: validateVersion
+    }, {
+      type: 'text',
+      name: 'projectAuthor',
+      message: 'The name of the author for this project?',
+      default: this.user.git.name() || ''
+    }, {
+      type: 'text',
+      name: 'projectLicense',
+      message: 'What license do you want to use?',
+      default: 'GPL-2.0',
+      validate: validateRequired
+    }]).then(props => {
+      this.props = props;
+    });
   }
 
   // Setup project
@@ -65,12 +149,14 @@ module.exports = class extends WPGenerator {
         this.templatePath('theme/**/*.{ico,gif,png,jpg,jpeg,svg,webp,woff,woff2,otf,ttf}'),
         this.destinationPath('src/')
       );
-    } catch (e) {}
+    } catch (e) {
+      // continue regardless of error
+    }
   }
 
   // Create the theme screenshot image
   createScreenshot() {
-    if(this.options.skipScreenshot) {
+    if (this.options.skipScreenshot) {
       return;
     }
 
@@ -115,7 +201,7 @@ module.exports = class extends WPGenerator {
         image.print(font, position.width, position.height, text);
 
         // Write the image to disk
-        image.write(outputFile, function(err) {
+        image.write(outputFile, function() {
           callback();
         });
       });
