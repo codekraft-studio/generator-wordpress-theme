@@ -35,7 +35,6 @@ module.exports = class WPGenerator extends Generator {
     const prompts = require('./prompts.js')[name](this);
     return this.prompt(prompts).then(props => {
       this.props = props;
-      this.log('\nStarting to create the project');
     });
   }
 
@@ -64,7 +63,6 @@ module.exports = class WPGenerator extends Generator {
     // Get and set the custom template
     let templateDirectory = path.join(os.homedir(), '.wordpress-starter', template);
     this.log('The', chalk.cyan(template), 'custom template will be used');
-    this.log('Updating the generator source path to match:', chalk.cyan(templateDirectory));
     this.sourceRoot(templateDirectory);
     done();
   }
@@ -78,7 +76,6 @@ module.exports = class WPGenerator extends Generator {
       case 'grunt':
       case 'gulp':
       case 'webpack':
-        this.log('Building the project with', chalk.cyan(pm), 'as project manager');
         ignores.push('node_modules', 'dist');
         this.fs.copyTpl(
           this.templatePath(`${pm}/package.json`),
@@ -94,7 +91,6 @@ module.exports = class WPGenerator extends Generator {
         );
         break;
       default:
-        this.log('Building the project without a project manager');
         break;
     }
 
@@ -106,15 +102,16 @@ module.exports = class WPGenerator extends Generator {
 
   install() {
     this.spawnCommandSync('git', ['init', '--quiet']);
-    if (!this.options.skipInstall) {
+    if (!this.options.skipInstall && this.props.projectManager !== '') {
       this.log('\nInstalling the project dependencies');
       this.installDependencies({
-        bower: false
+        bower: false,
+        npm: true
       });
     }
   }
 
   end() {
-    this.log('\nYour project is', chalk.bold.yellow('ready'), 'to go', 'We hope you liked to use our generator\n');
+    this.log('\nYour project is', chalk.bold.yellow('ready'), 'to go!');
   }
 };

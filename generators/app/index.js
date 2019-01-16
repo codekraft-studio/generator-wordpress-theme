@@ -70,8 +70,6 @@ module.exports = class extends WPGenerator {
 
   // Create the theme screenshot image
   createScreenshot() {
-
-    // Optionally skip this section
     if(this.options.skipScreenshot) {
       return;
     }
@@ -91,14 +89,14 @@ module.exports = class extends WPGenerator {
 
     // Load the font to write text
     Jimp.loadFont(Jimp.FONT_SANS_32_WHITE, function(err, font) {
-      if( err ) {
+      if (err) {
         callback();
         return;
       }
 
       // Create a new image from nothing
       new Jimp(measures.width, measures.height, bgColor, function(err, image) {
-        if( err ) {
+        if (err) {
           self.log('The png file creation', chalk.red('failed'), 'skipping this step');
           callback();
           return;
@@ -122,7 +120,6 @@ module.exports = class extends WPGenerator {
         });
       });
     });
-
   }
 
   install() {

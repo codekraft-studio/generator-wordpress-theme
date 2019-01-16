@@ -5,9 +5,9 @@
   "main": "",
   "private": true,
   "scripts": {
-    "start": "node node_modules/gulp/bin/gulp",
-    "build": "node node_modules/gulp/bin/gulp build",
-    "postinstall": "node node_modules/gulp/bin/gulp build"
+    "start": "gulp",
+    "build": "gulp build",
+    "postinstall": "npm run build"
   },
   "author": "<%= projectAuthor %>",
   "license": "<%= projectLicense %>",

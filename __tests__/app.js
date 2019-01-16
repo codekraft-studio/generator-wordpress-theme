@@ -20,14 +20,13 @@ describe('generator-wordpress-starter:app', () => {
         }).toPromise();
     });
 
-    it('creates and move in a folder named like the projectName', () => {
+    it('create a folder named like the projectName', () => {
       assert.equal(path.basename(process.cwd()), 'my-theme');
     });
 
-    it('creates files from template', () => {
+    it('creates mandatory files from template', () => {
       assert.file([
         'package.json',
-        'Gruntfile.js',
         'src/functions.php',
         'src/style.css'
       ]);
@@ -37,15 +36,14 @@ describe('generator-wordpress-starter:app', () => {
       assert.file('.git/HEAD');
     });
 
-    it('set theme name in banner', () => {
+    it('set properties in theme banner', () => {
       assert.fileContent('src/style.css', 'Theme Name: My Theme');
-    });
-
-    it('set text domain in banner', () => {
       assert.fileContent('src/style.css', 'Text Domain: my-theme');
     });
 
-    it('has the project name set on package.json', () => assert.fileContent('package.json', '"name": "' + themeName + '"'));
+    it('set the project on package.json', () => {
+      assert.fileContent('package.json', '"name": "' + themeName + '"')
+    });
   });
 
   describe('generator with non existing template continue', () => {
