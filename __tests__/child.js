@@ -27,7 +27,7 @@ describe('generator-wordpress-starter:child', function() {
       assert.fileContent('style.css', `Template:     wordpress-starter`);
       assert.fileContent('style.css', `Version:      0.0.1`);
       assert.fileContent('style.css', `Text Domain:  wordpress-starter-child`);
-      assert.fileContent('style.css', `License:      ISC`);
+      assert.fileContent('style.css', `License:      GPL-2.0`);
     });
   });
 
