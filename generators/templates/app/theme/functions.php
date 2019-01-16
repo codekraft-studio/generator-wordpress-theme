@@ -19,10 +19,12 @@ require_once( get_template_directory() . '/functions/menu.php' );
 require_once( get_template_directory() . '/functions/seo.php' );
 require_once( get_template_directory() . '/functions/filters.php' );
 require_once( get_template_directory() . '/functions/sidebar.php' );
-require_once( get_template_directory() . '/functions/shortcode.php' );
-require_once( get_template_directory() . '/functions/post-types.php' );
-require_once( get_template_directory() . '/functions/taxonomies.php' );
 require_once( get_template_directory() . '/functions/enqueue-scripts.php' );
+
+// Remove the comment to enable parts
+// require_once( get_template_directory() . '/functions/shortcode.php' );
+// require_once( get_template_directory() . '/functions/post-types.php' );
+// require_once( get_template_directory() . '/functions/taxonomies.php' );
 
 /*------------------------------------*\
   Custom functions
