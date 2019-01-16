@@ -1,6 +1,6 @@
 {
   "name": "generator-wordpress-starter",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "A yeoman generator for Wordpress projects with custom templates support.",
   "homepage": "https://github.com/codekraft-studio/generator-wordpress-starter",
   "author": {
