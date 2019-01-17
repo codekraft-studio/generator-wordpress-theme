@@ -2,35 +2,31 @@
 
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url] [![Slack Chat](https://img.shields.io/badge/wordpress_slack-@codekraft--studio-blue.svg?style=flat)](https://wordpress.slack.com)
 
-# generator-wordpress-starter
+# generator-wordpress-theme
 
-> A simple yeoman generator for Wordpress projects.
+> Yeoman generator for WordPress themes, childs and custom templates
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and __generator-wordpress-starter__ using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and __generator-wordpress-theme__ using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
-npm install -g generator-wordpress-starter
+npm install -g @wptools/generator-theme
 ```
 
 To generate a new project just type the string below, the generator will create the folder for you if not exists:
 
 ```bash
-yo wordpress-starter
+yo @wptools/theme "My Theme"
+yo @wptools/theme:child "My Child Theme"
 ```
 
-It will be made a bit of questions then you will have your project ready to go.
-
-You can also generate plugins, by typing:
-```bash
-yo wordpress-starter:plugin
-```
+It will ask few questions then it will setup a new project for your in seconds.
 
 ---
 
-## Generate a custom theme
+## Creating a custom template
 
 The project allow you to generate custom WordPress themes from templates located in 	`~/.wordpress-starter/` folder.
 
@@ -51,7 +47,7 @@ Every theme folder __must follow__ simple rules in order to been generated corre
 tree ~/.wordpress-starter/Simple
 └───theme
 ```
-In this example the Simple theme has only the __theme__ directory where you should put all the theme files like in the [default theme](https://github.com/codekraft-studio/generator-wordpress-starter/tree/master/generators/app/templates/theme) that comes with the generator.
+In this example the Simple theme has only the __theme__ directory where you should put all the theme files like in the [default theme](https://github.com/codekraft-studio/generator-wordpress-theme/tree/master/generators/app/templates/theme) that comes with the generator.
 
 Optionally you can also generate more complex projects, that uses build systems, for now the generator will support only [gulp](http://gulpjs.com/) and [grunt](https://gruntjs.com/), if you are not familiar with them, be sure to check out the __Getting Started__ guides.
 In order to archive this result you must follow this structure:
@@ -61,7 +57,7 @@ tree ~/.wordpress-starter/Simple
 ├───gulp
 └───theme
 ```
-You can take a look at the [example](https://github.com/codekraft-studio/generator-wordpress-starter/tree/master/generators/app/templates) which is the default theme generated if you don't specify a custom one.
+You can take a look at the [example](https://github.com/codekraft-studio/generator-wordpress-theme/tree/master/generators/app/templates) which is the default theme generated if you don't specify a custom one.
 
 As you can see in the default template, you can access the prompt variables inside the template during render process.
 
@@ -89,14 +85,14 @@ To develop this package you must clone it with Git and than link it to your glob
 ```bash
 npm link
 ```
-Than you can start editing the package by following the contribuing guidelines below and than testing with: `yo wordpress-starter`, if you have any troubles please follow [this](http://yeoman.io/authoring/) guide, "__Running the generator__".
+Than you can start editing the package by following the contribuing guidelines below and than testing with: `yo @wptools/theme`, if you have any troubles please follow [this](http://yeoman.io/authoring/) guide, "__Running the generator__".
 
 ---
 
 ## Contributing
 
 1. Create an issue and describe your idea
-2. Fork the project (https://github.com/codekraft-studio/generator-wordpress-starter/fork)
+2. Fork the project (https://github.com/codekraft-studio/generator-wordpress-theme/fork)
 3. Create your feature branch (`git checkout -b my-new-feature`)
 4. Commit your changes (`git commit -am 'Add some feature'`)
 5. Publish the branch (`git push origin my-new-feature`)
@@ -116,11 +112,11 @@ Than you can start editing the package by following the contribuing guidelines b
 
 Apache-2.0 © [codekraft-studio]()
 
-[npm-image]: https://badge.fury.io/js/generator-wordpress-starter.svg
-[npm-url]: https://npmjs.org/package/generator-wordpress-starter
-[travis-image]: https://travis-ci.org/codekraft-studio/generator-wordpress-starter.svg?branch=master
-[travis-url]: https://travis-ci.org/codekraft-studio/generator-wordpress-starter
-[daviddm-image]: https://david-dm.org/codekraft-studio/generator-wordpress-starter.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/codekraft-studio/generator-wordpress-starter
-[coveralls-image]: https://coveralls.io/repos/codekraft-studio/generator-wordpress-starter/badge.svg
-[coveralls-url]: https://coveralls.io/r/codekraft-studio/generator-wordpress-starter
+[npm-image]: https://badge.fury.io/js/generator-wordpress-theme.svg
+[npm-url]: https://npmjs.org/package/generator-wordpress-theme
+[travis-image]: https://travis-ci.org/codekraft-studio/generator-wordpress-theme.svg?branch=master
+[travis-url]: https://travis-ci.org/codekraft-studio/generator-wordpress-theme
+[daviddm-image]: https://david-dm.org/codekraft-studio/generator-wordpress-theme.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/codekraft-studio/generator-wordpress-theme
+[coveralls-image]: https://coveralls.io/repos/codekraft-studio/generator-wordpress-theme/badge.svg
+[coveralls-url]: https://coveralls.io/r/codekraft-studio/generator-wordpress-theme
