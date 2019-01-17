@@ -1,7 +1,7 @@
 const WPGenerator = require('../utils/generator');
 const assert = require('yeoman-assert');
 
-describe('generator-wordpress-starter:base-generator', () => {
+describe('generator-wordpress-theme:base-generator', () => {
   it('has a initializing method to check command line options', () => {
     assert.implement(WPGenerator, 'initializing');
   });

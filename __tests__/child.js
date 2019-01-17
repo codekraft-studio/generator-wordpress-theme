@@ -2,7 +2,7 @@ const path = require('path');
 const assert = require('yeoman-assert');
 const helpers = require('yeoman-test');
 
-describe('generator-wordpress-starter:child', function() {
+describe('generator-wordpress-theme:child', function() {
   describe('with default prompt', function() {
     beforeAll(function() {
       return helpers.run(path.join(__dirname, '../generators/child'))
