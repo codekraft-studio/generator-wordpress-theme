@@ -74,10 +74,6 @@ module.exports = class extends BaseGenerator {
     );
   }
 
-  install() {
-    super.install();
-  }
-
   end() {
     super.end();
   }
