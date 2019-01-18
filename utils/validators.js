@@ -8,7 +8,7 @@ module.exports.validateRequired = function(value) {
 };
 
 module.exports.validateVersion = val => {
-  if (!/^\bv?(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)$/.test(val)) {
+  if (!/^(?:(?:0|[1-9]+)\.){0,2}(?:0|[1-9]+)$/.test(val)) {
     return 'You should enter a valid semver version';
   }
   return true;
