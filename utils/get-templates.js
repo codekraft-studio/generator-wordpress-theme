@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = function() {
-  let dir = path.join(os.homedir(), '.wordpress-starter');
+  let dir = path.join(os.homedir(), '.wptools', 'themes');
   if (!fs.existsSync(dir)) {
     return;
   }
