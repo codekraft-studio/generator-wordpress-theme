@@ -1,6 +1,6 @@
 {
   "name": "@wptools/generator-theme",
-  "version": "0.1.9",
+  "version": "0.1.0",
   "description": "Yeoman generator for WordPress themes, childs and custom templates",
   "homepage": "https://github.com/codekraft-studio/generator-wordpress-theme",
   "author": {
