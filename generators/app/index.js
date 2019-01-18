@@ -132,8 +132,6 @@ module.exports = class extends BaseGenerator {
   }
 
   writing() {
-    this.log('Starting to copy the template files\n');
-
     // Copy and compile all the theme source files
     // related with the web development
     this.fs.copyTpl(

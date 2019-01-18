@@ -14,6 +14,8 @@ describe('utils.validators', () => {
     expect(validateVersion('x.6qq-8')).toEqual('You should enter a valid semver version')
     expect(validateVersion('0.0.0.0.0')).toEqual('You should enter a valid semver version')
     expect(validateVersion('0.x')).toEqual('You should enter a valid semver version')
+    expect(validateVersion('1')).toEqual(true)
+    expect(validateVersion('1.0')).toEqual(true)
     expect(validateVersion('0.1.0')).toEqual(true)
     expect(validateVersion('1.12.0')).toEqual(true)
   })

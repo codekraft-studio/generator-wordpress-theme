@@ -28,63 +28,71 @@ It will ask few questions then it will setup a new project for your in seconds.
 
 ## Creating a custom template
 
-The project allow you to generate custom WordPress themes from templates located in 	`~/.wordpress-starter/` folder.
+The generator allows you to generate WordPress themes from custom templates located in 	`~/.wptools/themes` folder, so you don't have to write a generator by yourself.
 
-+ Create a `.wordpress-starter` directory and place it inside your home folder.
-+ Place your themes inside that folder and follow some simple rules.
-+ When your template is ready you can use it with `--template TemplateName`
++ Create the `.wptools/themes` directory on your profile home `mkdir -p ~/.wptools/themes`.
++ Place your custom theme templates inside that folder to make them accessible in the generator execution.
++ When your template is ready you can use it with `--template TemplateName` or choose it from the prompt question options.
 
 You **must create** the folder if doesn't exist and place your themes inside like in this example:
 
 ```bash
-tree ~/.wordpress-starter/
+tree ~/.wptools/themes/
 ├───Simple
 └───Advanced
 ```
 
 Every theme folder __must follow__ simple rules in order to been generated correctly.
+
 ```bash
-tree ~/.wordpress-starter/Simple
+tree ~/.wptools/themes/Simple
 └───theme
 ```
+
 In this example the Simple theme has only the __theme__ directory where you should put all the theme files like in the [default theme](https://github.com/codekraft-studio/generator-wordpress-theme/tree/master/generators/app/templates/theme) that comes with the generator.
 
-Optionally you can also generate more complex projects, that uses build systems, for now the generator will support only [gulp](http://gulpjs.com/) and [grunt](https://gruntjs.com/), if you are not familiar with them, be sure to check out the __Getting Started__ guides.
-In order to archive this result you must follow this structure:
+Optionally you can also generate more complex projects, that uses build systems, to archive this result you __must follow this project directory structure__:
+
 ```bash
-tree ~/.wordpress-starter/Simple
+tree ~/.wptools/themes/Simple
 ├───grunt
 ├───gulp
+├───webpack
 └───theme
 ```
-You can take a look at the [example](https://github.com/codekraft-studio/generator-wordpress-theme/tree/master/generators/app/templates) which is the default theme generated if you don't specify a custom one.
 
-As you can see in the default template, you can access the prompt variables inside the template during render process.
+The generator will search for your project manager template files inside the folder named like it, take a look on how the [default theme](https://github.com/codekraft-studio/generator-wordpress-theme/tree/master/generators/app/templates) handle multiple setups.
 
-This are all the variables available right now:
+Inside your custom templates you have access to variables during the rendering process, here the list of all the variables used and available right now during rendering:
 
 * __projectName__: The project name as slug
 * __projectTitle__: The full project title as it appears on WordPress repositories
 * __projectDescription__: A short project description
-* __projectManager__: The build system used for the project (grunt, gulp)
+* __projectTemplate__: The name of the template that is being used
+* __projectManager__: The name of the selected build system
 * __projectVersion__: The version when the project has started
 * __projectAuthor__: The project author name
+* __projectLicense__: The project license name
 
-Simply use it like this: `<%= projectName %>` inside your files to have it rendered with the value.
+And only for the child theme generator, all the above plus:
 
-Inside the __theme__ folder you will always put all the themes related files (scripts, templates, assets, ...) while in the gulp/grunt folder you should put only the files that are related with your project build system configuration.
+* __parentTemplate__: The name of the parent template theme
 
-In the grunt/gulp folder, you __must place only two files__: `package.json` and `gulpfile.js` or `Gruntfile.js`, any other file __will be ignored__.
+Simply use it like this: `<%= projectName %>` inside your files to have it rendered with the value, if you are not familiar with it take a loot at [EJS interpolation](http://www.embeddedjs.com/).
 
-The `package.json` file will be rendered with [EJS interpolation](http://www.embeddedjs.com/), while the other file will be simply copied since it uses itself ESJ during it's job.
+Inside the __theme__ folder you will always put all the themes related files (scripts, templates, assets, ...) while in the other folders you should put only the files that are related with your project build system configuration and package dependencies.
+
 
 ---
 
 ## Development
+
 To develop this package you must clone it with Git and than link it to your global npm modules by typing:
+
 ```bash
 npm link
 ```
+
 Than you can start editing the package by following the contribuing guidelines below and than testing with: `yo @wptools/theme`, if you have any troubles please follow [this](http://yeoman.io/authoring/) guide, "__Running the generator__".
 
 ---

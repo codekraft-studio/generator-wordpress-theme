@@ -3,11 +3,15 @@
 const pkg = require('../package.json');
 const banner = require('./banner.js');
 const chalk = require('chalk');
-const path = require('path');
+const fs = require('fs');
 const os = require('os');
+const path = require('path');
 const mkdirp = require('mkdirp');
 const updateNotifier = require('update-notifier');
 const Generator = require('yeoman-generator');
+
+const wpToolsDir = path.join(os.homedir(), '.wptools');
+const templatesDir = path.join(wpToolsDir, 'themes');
 
 // Check for package updates
 updateNotifier({
@@ -17,11 +21,14 @@ updateNotifier({
   isGlobal: true
 });
 
-module.exports = class WPGenerator extends Generator {
+module.exports = class BaseGenerator extends Generator {
   constructor(args, opts) {
     super(args, opts);
-    this.log(banner);
+    if (!fs.existsSync(wpToolsDir)) {
+      mkdirp.sync(templatesDir);
+    }
 
+    this.log(banner);
     this.genName = path.basename(path.dirname(this.resolved));
     this.sourceRoot(path.join(__dirname, '../generators/templates', this.genName));
     this.argument('name', {
@@ -48,13 +55,11 @@ module.exports = class WPGenerator extends Generator {
     // or custom template has errored
     if (!template || template === '') {
       this.props.projectTemplate = '';
-      this.log('The', chalk.cyan('default'), 'template will be used');
       return done();
     }
 
     // Get and set the custom template
-    let templateDirectory = path.join(os.homedir(), '.wordpress-starter', template);
-    this.log('The', chalk.cyan(template), 'custom template will be used');
+    let templateDirectory = path.join(templatesDir, template);
     this.sourceRoot(templateDirectory);
     done();
   }
