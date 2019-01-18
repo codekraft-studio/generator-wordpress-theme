@@ -11,8 +11,7 @@
 First, install [Yeoman](http://yeoman.io) and __generator-wordpress-theme__ using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
-npm install -g yo
-npm install -g @wptools/generator-theme
+npm install -g yo @wptools/generator-theme
 ```
 
 To generate a new project just type the string below, the generator will create the folder for you if not exists:
@@ -120,8 +119,8 @@ Than you can start editing the package by following the contribuing guidelines b
 
 Apache-2.0 © [codekraft-studio]()
 
-[npm-image]: https://badge.fury.io/js/generator-wordpress-theme.svg
-[npm-url]: https://npmjs.org/package/generator-wordpress-theme
+[npm-image]: https://badge.fury.io/js/%40wptools%2Fgenerator-theme.svg
+[npm-url]: https://npmjs.org/package/@wptools/generator-theme
 [travis-image]: https://travis-ci.org/codekraft-studio/generator-wordpress-theme.svg?branch=master
 [travis-url]: https://travis-ci.org/codekraft-studio/generator-wordpress-theme
 [daviddm-image]: https://david-dm.org/codekraft-studio/generator-wordpress-theme.svg?theme=shields.io
