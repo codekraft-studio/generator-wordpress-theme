@@ -18,7 +18,8 @@ function theme_support()  {
 	// Add theme support for document Title tag
 	add_theme_support( 'title-tag' );
 
-	// Add theme support for Custom Logo.
+	// Add theme support for Custom Logo
+	// @see: https://developer.wordpress.org/themes/functionality/custom-logo/
 	add_theme_support( 'custom-logo' );
 
 	// Add theme support for custom CSS in the TinyMCE visual editor
