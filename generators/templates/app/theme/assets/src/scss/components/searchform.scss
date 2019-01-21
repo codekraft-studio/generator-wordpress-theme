@@ -26,11 +26,15 @@ form.search {
     width: 50px;
     background: lighten($secondary-color, 10%);
     border: 0;
-    font-weight: 700;
-    line-height: 1;
     padding: 0.4em 0.8em;
-    text-transform: uppercase;
     cursor: pointer;
+
+    &:after {
+      content: "\002315";
+      font-size: 30px;
+      display: block;
+      color: white;
+    }
 
     &:focus {
       outline: inherit !important;
