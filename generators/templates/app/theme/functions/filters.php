@@ -23,4 +23,4 @@ function theme_search_filter($query) {
 
 }
 
-add_action( 'pre_get_posts', 'theme_search_filter' ); // In search page add all public custom post types
+add_action( 'pre_get_posts', 'theme_search_filter' );
