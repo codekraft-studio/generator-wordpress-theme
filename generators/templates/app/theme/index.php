@@ -4,7 +4,7 @@
 	<main>
 
 		<h2 class="section-title">
-			<?php _e( 'Last Posts ', 'wordpress-theme-starter' ); ?>
+			<?php _e( 'Last Posts ', '<%= projectName %>' ); ?>
 		</h2>
 
 		<?php get_template_part('loop'); ?>

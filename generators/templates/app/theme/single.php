@@ -63,7 +63,7 @@
 					</div>
 					<div class="author-details">
 						<div class="author-name">
-							<?php _e( 'Published by', 'wordpress-theme-starter' ); ?> <?php the_author_posts_link(); ?>
+							<?php _e( 'Published by', '<%= projectName %>' ); ?> <?php the_author_posts_link(); ?>
 						</div>
 						<div class="author-description">
 							<p><?php the_author_meta( 'description' ); ?></p>

@@ -4,7 +4,7 @@
 <main>
 
 	<h2 class="section-title">
-		<?php echo sprintf( __( '%s Search Results for ', 'wordpress-theme-starter' ), $wp_query->found_posts ); echo get_search_query(); ?>
+		<?php echo sprintf( __( '%s Search Results for ', '<%= projectName %>' ), $wp_query->found_posts ); echo get_search_query(); ?>
 	</h2>
 
 	<?php get_template_part('loop'); ?>

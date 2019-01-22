@@ -18,7 +18,7 @@ if ( post_password_required() ) {
 				$comments_number = get_comments_number();
 				if ( 1 === $comments_number ) {
 					/* translators: %s: post title */
-					printf( _x( 'One comment on &ldquo;%s&rdquo;', 'comments title', 'wordpress-theme-starter' ), get_the_title() );
+					printf( _x( 'One comment on &ldquo;%s&rdquo;', 'comments title', '<%= projectName %>' ), get_the_title() );
 				} else {
 					printf(
 						/* translators: 1: number of comments, 2: post title */
@@ -27,7 +27,7 @@ if ( post_password_required() ) {
 							'%1$s comments on &ldquo;%2$s&rdquo;',
 							$comments_number,
 							'comments title',
-							'wordpress-theme-starter'
+							'<%= projectName %>'
 						),
 						number_format_i18n( $comments_number ),
 						get_the_title()
@@ -57,7 +57,7 @@ if ( post_password_required() ) {
 		if ( ! comments_open() && get_comments_number() && post_type_supports( get_post_type(), 'comments' ) ) :
 	?>
 
-		<p class="no-comments"><?php _e( 'Comments are closed.', 'wordpress-theme-starter' ); ?></p>
+		<p class="no-comments"><?php _e( 'Comments are closed.', '<%= projectName %>' ); ?></p>
 
 	<?php endif; ?>
 
