@@ -121,6 +121,7 @@ module.exports = class extends BaseGenerator {
       validate: validateRequired
     }]).then(props => {
       this.props = props;
+      this.props.functionPrefix = _.snakeCase(this.props.projectName);
     });
   }
 

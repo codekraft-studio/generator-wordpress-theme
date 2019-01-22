@@ -1,7 +1,7 @@
 <?php
 
 // Add Shortcode
-function theme_shortcode_example( $atts ) {
+function <%= functionPrefix %>_shortcode_example( $atts ) {
 
 	// Attributes
 	$atts = shortcode_atts(array(

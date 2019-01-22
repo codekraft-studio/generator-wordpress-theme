@@ -1,7 +1,7 @@
 <?php
 
 // Load theme admin styles
-function theme_admin_styles() {
+function <%= functionPrefix %>_admin_styles() {
 
 	wp_register_style( 'admin-style', get_template_directory_uri() . '/assets/dist/css/admin.css', array(), null );
 	wp_enqueue_style( 'admin-style' );
@@ -9,7 +9,7 @@ function theme_admin_styles() {
 }
 
 // Load admin scripts
-function theme_admin_scripts() {
+function <%= functionPrefix %>_admin_scripts() {
 
   $path = get_template_directory_uri() . "/assets/dist/js/admin.js";
 
@@ -20,13 +20,13 @@ function theme_admin_scripts() {
 }
 
 // Load admin theme conditional scripts
-function theme_admin_conditional_scripts() { }
+function <%= functionPrefix %>_admin_conditional_scripts() { }
 
 // Load admin theme conditional styles
-function theme_admin_conditional_styles() { }
+function <%= functionPrefix %>_admin_conditional_styles() { }
 
 // Remove the admin bar
-function theme_remove_admin_bar() {
+function <%= functionPrefix %>_remove_admin_bar() {
   return false;
 }
 

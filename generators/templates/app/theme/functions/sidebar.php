@@ -1,7 +1,7 @@
 <?php
 
 // Register Sidebars
-function theme_register_sidebar() {
+function <%= functionPrefix %>_register_sidebar() {
 
 	$args = array(
 		'id'            => 'main-sidebar',

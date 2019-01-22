@@ -53,7 +53,7 @@
 
 						<!-- nav -->
 						<nav class="nav">
-							<?php theme_navigation(); ?>
+							<?php <%= functionPrefix %>_navigation(); ?>
 						</nav>
 						<!-- /nav -->
 

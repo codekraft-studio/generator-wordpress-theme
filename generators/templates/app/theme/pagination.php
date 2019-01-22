@@ -1,5 +1,5 @@
 <!-- pagination -->
 <div class="pagination">
-	<?php theme_pagination(); ?>
+	<?php <%= functionPrefix %>_pagination(); ?>
 </div>
 <!-- /pagination -->

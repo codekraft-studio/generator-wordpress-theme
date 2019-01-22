@@ -1,7 +1,7 @@
 <?php
 
 // Register Custom Taxonomy
-function custom_product_taxonomy() {
+function <%= functionPrefix %>_add_product_taxonomy() {
 
 	$labels = array(
 		'name'                       => _x( 'Product Tags', 'Taxonomy General Name', '<%= projectName %>' ),
@@ -40,4 +40,4 @@ function custom_product_taxonomy() {
 
 }
 
-add_action( 'init', 'custom_product_taxonomy', 0 );
+add_action( 'init', '<%= functionPrefix %>_add_product_taxonomy', 0 );

@@ -16,19 +16,19 @@ remove_action('wp_head', 'rsd_link'); // Remove EditURI link
 remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altogether
 
 // Custom View Article link to Post
-function theme_custom_post_more($more) {
+function <%= functionPrefix %>_custom_post_more($more) {
   global $post;
   return '... <a class="article-more" href="' . get_permalink($post->ID) . '">' . __('Read More', '<%= projectName %>') . '</a>';
 }
 
 // Optionally Filter the except length.
-function theme_custom_excerpt_length($length) {
+function <%= functionPrefix %>_custom_excerpt_length($length) {
 	return 55;
 }
 
 // Removes the type attribute from style and scripts
 // to avoid HTML linting errors applied by new WEC rules
-function theme_remove_type_attr($tag, $handle) {
+function <%= functionPrefix %>_remove_type_attr($tag, $handle) {
   return preg_replace( "/type=['\"]text\/(javascript|css)['\"]/", '', $tag );
 }
 

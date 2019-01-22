@@ -1,7 +1,7 @@
 <?php
 
 // Register Custom Post Type
-function theme_custom_post_types() {
+function <%= functionPrefix %>_custom_post_types() {
 
   // the post types to add
   $post_types = array(

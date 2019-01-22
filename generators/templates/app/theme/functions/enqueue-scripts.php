@@ -1,7 +1,7 @@
 <?php
 
 // Load theme scripts
-function theme_scripts() {
+function <%= functionPrefix %>_scripts() {
 
   $path = get_template_directory_uri() . "/assets/dist/js/main.js";
 
@@ -12,10 +12,10 @@ function theme_scripts() {
 }
 
 // Load theme conditional scripts
-function theme_conditional_scripts() { }
+function <%= functionPrefix %>_conditional_scripts() { }
 
 // Load theme conditional styles
-function theme_conditional_styles() { }
+function <%= functionPrefix %>_conditional_styles() { }
 
 add_action( 'wp_enqueue_scripts', 'theme_scripts' ); // Add Theme Scripts
 add_action( 'wp_enqueue_scripts', 'theme_conditional_scripts' ); // Add Theme Conditionals Scripts

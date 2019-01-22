@@ -7,6 +7,7 @@ const helpers = require('yeoman-test');
 describe('generator-wordpress-theme:app', () => {
   describe('default execution', () => {
     const themeName = 'my-theme'
+    const themePrefix = 'my_theme'
 
     beforeAll(() => {
       jest.setTimeout(10000)
@@ -42,6 +43,10 @@ describe('generator-wordpress-theme:app', () => {
 
     it('create the theme screenshot file', () => {
       assert.file('src/screenshot.png');
+    });
+
+    it('prefix functions with theme slug', () => {
+      assert.fileContent('src/functions/template-functions.php', `function ${themePrefix}_pagination() {`)
     });
   });
 

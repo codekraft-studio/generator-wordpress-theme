@@ -1,7 +1,7 @@
 <?php
 
 // Add all public post types in search page query
-function theme_search_filter($query) {
+function <%= functionPrefix %>_search_filter($query) {
 
 	if ( !is_admin() && $query->is_main_query() && $query->is_search ) {
 

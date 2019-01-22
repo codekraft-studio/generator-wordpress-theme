@@ -4,7 +4,7 @@
   Theme Support
 \*------------------------------------*/
 
-function theme_support()  {
+function <%= functionPrefix %>_support()  {
 
 	// Add theme support for Automatic Feed Links
 	add_theme_support( 'automatic-feed-links' );
@@ -37,4 +37,4 @@ function theme_support()  {
 
 }
 
-add_action( 'after_setup_theme', 'theme_support' ); // Add Theme features support
+add_action( 'after_setup_theme', '<%= functionPrefix %>_support' );

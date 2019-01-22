@@ -1,7 +1,7 @@
 <?php
 
 // Print theme navigation
-function theme_navigation() {
+function <%= functionPrefix %>_navigation() {
 
   wp_nav_menu(
     array(
@@ -27,7 +27,7 @@ function theme_navigation() {
 }
 
 // Register Navigation Menus
-function theme_navigation_menus() {
+function <%= functionPrefix %>_navigation_menus() {
 
 	$locations = array(
 		'header-menu' => __( 'The main theme menu', '<%= projectName %>' ),
