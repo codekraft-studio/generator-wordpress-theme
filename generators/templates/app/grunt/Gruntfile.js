@@ -192,7 +192,7 @@ module.exports = function(grunt) {
       options: {
         i18nToolsPath: path.join('../../../../', 'tools/i18n/'),
         textdomain: '<%= pkg.name %>',
-        updateDomains: ['wordpress-theme-starter']
+        updateDomains: true
       },
       target: {
         files: {
